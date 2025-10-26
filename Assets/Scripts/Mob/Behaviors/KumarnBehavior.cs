@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace MobSystem
 {
@@ -11,17 +12,29 @@ namespace MobSystem
         [Header("Kumarn Settings")]
         [SerializeField] private float screamInterval = 5f;
         [SerializeField] private float screamChance = 0.3f;
+        
+        [Header("Zigzag Movement")]
         [SerializeField] private bool zigzagMovement = true;
         [SerializeField] private float zigzagIntensity = 2f;
+        [SerializeField] private float pathUpdateRate = 0.1f;
+        [SerializeField] private int maxZigzagTimes = 5;
+        [SerializeField] private float zigzagCycleDuration = 2f;
 
         private float screamTimer;
         private Vector3 zigzagOffset;
         private float zigzagTime;
+        private float pathUpdateTimer;
+        private NavMeshAgent navAgent;
+        private int currentZigzagCount;
+        private float zigzagCycleTimer;
+        private bool isZigzagging;
 
         public override void Initialize(MobAI ai, MobData data, Transform playerTransform)
         {
             base.Initialize(ai, data, playerTransform);
             screamTimer = screamInterval;
+            navAgent = GetComponent<NavMeshAgent>();
+            pathUpdateTimer = pathUpdateRate;
         }
 
         public override void OnSpawned()
@@ -35,6 +48,11 @@ namespace MobSystem
 
         public override void OnStartChasing()
         {
+            // Reset zigzag count for new chase
+            currentZigzagCount = 0;
+            zigzagCycleTimer = zigzagCycleDuration;
+            isZigzagging = zigzagMovement && maxZigzagTimes > 0;
+            
             // Kumarn might scream when it starts chasing
             if (Random.value < 0.5f)
             {
@@ -56,14 +74,42 @@ namespace MobSystem
             }
 
             // Erratic zigzag movement for more unsettling behavior
-            if (zigzagMovement)
+            if (isZigzagging)
             {
+                // Track zigzag cycles
+                zigzagCycleTimer -= Time.deltaTime;
+                if (zigzagCycleTimer <= 0f)
+                {
+                    currentZigzagCount++;
+                    zigzagCycleTimer = zigzagCycleDuration;
+                    
+                    // Check if reached max zigzags
+                    if (currentZigzagCount >= maxZigzagTimes)
+                    {
+                        isZigzagging = false;
+                        
+                        // Play a final scream when stopping zigzag
+                        if (MobAudioManager.instance != null)
+                        {
+                            string[] screams = { "KumarnScream1", "KumarnScream2", "KumarnScream3" };
+                            string randomScream = screams[Random.Range(0, screams.Length)];
+                            MobAudioManager.instance.PlayAudio3D(randomScream, transform.position);
+                        }
+                    }
+                }
+                
+                // Calculate zigzag offset
                 zigzagTime += Time.deltaTime * 2f;
                 zigzagOffset = new Vector3(
                     Mathf.Sin(zigzagTime) * zigzagIntensity,
                     0,
                     Mathf.Cos(zigzagTime * 0.7f) * zigzagIntensity
                 );
+            }
+            else
+            {
+                // No zigzag offset when not zigzagging
+                zigzagOffset = Vector3.zero;
             }
         }
 
@@ -80,20 +126,33 @@ namespace MobSystem
 
         public override bool CustomMovement()
         {
-            // Apply zigzag offset if enabled
-            if (zigzagMovement && player != null)
+            // Apply zigzag offset if currently zigzagging
+            if (isZigzagging && player != null && navAgent != null)
             {
-                Vector3 targetPos = player.position + zigzagOffset;
-                mobAI.SetCustomDestination(targetPos);
+                // Update path frequently for smooth zigzag
+                pathUpdateTimer -= Time.deltaTime;
+                if (pathUpdateTimer <= 0f)
+                {
+                    Vector3 targetPos = player.position + zigzagOffset;
+                    navAgent.SetDestination(targetPos);
+                    pathUpdateTimer = pathUpdateRate;
+                }
+                
+                // Update speed multiplier
+                navAgent.speed = mobData.moveSpeed * GetSpeedMultiplier();
+                
+                // We're handling movement, so return true
                 return true;
             }
+            
+            // Use default movement if zigzag is disabled or exhausted
             return false;
         }
 
         public override float GetSpeedMultiplier()
         {
-            // Kumarn is fast
-            return 1.2f;
+            // Kumarn is fast, even faster when done zigzagging
+            return isZigzagging ? 1.2f : 1.4f;
         }
     }
 }

@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7155879784042887612}
   - component: {fileID: 3893229195639053513}
   - component: {fileID: 1635684779960307287}
+  - component: {fileID: 4287337904223152321}
+  - component: {fileID: 4621318632218126599}
   - component: {fileID: 2934983952883413264}
   m_Layer: 0
   m_Name: Enemy Wooloo
@@ -93,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobData: {fileID: 11400000, guid: f71b904bfd1e4ea41803de932a9628cc, type: 2}
+  mobData: {fileID: 11400000, guid: 89929859ca1697b4d94527f13e5a92f1, type: 2}
   player: {fileID: 9071475295021801249, guid: bb87de885db774b4cae82369710f7f20, type: 3}
   stoppingDistance: 2
   moveSpeed: 3.5
@@ -133,6 +135,47 @@ MonoBehaviour:
   damageFlashDuration: 0.1
   useKnockback: 1
   knockbackForce: 5
+--- !u!114 &4287337904223152321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2384702011734902533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkingParameter: IsWalking
+  attackParameter: Attack
+  deathParameter: Death
+  spawnParameter: Spawn
+  hurtParameter: Hurt
+  useAnimationSpeed: 1
+  speedMultiplier: 1
+  enableHeadTracking: 1
+  headBone: {fileID: 0}
+  headTrackingWeight: 0.5
+--- !u!114 &4621318632218126599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2384702011734902533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb6f01982d8ba6d478949cf0bc2a5adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screamInterval: 5
+  screamChance: 0.6
+  zigzagMovement: 1
+  zigzagIntensity: 50
+  pathUpdateRate: 0.1
+  maxZigzagTimes: 10
+  zigzagCycleDuration: 2
 --- !u!54 &2934983952883413264
 Rigidbody:
   m_ObjectHideFlags: 0

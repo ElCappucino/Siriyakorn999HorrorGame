@@ -8,19 +8,19 @@ The mob system has been refactored to support multiple mob types with unique beh
 ### 1. **Sadako**
 - **Speed:** Slow
 - **Movement:** Crawling
-- **Audio Theme:** Electricity (แฟ่ไฟฟ้า)
+- **Audio Theme:** Electricity (Computer Noise)
 - **Special:** Periodic electricity effects while chasing
 
 ### 2. **Kumarn**
 - **Speed:** Fast
 - **Movement:** Running with zigzag pattern
-- **Audio Theme:** Thai Child Voice (แฟยินไทย)
+- **Audio Theme:** Thai Child Voice (Bell Anklet)
 - **Special:** Random screaming, erratic movement patterns
 
 ### 3. **Vampire**
 - **Speed:** Normal
 - **Movement:** Flies as bat, then walks as humanoid
-- **Audio Theme:** Bat sounds (แฟไม่กาเชน)
+- **Audio Theme:** Bat sounds (Window Open-Close)
 - **Special:** Transforms from bat to humanoid when close to player, creates jumpscare
 
 ### 4. **Smol Sadako**
