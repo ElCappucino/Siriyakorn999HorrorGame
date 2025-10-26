@@ -5,10 +5,15 @@ namespace MobSystem
 {
     /// <summary>
     /// AI controller for enemy mobs that track and move towards the player
+    /// Supports different mob types with unique behaviors
     /// </summary>
     [RequireComponent(typeof(NavMeshAgent))]
     public class MobAI : MonoBehaviour
     {
+        [Header("Mob Configuration")]
+        [Tooltip("The mob data defining this mob's characteristics")]
+        [SerializeField] private MobData mobData;
+
         [Header("Target Settings")]
         [Tooltip("The player transform to chase. If null, will find GameObject with 'Player' tag")]
         public Transform player;
@@ -17,7 +22,7 @@ namespace MobSystem
         [Tooltip("How close the mob needs to be to the player before stopping")]
         [SerializeField] private float stoppingDistance = 2f;
         
-        [Tooltip("How fast the mob moves")]
+        [Tooltip("How fast the mob moves (can be overridden by MobData)")]
         [SerializeField] private float moveSpeed = 3.5f;
         
         [Tooltip("How fast the mob rotates to face the player")]
@@ -59,6 +64,9 @@ namespace MobSystem
         private bool hasDetectedPlayer = false;
         private float lastAttackTime;
         private MobState currentState = MobState.Idle;
+        private MobBehavior behavior;
+        private bool isPaused = false;
+        private Vector3 customDestination;
 
         // Animation parameters (if you have an animator)
         private Animator animator;
@@ -76,6 +84,13 @@ namespace MobSystem
         {
             navAgent = GetComponent<NavMeshAgent>();
             animator = GetComponent<Animator>();
+            behavior = GetComponent<MobBehavior>();
+            
+            // Apply mob data if available
+            if (mobData != null)
+            {
+                ApplyMobData();
+            }
             
             // Configure NavMeshAgent
             navAgent.speed = moveSpeed;
@@ -100,11 +115,35 @@ namespace MobSystem
             }
 
             pathUpdateTimer = pathUpdateInterval;
+
+            // Initialize behavior
+            if (behavior != null)
+            {
+                behavior.Initialize(this, mobData, player);
+            }
+        }
+
+        /// <summary>
+        /// Apply settings from MobData
+        /// </summary>
+        private void ApplyMobData()
+        {
+            moveSpeed = mobData.moveSpeed;
+            rotationSpeed = mobData.rotationSpeed;
+            detectionRange = mobData.detectionRange;
+            attackRange = mobData.attackRange;
+            attackCooldown = mobData.attackCooldown;
+            attackDamage = mobData.attackDamage;
+            
+            // Apply audio settings
+            detectionSoundName = mobData.detectionSoundName;
+            chaseSoundName = mobData.chaseSoundName;
+            attackSoundName = mobData.attackSoundName;
         }
 
         private void Update()
         {
-            if (player == null) return;
+            if (player == null || isPaused) return;
 
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
@@ -128,6 +167,12 @@ namespace MobSystem
 
         private void HandleIdleState(float distanceToPlayer)
         {
+            // Call behavior hook
+            if (behavior != null)
+            {
+                behavior.OnIdleUpdate(distanceToPlayer);
+            }
+
             // Check if player is in detection range
             if (distanceToPlayer <= detectionRange)
             {
@@ -140,17 +185,39 @@ namespace MobSystem
                 {
                     MobAudioManager.instance.PlayAudio3D(detectionSoundName, transform.position);
                 }
+
+                // Call behavior hook
+                if (behavior != null)
+                {
+                    behavior.OnStartChasing();
+                }
             }
         }
 
         private void HandleChasingState(float distanceToPlayer)
         {
-            // Update path to player periodically
-            pathUpdateTimer -= Time.deltaTime;
-            if (pathUpdateTimer <= 0f)
+            // Call behavior hook
+            if (behavior != null)
             {
-                navAgent.SetDestination(player.position);
-                pathUpdateTimer = pathUpdateInterval;
+                behavior.OnChasingUpdate(distanceToPlayer);
+
+                // Check if behavior wants custom movement
+                if (behavior.CustomMovement())
+                {
+                    // Behavior handles movement
+                    // Still update speed multiplier
+                    navAgent.speed = moveSpeed * behavior.GetSpeedMultiplier();
+                }
+                else
+                {
+                    // Default NavMesh movement
+                    UpdateDefaultMovement(distanceToPlayer);
+                }
+            }
+            else
+            {
+                // Default NavMesh movement
+                UpdateDefaultMovement(distanceToPlayer);
             }
 
             // Check if close enough to attack
@@ -158,6 +225,12 @@ namespace MobSystem
             {
                 currentState = MobState.Attacking;
                 navAgent.isStopped = true;
+
+                // Call behavior hook
+                if (behavior != null)
+                {
+                    behavior.OnStartAttacking();
+                }
             }
             // Check if player escaped detection range
             else if (distanceToPlayer > detectionRange)
@@ -167,8 +240,33 @@ namespace MobSystem
             }
         }
 
+        private void UpdateDefaultMovement(float distanceToPlayer)
+        {
+            // Update path to player periodically
+            pathUpdateTimer -= Time.deltaTime;
+            if (pathUpdateTimer <= 0f)
+            {
+                Vector3 destination = customDestination != Vector3.zero ? customDestination : player.position;
+                navAgent.SetDestination(destination);
+                pathUpdateTimer = pathUpdateInterval;
+                customDestination = Vector3.zero; // Reset after use
+            }
+
+            // Apply speed multiplier from behavior
+            if (behavior != null)
+            {
+                navAgent.speed = moveSpeed * behavior.GetSpeedMultiplier();
+            }
+        }
+
         private void HandleAttackingState(float distanceToPlayer)
         {
+            // Call behavior hook
+            if (behavior != null)
+            {
+                behavior.OnAttackingUpdate(distanceToPlayer);
+            }
+
             // Stop moving and face the player
             navAgent.isStopped = true;
             FaceTarget(player.position);
@@ -190,28 +288,44 @@ namespace MobSystem
 
         private void Attack()
         {
-            // Play attack animation
-            if (animator != null)
+            // Check if behavior wants to handle attack
+            bool useDefaultAttack = true;
+            if (behavior != null)
             {
-                animator.SetTrigger(isAttackingHash);
+                useDefaultAttack = behavior.OnAttack();
             }
 
-            // Play 3D attack sound from enemy position
-            if (MobAudioManager.instance != null && !string.IsNullOrEmpty(attackSoundName))
+            if (useDefaultAttack)
             {
-                MobAudioManager.instance.PlayAudio3D(attackSoundName, transform.position);
+                // Play attack animation
+                if (animator != null)
+                {
+                    animator.SetTrigger(isAttackingHash);
+                }
+
+                // Play 3D attack sound from enemy position
+                if (MobAudioManager.instance != null && !string.IsNullOrEmpty(attackSoundName))
+                {
+                    MobAudioManager.instance.PlayAudio3D(attackSoundName, transform.position);
+                }
+
+                // Deal damage to player
+                PlayerSystem.PlayerHealth playerHealth = player.GetComponent<PlayerSystem.PlayerHealth>();
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamage(attackDamage);
+                    Debug.Log($"Mob attacked player for {attackDamage} damage!");
+                }
+                else
+                {
+                    Debug.LogWarning("Player doesn't have PlayerHealth component!");
+                }
             }
 
-            // Deal damage to player
-            PlayerSystem.PlayerHealth playerHealth = player.GetComponent<PlayerSystem.PlayerHealth>();
-            if (playerHealth != null)
+            // Call behavior hook after attack
+            if (behavior != null)
             {
-                playerHealth.TakeDamage(attackDamage);
-                Debug.Log($"Mob attacked player for {attackDamage} damage!");
-            }
-            else
-            {
-                Debug.LogWarning("Player doesn't have PlayerHealth component!");
+                behavior.OnAttackComplete();
             }
         }
 
@@ -244,6 +358,12 @@ namespace MobSystem
             currentState = MobState.Idle;
             hasDetectedPlayer = false;
             navAgent.isStopped = false;
+
+            // Call behavior hook
+            if (behavior != null)
+            {
+                behavior.OnSpawned();
+            }
         }
 
         /// <summary>
@@ -261,6 +381,62 @@ namespace MobSystem
                 {
                     MobAudioManager.instance.PlayAudio3D(detectionSoundName, transform.position);
                 }
+
+                // Call behavior hook
+                if (behavior != null)
+                {
+                    behavior.OnStartChasing();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Set a custom destination for the next movement update
+        /// Used by behaviors that need custom movement patterns
+        /// </summary>
+        public void SetCustomDestination(Vector3 destination)
+        {
+            customDestination = destination;
+        }
+
+        /// <summary>
+        /// Pause or unpause the mob's AI
+        /// Used by behaviors that need to pause (e.g., Kumarn Bat Wing pause before attack)
+        /// </summary>
+        public void SetPaused(bool paused)
+        {
+            isPaused = paused;
+            if (navAgent != null)
+            {
+                navAgent.isStopped = paused;
+            }
+        }
+
+        /// <summary>
+        /// Get the current state of the mob
+        /// </summary>
+        public MobState GetCurrentState()
+        {
+            return currentState;
+        }
+
+        /// <summary>
+        /// Get the mob data
+        /// </summary>
+        public MobData GetMobData()
+        {
+            return mobData;
+        }
+
+        /// <summary>
+        /// Set the mob data (useful for runtime spawning)
+        /// </summary>
+        public void SetMobData(MobData data)
+        {
+            mobData = data;
+            if (mobData != null)
+            {
+                ApplyMobData();
             }
         }
 

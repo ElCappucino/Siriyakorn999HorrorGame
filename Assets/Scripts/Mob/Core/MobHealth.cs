@@ -57,6 +57,7 @@ namespace MobSystem
         private Material[] originalMaterials;
         private Rigidbody rb;
         private MobAI mobAI;
+        private MobBehavior behavior;
         private Animator animator;
         private readonly int deathHash = Animator.StringToHash("Death");
 
@@ -65,6 +66,7 @@ namespace MobSystem
             currentHealth = maxHealth;
             rb = GetComponent<Rigidbody>();
             mobAI = GetComponent<MobAI>();
+            behavior = GetComponent<MobBehavior>();
             animator = GetComponent<Animator>();
             
             // Store original materials for damage flash
@@ -111,6 +113,12 @@ namespace MobSystem
                 rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
             }
 
+            // Call behavior hook
+            if (behavior != null)
+            {
+                behavior.OnTakeDamage(damage);
+            }
+
             // Check for death
             if (currentHealth <= 0)
             {
@@ -140,6 +148,12 @@ namespace MobSystem
             if (AudioManager.instance != null && !string.IsNullOrEmpty(deathSoundName))
             {
                 AudioManager.instance.PlayAudio(deathSoundName);
+            }
+
+            // Call behavior hook
+            if (behavior != null)
+            {
+                behavior.OnDeath();
             }
 
             // Disable AI

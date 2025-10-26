@@ -12,6 +12,9 @@ namespace MobSystem
         [Header("Spawn Settings")]
         [Tooltip("The mob prefab to spawn")]
         [SerializeField] private GameObject mobPrefab;
+
+        [Tooltip("Optional: Mob data to apply to the spawned mob (overrides prefab settings)")]
+        [SerializeField] private MobData mobDataOverride;
         
         [Tooltip("Where the mob will spawn relative to this spawner")]
         [SerializeField] private Transform spawnPoint;
@@ -171,6 +174,16 @@ namespace MobSystem
             // Instantiate the mob
             currentMob = Instantiate(mobPrefab, spawnPosition, Quaternion.identity);
 
+            // Apply mob data override if specified
+            if (mobDataOverride != null)
+            {
+                MobAI mobAI = currentMob.GetComponent<MobAI>();
+                if (mobAI != null)
+                {
+                    mobAI.SetMobData(mobDataOverride);
+                }
+            }
+
             // Play 3D spawn sound at the spawned enemy's position
             if (MobAudioManager.instance != null && !string.IsNullOrEmpty(spawnSoundName))
             {
@@ -188,13 +201,13 @@ namespace MobSystem
             yield return StartCoroutine(AnimateEmergence(currentMob, spawnPosition, finalPosition));
 
             // Notify the mob AI that it has spawned
-            MobAI mobAI = currentMob.GetComponent<MobAI>();
-            if (mobAI != null)
+            MobAI mobAI2 = currentMob.GetComponent<MobAI>();
+            if (mobAI2 != null)
             {
-                mobAI.OnSpawned();
+                mobAI2.OnSpawned();
                 
                 // For horror effect, make mob immediately aware of player
-                mobAI.ForceDetectPlayer();
+                mobAI2.ForceDetectPlayer();
             }
 
             // Handle respawn
