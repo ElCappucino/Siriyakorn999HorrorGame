@@ -2665,6 +2665,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6521366553161395792, guid: 9451d17a755580c46a7c3d43ad00a1bc, type: 3}
+      propertyPath: mobPrefab
+      value: 
+      objectReference: {fileID: 9212125674474928216, guid: 5ad278208f56f7449ad7e127fc3a1fae, type: 3}
+    - target: {fileID: 6521366553161395792, guid: 9451d17a755580c46a7c3d43ad00a1bc, type: 3}
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 463684467}
@@ -2752,7 +2756,7 @@ PrefabInstance:
       objectReference: {fileID: 6499116736080838362}
     - target: {fileID: 5069092188901765159, guid: ab488f67d2afa09499ea360fe79f317a, type: 3}
       propertyPath: SFXSounds.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5069092188901765159, guid: ab488f67d2afa09499ea360fe79f317a, type: 3}
       propertyPath: SFXSounds.Array.data[2].name
@@ -2771,6 +2775,14 @@ PrefabInstance:
       value: KumarnScream3
       objectReference: {fileID: 0}
     - target: {fileID: 5069092188901765159, guid: ab488f67d2afa09499ea360fe79f317a, type: 3}
+      propertyPath: SFXSounds.Array.data[6].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5069092188901765159, guid: ab488f67d2afa09499ea360fe79f317a, type: 3}
+      propertyPath: SFXSounds.Array.data[6].name
+      value: KumarnFootsteps1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5069092188901765159, guid: ab488f67d2afa09499ea360fe79f317a, type: 3}
       propertyPath: SFXSounds.Array.data[2].pitch
       value: 1
       objectReference: {fileID: 0}
@@ -2784,6 +2796,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5069092188901765159, guid: ab488f67d2afa09499ea360fe79f317a, type: 3}
       propertyPath: SFXSounds.Array.data[5].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5069092188901765159, guid: ab488f67d2afa09499ea360fe79f317a, type: 3}
+      propertyPath: SFXSounds.Array.data[6].pitch
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5069092188901765159, guid: ab488f67d2afa09499ea360fe79f317a, type: 3}
@@ -2807,6 +2823,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5069092188901765159, guid: ab488f67d2afa09499ea360fe79f317a, type: 3}
+      propertyPath: SFXSounds.Array.data[6].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5069092188901765159, guid: ab488f67d2afa09499ea360fe79f317a, type: 3}
       propertyPath: SFXSounds.Array.data[2].audioClip
       value: 
       objectReference: {fileID: 8300000, guid: dfd9019c349672f4089357f1226d4116, type: 3}
@@ -2822,6 +2842,10 @@ PrefabInstance:
       propertyPath: SFXSounds.Array.data[5].audioClip
       value: 
       objectReference: {fileID: 8300000, guid: dfd9019c349672f4089357f1226d4116, type: 3}
+    - target: {fileID: 5069092188901765159, guid: ab488f67d2afa09499ea360fe79f317a, type: 3}
+      propertyPath: SFXSounds.Array.data[6].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3cdf2b73070b48d4e94ae4237e4177e8, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -16,6 +16,9 @@ namespace MobSystem
         [Tooltip("Optional: Mob data to apply to the spawned mob (overrides prefab settings)")]
         [SerializeField] private MobData mobDataOverride;
         
+        [Tooltip("Optional: Seed for random behavior (Kumarn zigzag, etc). 0 = random")]
+        [SerializeField] private int behaviorSeed = 0;
+        
         [Tooltip("Where the mob will spawn relative to this spawner")]
         [SerializeField] private Transform spawnPoint;
         
@@ -181,6 +184,16 @@ namespace MobSystem
                 if (mobAI != null)
                 {
                     mobAI.SetMobData(mobDataOverride);
+                }
+            }
+            
+            // Apply behavior seed if specified
+            if (behaviorSeed != 0)
+            {
+                KumarnBehavior kumarnBehavior = currentMob.GetComponent<KumarnBehavior>();
+                if (kumarnBehavior != null)
+                {
+                    kumarnBehavior.SetZigzagSeed(behaviorSeed);
                 }
             }
 

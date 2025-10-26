@@ -103,8 +103,8 @@ MonoBehaviour:
   detectionRange: 100
   pathUpdateInterval: 0.5
   detectionSoundName: MobDetect
-  chaseSoundName: MobChase
-  attackSoundName: MobAttack
+  chaseSoundName: KumarnChase
+  attackSoundName: KumarnAttack
   attackRange: 2
   attackCooldown: 2
   attackDamage: 10
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 0
+  currentHealth: 100
   deathDelay: 3
   useRagdoll: 1
   deathEffectPrefab: {fileID: 0}
