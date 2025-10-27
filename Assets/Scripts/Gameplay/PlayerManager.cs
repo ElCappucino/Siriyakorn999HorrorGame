@@ -31,6 +31,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float maxAimDistance = 100f;
     [SerializeField] private Transform talismanSpawnPos;
 
+    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
