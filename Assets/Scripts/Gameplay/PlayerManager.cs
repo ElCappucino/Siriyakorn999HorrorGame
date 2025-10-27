@@ -51,7 +51,7 @@ public class PlayerManager : MonoBehaviour
                 aimPoint = ray.origin + ray.direction * maxAimDistance; // aim far away
 
             GameObject proj = Instantiate(talismanPrefab, talismanSpawnPos.position, Quaternion.identity);
-            Rigidbody rb = proj.GetComponent<Rigidbody>();
+            Rigidbody rb = proj.GetComponentInChildren<Rigidbody>();
             if (rb != null)
             {
                 Vector3 dir = (aimPoint - talismanSpawnPos.position).normalized;

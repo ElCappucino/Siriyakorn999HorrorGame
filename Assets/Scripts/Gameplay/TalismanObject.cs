@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class TalismanObject : MonoBehaviour
 {
+    [SerializeField] private GameObject parent;
     private Rigidbody rb;
 
     private void Awake()
@@ -18,6 +19,6 @@ public class TalismanObject : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         rb.isKinematic = true;
-        gameObject.transform.SetParent(collision.transform);
+        parent.transform.SetParent(collision.transform, true);
     }
 }
