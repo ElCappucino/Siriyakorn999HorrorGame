@@ -390,7 +390,7 @@ MonoBehaviour:
     m_Bits: 8
   m_UseGeometry: 0
   m_DefaultArea: 0
-  m_GenerateLinks: 0
+  m_GenerateLinks: 1
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
@@ -932,7 +932,7 @@ Transform:
   m_GameObject: {fileID: 463684463}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1.2802, z: 27.2}
+  m_LocalPosition: {x: 0, y: 1.28, z: 24.34}
   m_LocalScale: {x: 52.016, y: 0.58024, z: 10.640116}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1217,7 +1217,7 @@ MonoBehaviour:
     m_Bits: 8
   m_UseGeometry: 0
   m_DefaultArea: 0
-  m_GenerateLinks: 0
+  m_GenerateLinks: 1
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
@@ -2489,7 +2489,8 @@ MonoBehaviour:
   lookAtRangeX: {x: -10, y: 10}
   lookAtRangeY: {x: -10, y: 10}
   currentLookatPos: {x: 0, y: 0}
-  moveSpeed: 10
+  moveSpeedX: 0
+  moveSpeedY: 0
 --- !u!114 &2104767719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2626,7 +2627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6385934574702222665, guid: 9451d17a755580c46a7c3d43ad00a1bc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.165738
+      value: 2.49
       objectReference: {fileID: 0}
     - target: {fileID: 6385934574702222665, guid: 9451d17a755580c46a7c3d43ad00a1bc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2634,7 +2635,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6385934574702222665, guid: 9451d17a755580c46a7c3d43ad00a1bc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 20.412071
+      value: 22.08
       objectReference: {fileID: 0}
     - target: {fileID: 6385934574702222665, guid: 9451d17a755580c46a7c3d43ad00a1bc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2862,6 +2863,10 @@ PrefabInstance:
     - target: {fileID: 40739448908468070, guid: bb87de885db774b4cae82369710f7f20, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870103314571447658, guid: bb87de885db774b4cae82369710f7f20, type: 3}
+      propertyPath: m_Controller
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7772896403233162388, guid: bb87de885db774b4cae82369710f7f20, type: 3}
       propertyPath: playerCamera

@@ -96,8 +96,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6359778594883346271}
   - component: {fileID: 115950227597479885}
-  - component: {fileID: 6114843553215801715}
   - component: {fileID: 632466290499629775}
+  - component: {fileID: 6114843553215801715}
   - component: {fileID: 3965412750251152896}
   - component: {fileID: 4736197452612484431}
   - component: {fileID: 6148424930819697946}
@@ -148,6 +148,28 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &632466290499629775
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9212125674474928216}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &6114843553215801715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,28 +196,6 @@ MonoBehaviour:
   attackCooldown: 2
   attackDamage: 10
   showDebugGizmos: 1
---- !u!95 &632466290499629775
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9212125674474928216}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8ba166aafe424fa48af539abbf4ce1b5, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &3965412750251152896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,6 +263,7 @@ MonoBehaviour:
   pathUpdateRate: 0.1
   maxZigzagTimes: 10
   zigzagCycleDuration: 2
+  zigzagSeed: 0
   screams:
   - KumarnScream1
   - KumarnScream2
