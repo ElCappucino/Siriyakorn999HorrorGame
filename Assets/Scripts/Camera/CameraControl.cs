@@ -10,7 +10,8 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private Vector2 lookAtRangeX;
     [SerializeField] private Vector2 lookAtRangeY;
     [SerializeField] private Vector2 currentLookatPos;
-    [SerializeField] private float moveSpeed;
+    [SerializeField] private float moveSpeedX;
+    [SerializeField] private float moveSpeedY;
 
     private Vector2 MoveInput;
 
@@ -23,11 +24,11 @@ public class CameraControl : MonoBehaviour
     {
         Vector3 lookatPos = cameraLookat.position;
 
-        lookatPos.x += direction.x * moveSpeed;
+        lookatPos.x += direction.x * moveSpeedX;
         if (lookatPos.x >= lookAtRangeX.y) lookatPos.x = lookAtRangeX.y;
         if (lookatPos.x <= lookAtRangeX.x) lookatPos.x = lookAtRangeX.x;
 
-        lookatPos.y += direction.y * moveSpeed;
+        lookatPos.y += direction.y * moveSpeedY;
         if (lookatPos.y >= lookAtRangeY.y) lookatPos.y = lookAtRangeY.y;
         if (lookatPos.y <= lookAtRangeY.x) lookatPos.y = lookAtRangeY.x;
 
