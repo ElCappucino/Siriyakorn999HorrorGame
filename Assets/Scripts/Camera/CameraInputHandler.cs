@@ -20,4 +20,17 @@ public class CameraInputHandler : MonoBehaviour
         }
         
     }
+
+    public void OnHoldTalisman(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            cameraControl.HoldTalisman(true);
+        }
+        else if (context.canceled)
+        {
+            cameraControl.HoldTalisman(false);
+        }
+
+    }
 }
