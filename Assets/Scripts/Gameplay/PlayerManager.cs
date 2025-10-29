@@ -85,6 +85,7 @@ public class PlayerManager : MonoBehaviour
                 Vector3 dir = (aimPoint - talismanSpawnPos.position).normalized;
                 rb.linearVelocity = dir * projectileSpeed;
             }
+            proj.GetComponentInChildren<TalismanObject>().InitEffect(TalismanObject.TalismanType.Lighting);
 
             Destroy(proj, 3.0f);
         }
