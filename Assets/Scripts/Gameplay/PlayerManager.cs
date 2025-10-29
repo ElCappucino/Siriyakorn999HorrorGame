@@ -1,10 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
+using MoreMountains.Feedbacks;
 
 public class PlayerManager : MonoBehaviour
 {
+    [Header("Score")]
+    [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text scoreMultiplierText;
+    [SerializeField] private MMF_Player scoreFeedbacks;
+    [SerializeField] private MMF_Player multiplierFeedbacks;
+    private int currentScore;
+    private float currentMultiplier;
+
     [Header("Health")]
     [SerializeField] private int maxHealth;
     [SerializeField] private Sprite fullHealthSprite;
@@ -21,6 +31,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float maxAimDistance = 100f;
     [SerializeField] private Transform talismanSpawnPos;
 
+    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,6 +43,22 @@ public class PlayerManager : MonoBehaviour
             var healthUI = Instantiate(healthPrefab, healthObjectParent);
             currentHealthImages.Add(healthUI.GetComponent<Image>());
         }
+
+        currentMultiplier = 1.0f;
+
+    }
+
+    public void IncreaseScore(int score)
+    {
+        currentScore += Mathf.CeilToInt(score * currentMultiplier);
+        scoreText.text = currentScore.ToString();
+        scoreFeedbacks.PlayFeedbacks();
+    }
+    public void IncreaseMultiplier(float multiplier)
+    {
+        currentMultiplier += multiplier;
+        scoreMultiplierText.text = "x" + currentMultiplier.ToString("F1");
+        multiplierFeedbacks.PlayFeedbacks();
     }
 
     public void DecreaseHealth()
@@ -51,7 +79,7 @@ public class PlayerManager : MonoBehaviour
                 aimPoint = ray.origin + ray.direction * maxAimDistance; // aim far away
 
             GameObject proj = Instantiate(talismanPrefab, talismanSpawnPos.position, Quaternion.identity);
-            Rigidbody rb = proj.GetComponent<Rigidbody>();
+            Rigidbody rb = proj.GetComponentInChildren<Rigidbody>();
             if (rb != null)
             {
                 Vector3 dir = (aimPoint - talismanSpawnPos.position).normalized;
