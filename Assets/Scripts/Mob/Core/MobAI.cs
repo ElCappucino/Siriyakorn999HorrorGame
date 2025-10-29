@@ -183,7 +183,7 @@ namespace MobSystem
                 // Play 3D detection sound from enemy position
                 if (MobAudioManager.instance != null && !string.IsNullOrEmpty(detectionSoundName))
                 {
-                    MobAudioManager.instance.PlayAudio3D(detectionSoundName, transform.position);
+                    MobAudioManager.instance.PlayAudio3DAttached(detectionSoundName, gameObject);
                 }
 
                 // Call behavior hook
@@ -306,7 +306,7 @@ namespace MobSystem
                 // Play 3D attack sound from enemy position
                 if (MobAudioManager.instance != null && !string.IsNullOrEmpty(attackSoundName))
                 {
-                    MobAudioManager.instance.PlayAudio3D(attackSoundName, transform.position);
+                    MobAudioManager.instance.PlayAudio3DAttached(attackSoundName, gameObject);
                 }
 
                 // Deal damage to player
@@ -379,7 +379,7 @@ namespace MobSystem
                 // Play 3D detection sound from enemy position
                 if (MobAudioManager.instance != null && !string.IsNullOrEmpty(detectionSoundName))
                 {
-                    MobAudioManager.instance.PlayAudio3D(detectionSoundName, transform.position);
+                    MobAudioManager.instance.PlayAudio3DAttached(detectionSoundName, gameObject);
                 }
 
                 // Call behavior hook

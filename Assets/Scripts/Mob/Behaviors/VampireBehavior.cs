@@ -34,7 +34,7 @@ namespace MobSystem
             // Play bat wing flapping sound
             if (MobAudioManager.instance != null)
             {
-                MobAudioManager.instance.PlayAudio3D("BatWings", transform.position);
+                MobAudioManager.instance.PlayAudio3DAttached("BatWings", gameObject);
             }
         }
 
@@ -94,7 +94,7 @@ namespace MobSystem
             // Play vampire humanoid sound
             if (MobAudioManager.instance != null)
             {
-                MobAudioManager.instance.PlayAudio3D("VampireRoar", transform.position);
+                MobAudioManager.instance.PlayAudio3DAttached("VampireRoar", gameObject);
             }
 
             isTransforming = false;

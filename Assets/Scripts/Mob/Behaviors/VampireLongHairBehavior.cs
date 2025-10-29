@@ -35,8 +35,8 @@ namespace MobSystem
             // Play bat sound with electricity
             if (MobAudioManager.instance != null)
             {
-                MobAudioManager.instance.PlayAudio3D("BatWings", transform.position);
-                MobAudioManager.instance.PlayAudio3D("ElectricityAmbient", transform.position);
+                MobAudioManager.instance.PlayAudio3DAttached("BatWings", gameObject);
+                MobAudioManager.instance.PlayAudio3DAttached("ElectricityAmbient", gameObject);
             }
 
             // Transform immediately after a short delay
@@ -87,7 +87,7 @@ namespace MobSystem
             // Play vampire roar
             if (MobAudioManager.instance != null)
             {
-                MobAudioManager.instance.PlayAudio3D("VampireRoar", transform.position);
+                MobAudioManager.instance.PlayAudio3DAttached("VampireRoar", gameObject);
             }
         }
 
@@ -107,7 +107,7 @@ namespace MobSystem
             // Play electricity surge on attack
             if (MobAudioManager.instance != null)
             {
-                MobAudioManager.instance.PlayAudio3D("ElectricityZap", transform.position);
+                MobAudioManager.instance.PlayAudio3DAttached("ElectricityZap", gameObject);
             }
 
             if (electricityEffect != null)

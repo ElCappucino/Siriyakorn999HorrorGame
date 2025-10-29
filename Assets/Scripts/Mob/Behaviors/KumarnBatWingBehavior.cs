@@ -76,7 +76,7 @@ namespace MobSystem
             // Play ominous sound during pause
             if (MobAudioManager.instance != null)
             {
-                MobAudioManager.instance.PlayAudio3D("KumarnStare", transform.position);
+                MobAudioManager.instance.PlayAudio3DAttached("KumarnStare", gameObject);
             }
 
             // Stare at player
@@ -89,7 +89,7 @@ namespace MobSystem
             // Resume with aggressive sound
             if (MobAudioManager.instance != null)
             {
-                MobAudioManager.instance.PlayAudio3D("KumarnScream1", transform.position);
+                MobAudioManager.instance.PlayAudio3DAttached("KumarnScream1", gameObject);
             }
 
             mobAI.SetPaused(false);
@@ -101,7 +101,7 @@ namespace MobSystem
             // Play combined child scream and bat screech
             if (MobAudioManager.instance != null)
             {
-                MobAudioManager.instance.PlayAudio3D("KumarnBatAttack", transform.position);
+                MobAudioManager.instance.PlayAudio3DAttached("KumarnBatAttack", gameObject);
             }
         }
 

@@ -65,7 +65,7 @@ namespace MobSystem
             // Audio effect
             if (MobAudioManager.instance != null)
             {
-                MobAudioManager.instance.PlayAudio3D("ElectricityZap", transform.position);
+                MobAudioManager.instance.PlayAudio3DAttached("ElectricityZap", gameObject);
             }
         }
 

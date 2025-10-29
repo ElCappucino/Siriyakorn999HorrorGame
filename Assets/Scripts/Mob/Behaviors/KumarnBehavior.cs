@@ -95,7 +95,7 @@ namespace MobSystem
             // Reset zigzag count for new chase
             if (MobAudioManager.instance != null)
             {
-                MobAudioManager.instance.PlayAudio3D(footstepsSounds[Random.Range(0, footstepsSounds.Length)], transform.position);
+                MobAudioManager.instance.PlayAudio3DAttached(footstepsSounds[Random.Range(0, footstepsSounds.Length)], gameObject);
             }
             currentZigzagCount = 0;
             zigzagCycleTimer = zigzagCycleDuration;
@@ -114,11 +114,11 @@ namespace MobSystem
             if (MobAudioManager.instance != null)
             {
                 string footstepSound = footstepsSounds[Random.Range(0, footstepsSounds.Length)];
-                GameObject existingAudio = GameObject.Find($"TempAudio_{footstepSound}");
+                GameObject existingAudio = GameObject.Find($"Audio_{footstepSound}");
                 
                 if (existingAudio == null)
                 {
-                    MobAudioManager.instance.PlayAudio3D(footstepSound, transform.position);
+                    MobAudioManager.instance.PlayAudio3DAttached(footstepSound, gameObject);
                 }
             }
 
@@ -152,7 +152,7 @@ namespace MobSystem
                         {
                             string[] screams = { "KumarnScream1", "KumarnScream2", "KumarnScream3" };
                             string randomScream = screams[Random.Range(0, screams.Length)];
-                            MobAudioManager.instance.PlayAudio3D(randomScream, transform.position);
+                            MobAudioManager.instance.PlayAudio3DAttached(randomScream, gameObject);
                         }
                     }
                 }
@@ -180,7 +180,7 @@ namespace MobSystem
                 // Play random scream from Thai child voice set
                 string[] screams = { "KumarnScream1", "KumarnScream2", "KumarnScream3" };
                 string randomScream = screams[Random.Range(0, screams.Length)];
-                MobAudioManager.instance.PlayAudio3D(randomScream, transform.position);
+                MobAudioManager.instance.PlayAudio3DAttached(randomScream, gameObject);
             }
         }
 

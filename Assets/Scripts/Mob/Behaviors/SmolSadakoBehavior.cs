@@ -88,7 +88,7 @@ namespace MobSystem
             // Audio effect
             if (MobAudioManager.instance != null)
             {
-                MobAudioManager.instance.PlayAudio3D("ElectricityZap", transform.position);
+                MobAudioManager.instance.PlayAudio3DAttached("ElectricityZap", gameObject);
             }
         }
 
@@ -99,7 +99,7 @@ namespace MobSystem
                 // Play random giggle sound
                 string[] giggles = { "ChildGiggle1", "ChildGiggle2", "ChildGiggle3" };
                 string randomGiggle = giggles[Random.Range(0, giggles.Length)];
-                MobAudioManager.instance.PlayAudio3D(randomGiggle, transform.position);
+                MobAudioManager.instance.PlayAudio3DAttached(randomGiggle, gameObject);
             }
         }
 
