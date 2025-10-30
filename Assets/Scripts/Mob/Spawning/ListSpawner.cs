@@ -38,7 +38,7 @@ public class ListSpawner : MonoBehaviour
     [SerializeField] private MobAudioManager mobAudioManager;
 
     [Tooltip("The name of the spawn sound")]
-    [SerializeField] private string spawnSoundName = "MobSpawn";
+    [SerializeField] private List<string> spawnSoundNames = new List<string> { "MobSpawn" };
 
     private void Initialize()
     {
@@ -78,7 +78,7 @@ public class ListSpawner : MonoBehaviour
                 GameObject mob = Instantiate(mobPrefab, spawnPoint.position, spawnPoint.rotation); 
                 SetSpawnAnimationPlaying(mob, true);
                 SetMobAIPaused(mob, true);
-                SetPlayingMobAudio(mob, spawnSoundName);
+                SetPlayingMobAudio(mob, spawnSoundNames);
                 SetMobScale(mob, Vector3.zero);
                 yield return new WaitForSeconds(spawnAnimationTime);
                 SetSpawnAnimationPlaying(mob, false);
@@ -90,8 +90,15 @@ public class ListSpawner : MonoBehaviour
         }
     }
 
-    private void SetPlayingMobAudio(GameObject mob, string soundName)
+    private void SetPlayingMobAudio(GameObject mob, List<string> soundNames)
     {
+        string soundName = "";
+        if (soundNames.Count > 0)
+        {
+            int randomIndex = Random.Range(0, soundNames.Count);
+            soundName = soundNames[randomIndex];
+        }
+        
         if (mob != null)
         {
             if (mobAudioManager != null && !string.IsNullOrEmpty(soundName)) mobAudioManager.PlayAudio3D(soundName, mob.transform.position);

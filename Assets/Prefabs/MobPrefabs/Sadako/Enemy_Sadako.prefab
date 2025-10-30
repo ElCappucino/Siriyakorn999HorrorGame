@@ -1,0 +1,194 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4956430168054780089
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.95
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.50071263
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.84
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.2730647
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.96199566
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 211.693
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
+      propertyPath: m_Name
+      value: Enemy_Sadako
+      objectReference: {fileID: 0}
+    - target: {fileID: 2902546568899558263, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 18fdba85a0f62184b9270b26f862871c, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2510013148456454215}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5243609184883252152}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 23349402788312427}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8271039197270677352}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3732862449236392329}
+  m_SourcePrefab: {fileID: 100100000, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
+--- !u!1 &5190872647505964520 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
+  m_PrefabInstance: {fileID: 4956430168054780089}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2510013148456454215
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5190872647505964520}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: be277d9549761b04a8bff81db461c722, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!195 &5243609184883252152
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5190872647505964520}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &23349402788312427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5190872647505964520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mobData: {fileID: 11400000, guid: f71b904bfd1e4ea41803de932a9628cc, type: 2}
+  player: {fileID: 0}
+  stoppingDistance: 2
+  moveSpeed: 1
+  rotationSpeed: 5
+  detectionRange: 100
+  pathUpdateInterval: 0.5
+  detectionSoundName: MobDetect
+  chaseSoundName: MobChase
+  attackSoundName: MobAttack
+  attackRange: 2
+  attackCooldown: 2
+  attackDamage: 10
+  showDebugGizmos: 1
+--- !u!114 &8271039197270677352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5190872647505964520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+  deathDelay: 3
+  useRagdoll: 1
+  deathEffectPrefab: {fileID: 0}
+  hurtSoundName: MobHurt
+  deathSoundName: MobDeath
+  randomizeHurtPitch: 1
+  minPitch: 0.9
+  maxPitch: 1.1
+  damageMaterial: {fileID: 0}
+  damageFlashDuration: 0.1
+  useKnockback: 1
+  knockbackForce: 5
+--- !u!114 &3732862449236392329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5190872647505964520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcfa1ad47f6f6fd4aa79f7ad7c63330b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crawlAnimationSpeed: 0.8
+  electricityEffect: {fileID: 0}
+  electricityInterval: 3
