@@ -102,7 +102,7 @@ namespace MobSystem
         [Tooltip("Spawn rate after hybrid phase (Phases 3-5)")]
         [Range(0, 100)] public float spawnRateAfterHybrid = 15f;
 
-        [Header("Speed Settings (Time to Reach Player in seconds)")]
+        [Header("Speed Settings (Speed to Reach Player -> Higher Number is Faster)")]
         [Tooltip("Speed for each phase (index 0 = Phase 1)")]
         public float[] timeToReachPlayerPerPhase = new float[5];
 
