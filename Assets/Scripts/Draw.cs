@@ -36,7 +36,7 @@ namespace PDollarGestureRecognizer {
         {
             timer = timerDelay;
             //Load pre-made gestures
-            TextAsset[] gesturesXml = Resources.LoadAll<TextAsset>("GestureSet/10-stylus-MEDIUM/");
+            TextAsset[] gesturesXml = Resources.LoadAll<TextAsset>("GestureSet/");
             foreach (TextAsset gestureXml in gesturesXml)
                 trainingSet.Add(GestureIO.ReadGestureFromXML(gestureXml.text));
 
