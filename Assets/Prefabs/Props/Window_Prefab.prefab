@@ -48,9 +48,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 819a509f673a32c4cac3e03e39b168ff, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 95886cdfcb0716b46a9e16eaef4bec9a, type: 2}
     - target: {fileID: 919132149155446097, guid: 819a509f673a32c4cac3e03e39b168ff, type: 3}
       propertyPath: m_Name
-      value: Window_Mesh
+      value: Window_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
