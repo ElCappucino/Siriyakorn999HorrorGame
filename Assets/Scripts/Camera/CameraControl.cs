@@ -15,7 +15,7 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private float moveSpeedY;
 
     [Header("Hand")]
-    [SerializeField] private Transform handPivot;
+    [SerializeField] public Transform handPivot;
     [SerializeField] private float handRotationAmountX;
     [SerializeField] private float handRotationAmountY;
     [SerializeField] private float rotationSpeed;
@@ -28,6 +28,7 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private Transform talisman_holdPos;
     [SerializeField] private Transform talisman_defaultPos;
     [SerializeField] private Transform talisman_introPos;
+    [SerializeField] private GameObject talisman_LineRenderer;
     [SerializeField] private float talismanMoveSpeed;
     public bool isHoldTalisman { get; private set; }
     public bool isRoundStart = false;
@@ -48,15 +49,18 @@ public class CameraControl : MonoBehaviour
         if (!isRoundStart)
         {
             talismanTargetPosition = talisman_introPos.position;
+            talisman_LineRenderer.SetActive(false);
             //Debug.Log("talismanTargetPosition = talisman_introPos.position;");
         }
         else if (isHoldTalisman)
         {
             talismanTargetPosition = talisman_holdPos.position;
+            talisman_LineRenderer.SetActive(true);
         }
         else
         {
             talismanTargetPosition = talisman_defaultPos.position;
+            talisman_LineRenderer.SetActive(false);
         }
 
         talismanObject.position = Vector3.Lerp(talismanObject.position, talismanTargetPosition, talismanMoveSpeed * Time.deltaTime);

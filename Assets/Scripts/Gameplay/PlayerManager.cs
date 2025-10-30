@@ -105,7 +105,9 @@ public class PlayerManager : MonoBehaviour
 
     public void ShootTalisman(InputAction.CallbackContext context)
     {
-        if (GameplayManager.Instance.isGameStart && !cameraControl.isHoldTalisman)
+        if (GameplayManager.Instance.isGameStart && 
+            !cameraControl.isHoldTalisman && 
+            currentTalismanType != TalismanObject.TalismanType.Normal)
         {
             if (context.performed)
             {
@@ -115,8 +117,9 @@ public class PlayerManager : MonoBehaviour
                     aimPoint = hit.point;
                 else
                     aimPoint = ray.origin + ray.direction * maxAimDistance; // aim far away
-
-                GameObject proj = Instantiate(talismanPrefab, talismanSpawnPos.position, Quaternion.identity);
+                Debug.Log("cameraControl.handPivot.transform.rotation.y = " + cameraControl.handPivot.transform.eulerAngles.y);
+                Quaternion rotation = Quaternion.Euler(0, cameraControl.handPivot.transform.eulerAngles.y, 0);
+                GameObject proj = Instantiate(talismanPrefab, talismanSpawnPos.position, rotation);
                 Rigidbody rb = proj.GetComponentInChildren<Rigidbody>();
                 if (rb != null)
                 {
