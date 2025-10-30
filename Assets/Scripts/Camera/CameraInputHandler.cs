@@ -1,9 +1,12 @@
+using PDollarGestureRecognizer;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CameraInputHandler : MonoBehaviour
 {
     private CameraControl cameraControl;
+    [SerializeField] private Draw drawControl;
+    [SerializeField] private PlayerManager playerManager;
 
     private void Awake()
     {
@@ -30,6 +33,8 @@ public class CameraInputHandler : MonoBehaviour
         else if (context.canceled)
         {
             cameraControl.HoldTalisman(false);
+
+            playerManager.UpdateCurrentTalismanType(drawControl.CheckGesture());
         }
 
     }
