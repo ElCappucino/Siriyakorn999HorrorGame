@@ -4,6 +4,7 @@ using TMPro;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using MoreMountains.Feedbacks;
+using MobSystem;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -31,7 +32,12 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float maxAimDistance = 100f;
     [SerializeField] private Transform talismanSpawnPos;
 
-    
+    [SerializeField] private CameraControl cameraControl;
+
+    [Header("Holding Talisman")]
+    [SerializeField] TalismanInfoList talismanInfo;
+    public TalismanObject.TalismanType currentTalismanType;
+    [SerializeField] private GameObject currentActiveTalisman;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -46,8 +52,38 @@ public class PlayerManager : MonoBehaviour
 
         currentMultiplier = 1.0f;
 
-    }
+        talismanInfo.InitDict();
 
+    }
+    public void UpdateCurrentTalismanType(string type)
+    {
+        Debug.Log("type = " + type);
+        string result = type.ToLower();
+        switch (result)
+        {
+            case "lightning":
+                currentTalismanType = TalismanObject.TalismanType.Lighting;
+                break;
+            case "cross":
+                currentTalismanType = TalismanObject.TalismanType.Cross;
+                break;
+            case "stun":
+                currentTalismanType = TalismanObject.TalismanType.Stun;
+                break;
+            case "thai":
+                currentTalismanType = TalismanObject.TalismanType.Thai;
+                break;
+            default:
+                Debug.Log("No match");
+                break;
+        }
+
+        if (currentActiveTalisman != null)
+            currentActiveTalisman.SetActive(false);
+
+        currentActiveTalisman = talismanInfo.talismanInfoDict[currentTalismanType].vfxObject;
+        currentActiveTalisman.SetActive(true);
+    }
     public void IncreaseScore(int score)
     {
         currentScore += Mathf.CeilToInt(score * currentMultiplier);
@@ -69,25 +105,34 @@ public class PlayerManager : MonoBehaviour
 
     public void ShootTalisman(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (GameplayManager.Instance.isGameStart && !cameraControl.isHoldTalisman)
         {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            Vector3 aimPoint;
-            if (Physics.Raycast(ray, out RaycastHit hit, maxAimDistance))
-                aimPoint = hit.point;
-            else
-                aimPoint = ray.origin + ray.direction * maxAimDistance; // aim far away
-
-            GameObject proj = Instantiate(talismanPrefab, talismanSpawnPos.position, Quaternion.identity);
-            Rigidbody rb = proj.GetComponentInChildren<Rigidbody>();
-            if (rb != null)
+            if (context.performed)
             {
-                Vector3 dir = (aimPoint - talismanSpawnPos.position).normalized;
-                rb.linearVelocity = dir * projectileSpeed;
-            }
+                Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+                Vector3 aimPoint;
+                if (Physics.Raycast(ray, out RaycastHit hit, maxAimDistance))
+                    aimPoint = hit.point;
+                else
+                    aimPoint = ray.origin + ray.direction * maxAimDistance; // aim far away
 
-            Destroy(proj, 3.0f);
+                GameObject proj = Instantiate(talismanPrefab, talismanSpawnPos.position, Quaternion.identity);
+                Rigidbody rb = proj.GetComponentInChildren<Rigidbody>();
+                if (rb != null)
+                {
+                    Vector3 dir = (aimPoint - talismanSpawnPos.position).normalized;
+                    rb.linearVelocity = dir * projectileSpeed;
+                }
+                proj.GetComponentInChildren<TalismanObject>().InitEffect(currentTalismanType);
+
+                Destroy(proj, 3.0f);
+            }
         }
+        else
+        {
+            Debug.Log("GameplayManager.Instance.isGameStart && !cameraControl.isHoldTalisman");
+        }    
+        
         
     }
     // Update is called once per frame
