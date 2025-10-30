@@ -12,6 +12,7 @@ namespace MobSystem
         protected MobData mobData;
         protected Transform player;
         protected Animator animator;
+        protected BoxCollider boxCollider;
 
         public virtual void Initialize(MobAI ai, MobData data, Transform playerTransform)
         {
@@ -19,6 +20,7 @@ namespace MobSystem
             mobData = data;
             player = playerTransform;
             animator = GetComponent<Animator>();
+            boxCollider = GetComponent<BoxCollider>();
         }
 
         /// <summary>

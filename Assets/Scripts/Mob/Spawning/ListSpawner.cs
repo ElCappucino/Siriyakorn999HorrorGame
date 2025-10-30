@@ -5,7 +5,7 @@ using MobSystem;
 
 public class ListSpawner : MonoBehaviour
 {
-    [Header("List Spawner Settings")]
+    [Header("-----List Spawner Settings-----")]
     [Tooltip("Spawn point main object")]
     [SerializeField] private GameObject spawnMainObject;
 
@@ -27,17 +27,21 @@ public class ListSpawner : MonoBehaviour
     [Tooltip("The time for playing spawn animation")]
     [SerializeField] private float spawnAnimationTime = 1f;
 
+    [Header("-----Gameplay Manager-----")]
+    [Tooltip("The GameplayManager to check if the game is started")]
+    [SerializeField] private GameplayManager GameplayManager;
 
-    // Animation parameters
+
+    [Header("-----Animation Parameters-----")]
     private readonly int isSpawningHash = Animator.StringToHash("IsSpawning");
     private readonly int isWalkingHash = Animator.StringToHash("IsWalking");
     private readonly int isAttackingHash = Animator.StringToHash("IsAttacking");
 
-    // Audio parameters
+    [Header("-----Audio Parameters-----")]
     [Tooltip("The MobAudioManager instance")]
     [SerializeField] private MobAudioManager mobAudioManager;
 
-    [Tooltip("The name of the spawn sound")]
+    [Tooltip("The names of the spawn sounds")]
     [SerializeField] private List<string> spawnSoundNames = new List<string> { "MobSpawn" };
 
     private void Initialize()
@@ -47,11 +51,25 @@ public class ListSpawner : MonoBehaviour
         {
             spawnPoints.Add(child);
         }
+        
+        if(GameplayManager == null && GameplayManager.Instance != null)
+        {
+            GameplayManager = GameplayManager.Instance;
+        }
     }
 
     private void Start()
     {
         Initialize();
+        StartCoroutine(WaitForGameStart());
+    }
+
+    private IEnumerator WaitForGameStart()
+    {
+        while (!GameplayManager.Instance.isGameStart)
+        {
+            yield return null;
+        }
         StartCoroutine(SpawnMobs());
     }
 

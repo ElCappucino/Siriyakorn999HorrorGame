@@ -69,6 +69,46 @@ namespace MobSystem
             }
         }
 
+        public override void OnTakeDamage(float damage)
+        {   
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            // Check if a talisman hit Sadako
+            TalismanObject talisman = collision.gameObject.GetComponent<TalismanObject>();
+            if (talisman == null)
+            {
+                // Try to get from parent or children
+                talisman = collision.gameObject.GetComponentInParent<TalismanObject>();
+                if (talisman == null)
+                {
+                    talisman = collision.gameObject.GetComponentInChildren<TalismanObject>();
+                }
+            }
+
+            if (talisman != null)
+            {
+                Debug.Log($"Talisman hit Sadako! Type: {talisman.CurrentType}");
+                
+                // Check if it's a lightning talisman (note: enum value is "Lighting")
+                if (talisman.CurrentType == TalismanObject.TalismanType.Lighting)
+                {
+                    MobHealth mobHealth = GetComponent<MobHealth>();
+                    if (mobHealth != null)
+                    {
+                        // Apply damage when lightning talisman hits
+                        float talismanDamage = 50f; // You can adjust this value
+                        mobHealth.TakeDamage(talismanDamage, collision.contacts[0].point);
+                        Debug.Log($"Lightning talisman dealt {talismanDamage} damage to Sadako!");
+                        
+                        // Optional: Add special effect when hit by lightning
+                        PlayElectricityEffect();
+                    }
+                }
+            }
+        }
+
         public override float GetSpeedMultiplier()
         {
             // Sadako is always slow

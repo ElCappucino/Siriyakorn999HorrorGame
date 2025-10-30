@@ -75,6 +75,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3732862449236392329}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4614264643161458590}
   m_SourcePrefab: {fileID: 100100000, guid: 7251190dad718494e9d45ef4d86325d3, type: 3}
 --- !u!1 &5190872647505964520 stripped
 GameObject:
@@ -192,3 +195,24 @@ MonoBehaviour:
   crawlAnimationSpeed: 0.8
   electricityEffect: {fileID: 0}
   electricityInterval: 3
+--- !u!65 &4614264643161458590
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5190872647505964520}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.6633904, y: 2.046226, z: 2.6624732}
+  m_Center: {x: -0.08299332, y: 1.0080945, z: 0.83941936}
