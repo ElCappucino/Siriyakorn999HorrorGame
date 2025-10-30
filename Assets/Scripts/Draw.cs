@@ -10,6 +10,7 @@ namespace PDollarGestureRecognizer {
         [SerializeField] private float timerDelay;
         [SerializeField] private GameObject tailsman;
         [SerializeField] private Transform gestureOnScreenPrefab;
+        [SerializeField] private float renderZ;
 
         private float timer;
         private bool onTailsman = false;
@@ -99,7 +100,7 @@ namespace PDollarGestureRecognizer {
                     points.Add(new Point(virtualKeyPosition.x, -virtualKeyPosition.y, strokeId));
 
                     currentGestureLineRenderer.positionCount = ++vertexCount;
-                    currentGestureLineRenderer.SetPosition(vertexCount - 1, Camera.main.ScreenToWorldPoint(new Vector3(virtualKeyPosition.x, virtualKeyPosition.y, 10)));
+                    currentGestureLineRenderer.SetPosition(vertexCount - 1, Camera.main.ScreenToWorldPoint(new Vector3(virtualKeyPosition.x, virtualKeyPosition.y, renderZ)));
                 }
             }
 
@@ -123,6 +124,18 @@ namespace PDollarGestureRecognizer {
                 }
             }
         }
+
+        public string CheckGesture()
+        {
+            recognized = true;
+            Gesture candidate = new Gesture(points.ToArray());
+            Result gestureResult = PointCloudRecognizer.Classify(candidate, trainingSet.ToArray());
+
+            message = gestureResult.GestureClass + " " + gestureResult.Score;
+
+            return gestureResult.GestureClass;
+        }
+
         void OnGUI()
         {
             GUI.Label(new Rect(10, Screen.height - 40, 500, 50), message);

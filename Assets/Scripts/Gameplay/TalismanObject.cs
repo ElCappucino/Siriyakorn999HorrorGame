@@ -8,7 +8,8 @@ public class TalismanObject : MonoBehaviour
         Stun,
         Thai,
         Lighting,
-        Cross
+        Cross,
+        Normal
     }
     [SerializeField] private TalismanInfoList talismanList;
     [SerializeField] private GameObject parent;
