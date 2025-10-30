@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -175,13 +176,15 @@ namespace MobSystem
 
         private void PlayScream()
         {
-            if (MobAudioManager.instance != null)
+            PlayRandomSound(screams, attached: true);
+        }
+
+        protected override System.Collections.Generic.List<TalismanObject.TalismanType> GetRequiredTalismans()
+        {
+            return new System.Collections.Generic.List<TalismanObject.TalismanType>
             {
-                // Play random scream from Thai child voice set
-                string[] screams = { "KumarnScream1", "KumarnScream2", "KumarnScream3" };
-                string randomScream = screams[Random.Range(0, screams.Length)];
-                MobAudioManager.instance.PlayAudio3DAttached(randomScream, gameObject);
-            }
+                TalismanObject.TalismanType.Thai
+            };
         }
 
         public override bool CustomMovement()
@@ -225,37 +228,11 @@ namespace MobSystem
 
         private void OnCollisionEnter(Collision collision)
         {
-            // Check if a talisman hit Kumarn
-            TalismanObject talisman = collision.gameObject.GetComponent<TalismanObject>();
-            if (talisman == null)
-            {
-                // Try to get from parent or children
-                talisman = collision.gameObject.GetComponentInParent<TalismanObject>();
-                if (talisman == null)
-                {
-                    talisman = collision.gameObject.GetComponentInChildren<TalismanObject>();
-                }
-            }
-
-            if (talisman != null)
-            {
-                Debug.Log($"Talisman hit Kumarn! Type: {talisman.CurrentType}");
-
-                // Check if it's a Thai talisman (note: enum value is "Thai")
-                if (talisman.CurrentType == TalismanObject.TalismanType.Thai)
-                {
-                    MobHealth mobHealth = GetComponent<MobHealth>();
-                    if (mobHealth != null)
-                    {
-                        // Apply damage when lightning talisman hits
-                        float talismanDamage = 100f; // You can adjust this value
-                        mobHealth.TakeDamage(talismanDamage, collision.contacts[0].point);
-                        Debug.Log($"Lightning talisman dealt {talismanDamage} damage to Kumarn!");
-                    }
-                }
-            }
+            HandleTalismanCollision(collision);
         }
 
+        // Note: OnAttack and OnAttackComplete use base class default behavior
+        // (allows default attack and destroys mob after attack)
     }
 }
 

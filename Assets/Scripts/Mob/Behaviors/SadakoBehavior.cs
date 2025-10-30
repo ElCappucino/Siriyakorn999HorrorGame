@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace MobSystem
@@ -47,73 +48,48 @@ namespace MobSystem
             }
         }
 
+        private void PlayElectricityEffect()
+        {
+            PlayElectricityEffect(electricityEffect, 1f);
+        }
+
+        protected override System.Collections.Generic.List<TalismanObject.TalismanType> GetRequiredTalismans()
+        {
+            return new System.Collections.Generic.List<TalismanObject.TalismanType>
+            {
+                TalismanObject.TalismanType.Lighting
+            };
+        }
+
+        protected override void OnTalismanCollected(TalismanObject.TalismanType talismanType)
+        {
+            // Play electricity effect when hit by lightning talisman
+            PlayElectricityEffect();
+        }
+
+        public override void OnTakeDamage(float damage)
+        {
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            HandleTalismanCollision(collision);
+        }
+        
+        public override float GetSpeedMultiplier()
+        {
+            // Sadako is always slow
+            return 1f;
+        }
+
         public override void OnStartAttacking()
         {
             // Play electricity surge when starting attack
             PlayElectricityEffect();
         }
 
-        private void PlayElectricityEffect()
-        {
-            // Visual effect
-            if (electricityEffect != null)
-            {
-                GameObject effect = Instantiate(electricityEffect, transform.position, Quaternion.identity, transform);
-                Destroy(effect, 1f);
-            }
-
-            // Audio effect
-            if (MobAudioManager.instance != null)
-            {
-                MobAudioManager.instance.PlayAudio3DAttached("ElectricityZap", gameObject);
-            }
-        }
-
-        public override void OnTakeDamage(float damage)
-        {   
-        }
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            // Check if a talisman hit Sadako
-            TalismanObject talisman = collision.gameObject.GetComponent<TalismanObject>();
-            if (talisman == null)
-            {
-                // Try to get from parent or children
-                talisman = collision.gameObject.GetComponentInParent<TalismanObject>();
-                if (talisman == null)
-                {
-                    talisman = collision.gameObject.GetComponentInChildren<TalismanObject>();
-                }
-            }
-
-            if (talisman != null)
-            {
-                Debug.Log($"Talisman hit Sadako! Type: {talisman.CurrentType}");
-                
-                // Check if it's a lightning talisman (note: enum value is "Lighting")
-                if (talisman.CurrentType == TalismanObject.TalismanType.Lighting)
-                {
-                    MobHealth mobHealth = GetComponent<MobHealth>();
-                    if (mobHealth != null)
-                    {
-                        // Apply damage when lightning talisman hits
-                        float talismanDamage = 100f; // You can adjust this value
-                        mobHealth.TakeDamage(talismanDamage, collision.contacts[0].point);
-                        Debug.Log($"Lightning talisman dealt {talismanDamage} damage to Sadako!");
-                        
-                        // Optional: Add special effect when hit by lightning
-                        PlayElectricityEffect();
-                    }
-                }
-            }
-        }
-
-        public override float GetSpeedMultiplier()
-        {
-            // Sadako is always slow
-            return 1f;
-        }
+        // Note: OnAttack and OnAttackComplete use base class default behavior
+        // (allows default attack and destroys mob after attack)
     }
 }
 

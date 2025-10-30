@@ -320,9 +320,6 @@ namespace MobSystem
                 {
                     Debug.LogWarning("Player doesn't have PlayerHealth component!");
                 }
-
-                //Delete Object after attack
-                Destroy(gameObject);
             }
 
             // Call behavior hook after attack
@@ -461,6 +458,36 @@ namespace MobSystem
         public float GetMoveSpeed()
         {
             return moveSpeed;
+        }
+
+        /// <summary>
+        /// Immediately destroy this mob (disables all components first for instant effect)
+        /// </summary>
+        public void DestroyMob()
+        {
+            // Disable AI to stop all updates immediately
+            this.enabled = false;
+            
+            // Disable NavMeshAgent to stop movement immediately
+            if (navAgent != null)
+            {
+                navAgent.enabled = false;
+            }
+            
+            // Disable animator to stop animations
+            if (animator != null)
+            {
+                animator.enabled = false;
+            }
+            
+            // Disable behavior script
+            if (behavior != null)
+            {
+                behavior.enabled = false;
+            }
+            
+            // Mark as destroyed and destroy the GameObject
+            Destroy(gameObject);
         }
 
         private void OnDrawGizmosSelected()

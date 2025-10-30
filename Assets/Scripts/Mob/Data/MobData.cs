@@ -21,6 +21,7 @@ namespace MobSystem
         public float moveSpeed = 3.5f;
         [Range(0.5f, 5f)]
         public float rotationSpeed = 2f;
+        public float stunDuration = 2f;
 
         [Header("Detection")]
         [Range(5f, 50f)]

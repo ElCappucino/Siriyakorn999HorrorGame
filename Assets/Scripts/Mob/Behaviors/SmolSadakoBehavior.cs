@@ -78,35 +78,46 @@ namespace MobSystem
 
         private void PlayElectricityEffect()
         {
-            // Visual effect
-            if (electricityEffect != null)
-            {
-                GameObject effect = Instantiate(electricityEffect, transform.position, Quaternion.identity, transform);
-                Destroy(effect, 1f);
-            }
-
-            // Audio effect
-            if (MobAudioManager.instance != null)
-            {
-                MobAudioManager.instance.PlayAudio3DAttached("ElectricityZap", gameObject);
-            }
+            PlayElectricityEffect(electricityEffect, 1f);
         }
 
         private void PlayGiggle()
         {
-            if (MobAudioManager.instance != null)
-            {
-                // Play random giggle sound
-                string[] giggles = { "ChildGiggle1", "ChildGiggle2", "ChildGiggle3" };
-                string randomGiggle = giggles[Random.Range(0, giggles.Length)];
-                MobAudioManager.instance.PlayAudio3DAttached(randomGiggle, gameObject);
-            }
+            string[] giggles = { "ChildGiggle1", "ChildGiggle2", "ChildGiggle3" };
+            PlayRandomSound(giggles, attached: true);
         }
 
         public override float GetSpeedMultiplier()
         {
             // Faster than regular Sadako but not as fast as Kumarn
             return 1.1f;
+        }
+
+        protected override System.Collections.Generic.List<TalismanObject.TalismanType> GetRequiredTalismans()
+        {
+            return new System.Collections.Generic.List<TalismanObject.TalismanType>
+            {
+                TalismanObject.TalismanType.Lighting,
+                TalismanObject.TalismanType.Thai
+            };
+        }
+
+        protected override void OnTalismanCollected(TalismanObject.TalismanType talismanType)
+        {
+            // Play effects based on which talisman was collected
+            if (talismanType == TalismanObject.TalismanType.Lighting)
+            {
+                PlayElectricityEffect();
+            }
+            else if (talismanType == TalismanObject.TalismanType.Thai)
+            {
+                PlayGiggle();
+            }
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            HandleTalismanCollision(collision);
         }
     }
 }

@@ -738,6 +738,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6f01982d8ba6d478949cf0bc2a5adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  indicatorSettings: {fileID: 11400000, guid: 7e7d7dee1aee81a4386e326dd7a5c56c, type: 2}
+  questionMarkIndicator: {fileID: 2335696680179921077, guid: 7d8eb4aa12b03294da48683371661df0, type: 3}
+  thaiTalismanIndicator: {fileID: 6357705193780104938, guid: a70600ee7d188fc4f82c375b8a4fa2b7, type: 3}
+  electricTalismanIndicator: {fileID: 5219164839854181288, guid: 0eadec25843383448845aa12ec463899, type: 3}
+  crossTalismanIndicator: {fileID: 5785291350212733167, guid: a1f5ab8e8e62dc44798215677523537c, type: 3}
   screamInterval: 5
   screamChance: 0.3
   zigzagMovement: 1

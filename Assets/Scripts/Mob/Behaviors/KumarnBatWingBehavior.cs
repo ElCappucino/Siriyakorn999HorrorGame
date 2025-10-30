@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.AI;
 
 namespace MobSystem
 {
@@ -15,15 +16,21 @@ namespace MobSystem
         [SerializeField] private float hoverBobAmount = 0.3f;
         [SerializeField] private GameObject batWingEffect;
         [SerializeField] private float pauseDistance = 3f;
+        [SerializeField] private float pathUpdateRate = 0.2f;
 
         private bool isPaused = false;
         private bool hasPausedThisChase = false;
         private float hoverTime = 0f;
         private Vector3 originalPosition;
+        private NavMeshAgent navAgent;
+        private float pathUpdateTimer;
 
         public override void Initialize(MobAI ai, MobData data, Transform playerTransform)
         {
             base.Initialize(ai, data, playerTransform);
+            
+            navAgent = GetComponent<NavMeshAgent>();
+            pathUpdateTimer = pathUpdateRate;
             originalPosition = transform.position;
         }
 
@@ -50,19 +57,12 @@ namespace MobSystem
 
         public override void OnChasingUpdate(float distanceToPlayer)
         {
-            // Hovering/flying behavior
-            hoverTime += Time.deltaTime * hoverBobSpeed;
-            float bobOffset = Mathf.Sin(hoverTime) * hoverBobAmount;
-            
-            Vector3 pos = transform.position;
-            pos.y = player.position.y + hoverHeight + bobOffset;
-            transform.position = pos;
-
             // Pause before attacking when close enough
             if (!hasPausedThisChase && !isPaused && distanceToPlayer <= pauseDistance)
             {
                 StartCoroutine(PauseBeforeAttack());
             }
+            // Note: Hovering movement is now handled in CustomMovement()
         }
 
         private IEnumerator PauseBeforeAttack()
@@ -108,13 +108,54 @@ namespace MobSystem
         public override bool CustomMovement()
         {
             // Use custom hovering movement
-            return true;
+            if (player != null && navAgent != null)
+            {
+                // Update path to player periodically (unless paused)
+                if (!isPaused)
+                {
+                    pathUpdateTimer -= Time.deltaTime;
+                    if (pathUpdateTimer <= 0f)
+                    {
+                        navAgent.SetDestination(player.position);
+                        pathUpdateTimer = pathUpdateRate;
+                    }
+
+                    // Update speed multiplier
+                    navAgent.speed = mobData.moveSpeed * GetSpeedMultiplier();
+                }
+
+                // Hovering/flying behavior with bobbing
+                hoverTime += Time.deltaTime * hoverBobSpeed;
+                float bobOffset = Mathf.Sin(hoverTime) * hoverBobAmount;
+                
+                Vector3 pos = transform.position;
+                pos.y = player.position.y + hoverHeight + bobOffset;
+                transform.position = pos;
+
+                return true;
+            }
+
+            return false;
         }
 
         public override float GetSpeedMultiplier()
         {
             // Fast like Kumarn
             return isPaused ? 0f : 1.3f;
+        }
+
+        protected override System.Collections.Generic.List<TalismanObject.TalismanType> GetRequiredTalismans()
+        {
+            return new System.Collections.Generic.List<TalismanObject.TalismanType>
+            {
+                TalismanObject.TalismanType.Thai,
+                TalismanObject.TalismanType.Cross
+            };
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            HandleTalismanCollision(collision);
         }
     }
 }
