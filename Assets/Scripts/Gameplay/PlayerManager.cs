@@ -8,13 +8,7 @@ using MobSystem;
 
 public class PlayerManager : MonoBehaviour
 {
-    [Header("Score")]
-    [SerializeField] private TMP_Text scoreText;
-    [SerializeField] private TMP_Text scoreMultiplierText;
-    [SerializeField] private MMF_Player scoreFeedbacks;
-    [SerializeField] private MMF_Player multiplierFeedbacks;
-    private int currentScore;
-    private float currentMultiplier;
+    
 
     [Header("Health")]
     [SerializeField] private int maxHealth;
@@ -23,7 +17,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private GameObject healthPrefab;
     [SerializeField] private Transform healthObjectParent;
     private List<Image> currentHealthImages = new List<Image>();
-    private int currentHealth;
+    public int currentHealth;
 
     [Header("Shooting Talisman")]
     [SerializeField] private Camera cam;
@@ -50,7 +44,7 @@ public class PlayerManager : MonoBehaviour
             currentHealthImages.Add(healthUI.GetComponent<Image>());
         }
 
-        currentMultiplier = 1.0f;
+        
 
         talismanInfo.InitDict();
 
@@ -84,23 +78,17 @@ public class PlayerManager : MonoBehaviour
         currentActiveTalisman = talismanInfo.talismanInfoDict[currentTalismanType].vfxObject;
         currentActiveTalisman.SetActive(true);
     }
-    public void IncreaseScore(int score)
-    {
-        currentScore += Mathf.CeilToInt(score * currentMultiplier);
-        scoreText.text = currentScore.ToString();
-        scoreFeedbacks.PlayFeedbacks();
-    }
-    public void IncreaseMultiplier(float multiplier)
-    {
-        currentMultiplier += multiplier;
-        scoreMultiplierText.text = "x" + currentMultiplier.ToString("F1");
-        multiplierFeedbacks.PlayFeedbacks();
-    }
+    
 
     public void DecreaseHealth()
     {
         currentHealth--;
         currentHealthImages[currentHealth].sprite = emptyHealthSprite;
+
+        if (currentHealth <= 0 && !GameplayManager.Instance.isGameFinish)
+        {
+            GameplayManager.Instance.ShowGameOverScene();
+        }
     }
 
     public void ShootTalisman(InputAction.CallbackContext context)
@@ -132,6 +120,8 @@ public class PlayerManager : MonoBehaviour
                 currentActiveTalisman = talismanInfo.talismanInfoDict[TalismanObject.TalismanType.Normal].vfxObject;
                 currentTalismanType = TalismanObject.TalismanType.Normal;
                 currentActiveTalisman.SetActive(true);
+
+                GameplayManager.Instance.WriteTalisman();
 
                 Destroy(proj, 3.0f);
             }
