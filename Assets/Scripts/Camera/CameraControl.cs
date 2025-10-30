@@ -27,11 +27,17 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private Transform talismanObject;
     [SerializeField] private Transform talisman_holdPos;
     [SerializeField] private Transform talisman_defaultPos;
+    [SerializeField] private Transform talisman_introPos;
     [SerializeField] private float talismanMoveSpeed;
     private bool isHoldTalisman;
+    public bool isRoundStart = false;
 
     private Vector2 MoveInput;
 
+    private void Start()
+    {
+        talismanObject.position = talisman_introPos.position;
+    }
     private void Update()
     {
         Quaternion currentRotation = handPivot.rotation;
@@ -39,7 +45,12 @@ public class CameraControl : MonoBehaviour
         handPivot.rotation = Quaternion.Slerp(currentRotation, targetRotation, Time.deltaTime * rotationSpeed);
 
         Vector3 talismanTargetPosition;
-        if (isHoldTalisman)
+        if (!isRoundStart)
+        {
+            talismanTargetPosition = talisman_introPos.position;
+            Debug.Log("talismanTargetPosition = talisman_introPos.position;");
+        }
+        else if (isHoldTalisman)
         {
             talismanTargetPosition = talisman_holdPos.position;
         }
