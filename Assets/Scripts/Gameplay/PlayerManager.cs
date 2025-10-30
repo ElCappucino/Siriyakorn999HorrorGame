@@ -31,7 +31,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float maxAimDistance = 100f;
     [SerializeField] private Transform talismanSpawnPos;
 
-    
+    [SerializeField] private CameraControl cameraControl;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -69,7 +69,7 @@ public class PlayerManager : MonoBehaviour
 
     public void ShootTalisman(InputAction.CallbackContext context)
     {
-        if (GameplayManager.Instance.isGameStart)
+        if (GameplayManager.Instance.isGameStart && !cameraControl.isHoldTalisman)
         {
             if (context.performed)
             {

@@ -99,7 +99,7 @@ namespace PDollarGestureRecognizer {
                     points.Add(new Point(virtualKeyPosition.x, -virtualKeyPosition.y, strokeId));
 
                     currentGestureLineRenderer.positionCount = ++vertexCount;
-                    currentGestureLineRenderer.SetPosition(vertexCount - 1, Camera.main.ScreenToWorldPoint(new Vector3(virtualKeyPosition.x, virtualKeyPosition.y, 10)));
+                    currentGestureLineRenderer.SetPosition(vertexCount - 1, Camera.main.ScreenToWorldPoint(new Vector3(virtualKeyPosition.x, virtualKeyPosition.y, 1.0f)));
                 }
             }
 

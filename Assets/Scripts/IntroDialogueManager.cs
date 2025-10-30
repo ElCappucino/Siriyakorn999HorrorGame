@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
+using System.Collections;
 
 public class IntroDialogueManager : MonoBehaviour
 {
@@ -13,15 +14,23 @@ public class IntroDialogueManager : MonoBehaviour
     [SerializeField] private CameraControl cameraControl;
     [SerializeField] private GameObject GotoTutorialButton;
     private int currentMonologueIndex = 0;
+    private bool isAbleToClick = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         RevealNextText();
+        StartCoroutine(EnableClick());
+    }
+    IEnumerator EnableClick()
+    {
+        yield return new WaitForSeconds(0.2f);
+        isAbleToClick = true;
     }
     public void OnClick(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && isAbleToClick)
         {
+            Debug.Log("OnClick");
             RevealNextText();
         }
     }
@@ -37,6 +46,8 @@ public class IntroDialogueManager : MonoBehaviour
 
             cameraControl.isRoundStart = true;
             GotoTutorialButton.SetActive(true);
+            currentMonologueIndex = 0;
+            isAbleToClick = false ;
         }
         else
         {
