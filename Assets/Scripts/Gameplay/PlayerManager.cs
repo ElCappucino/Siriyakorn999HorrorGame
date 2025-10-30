@@ -57,18 +57,20 @@ public class PlayerManager : MonoBehaviour
     }
     public void UpdateCurrentTalismanType(string type)
     {
-        switch (type)
+        Debug.Log("type = " + type);
+        string result = type.ToLower();
+        switch (result)
         {
-            case "Lightning":
+            case "lightning":
                 currentTalismanType = TalismanObject.TalismanType.Lighting;
                 break;
-            case "Cross":
+            case "cross":
                 currentTalismanType = TalismanObject.TalismanType.Cross;
                 break;
-            case "Stun":
+            case "stun":
                 currentTalismanType = TalismanObject.TalismanType.Stun;
                 break;
-            case "Thai":
+            case "thai":
                 currentTalismanType = TalismanObject.TalismanType.Thai;
                 break;
             default:
@@ -126,6 +128,10 @@ public class PlayerManager : MonoBehaviour
                 Destroy(proj, 3.0f);
             }
         }
+        else
+        {
+            Debug.Log("GameplayManager.Instance.isGameStart && !cameraControl.isHoldTalisman");
+        }    
         
         
     }
