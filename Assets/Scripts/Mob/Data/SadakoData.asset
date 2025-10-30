@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Sadako
   movementType: 1
   speedTier: 0
-  moveSpeed: 1
+  moveSpeed: 0.2
   rotationSpeed: 1
   detectionRange: 50
   attackRange: 1

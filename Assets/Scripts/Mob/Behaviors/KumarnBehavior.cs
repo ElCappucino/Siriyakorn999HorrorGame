@@ -36,7 +36,7 @@ namespace MobSystem
         private int currentZigzagCount;
         private float zigzagCycleTimer;
         private bool isZigzagging;
-        
+
         // Seeded random values for unique zigzag patterns
         private float zigzagTimeOffset;
         private float zigzagFrequencyX;
@@ -49,11 +49,11 @@ namespace MobSystem
             screamTimer = screamInterval;
             navAgent = GetComponent<NavMeshAgent>();
             pathUpdateTimer = pathUpdateRate;
-            
+
             // Initialize seeded random values for zigzag pattern
             InitializeZigzagSeed();
         }
-        
+
         private void InitializeZigzagSeed()
         {
             // Use provided seed, or generate random one if seed is 0
@@ -62,20 +62,20 @@ namespace MobSystem
             {
                 seed = Random.Range(1, 100000);
             }
-            
+
             // Initialize random with seed
             Random.State oldState = Random.state;
             Random.InitState(seed);
-            
+
             // Generate unique zigzag parameters based on seed
             zigzagTimeOffset = Random.Range(0f, 100f);
             zigzagFrequencyX = Random.Range(0.8f, 1.5f);
             zigzagFrequencyZ = Random.Range(0.5f, 1.0f);
             zigzagPhaseShift = Random.Range(0f, Mathf.PI * 2f);
-            
+
             // Restore previous random state
             Random.state = oldState;
-            
+
             Debug.Log($"[KumarnBehavior] Initialized zigzag with seed {seed}: " +
                      $"timeOffset={zigzagTimeOffset:F2}, freqX={zigzagFrequencyX:F2}, " +
                      $"freqZ={zigzagFrequencyZ:F2}, phase={zigzagPhaseShift:F2}");
@@ -115,7 +115,7 @@ namespace MobSystem
             {
                 string footstepSound = footstepsSounds[Random.Range(0, footstepsSounds.Length)];
                 GameObject existingAudio = GameObject.Find($"Audio_{footstepSound}");
-                
+
                 if (existingAudio == null)
                 {
                     MobAudioManager.instance.PlayAudio3DAttached(footstepSound, gameObject);
@@ -214,7 +214,7 @@ namespace MobSystem
             // Kumarn is fast, even faster when done zigzagging
             return isZigzagging ? 1.2f : 1.4f;
         }
-        
+
         /// <summary>
         /// Set a specific seed for zigzag behavior (call before Initialize)
         /// </summary>
@@ -222,6 +222,40 @@ namespace MobSystem
         {
             zigzagSeed = seed;
         }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            // Check if a talisman hit Kumarn
+            TalismanObject talisman = collision.gameObject.GetComponent<TalismanObject>();
+            if (talisman == null)
+            {
+                // Try to get from parent or children
+                talisman = collision.gameObject.GetComponentInParent<TalismanObject>();
+                if (talisman == null)
+                {
+                    talisman = collision.gameObject.GetComponentInChildren<TalismanObject>();
+                }
+            }
+
+            if (talisman != null)
+            {
+                Debug.Log($"Talisman hit Kumarn! Type: {talisman.CurrentType}");
+
+                // Check if it's a Thai talisman (note: enum value is "Thai")
+                if (talisman.CurrentType == TalismanObject.TalismanType.Thai)
+                {
+                    MobHealth mobHealth = GetComponent<MobHealth>();
+                    if (mobHealth != null)
+                    {
+                        // Apply damage when lightning talisman hits
+                        float talismanDamage = 100f; // You can adjust this value
+                        mobHealth.TakeDamage(talismanDamage, collision.contacts[0].point);
+                        Debug.Log($"Lightning talisman dealt {talismanDamage} damage to Kumarn!");
+                    }
+                }
+            }
+        }
+
     }
 }
 

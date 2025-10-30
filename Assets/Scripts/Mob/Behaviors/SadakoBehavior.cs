@@ -98,7 +98,7 @@ namespace MobSystem
                     if (mobHealth != null)
                     {
                         // Apply damage when lightning talisman hits
-                        float talismanDamage = 50f; // You can adjust this value
+                        float talismanDamage = 100f; // You can adjust this value
                         mobHealth.TakeDamage(talismanDamage, collision.contacts[0].point);
                         Debug.Log($"Lightning talisman dealt {talismanDamage} damage to Sadako!");
                         

@@ -320,6 +320,9 @@ namespace MobSystem
                 {
                     Debug.LogWarning("Player doesn't have PlayerHealth component!");
                 }
+
+                //Delete Object after attack
+                Destroy(gameObject);
             }
 
             // Call behavior hook after attack
@@ -438,6 +441,26 @@ namespace MobSystem
             {
                 ApplyMobData();
             }
+        }
+
+        /// <summary>
+        /// Set the move speed dynamically (for phase-based scaling)
+        /// </summary>
+        public void SetMoveSpeed(float speed)
+        {
+            moveSpeed = speed;
+            if (navAgent != null)
+            {
+                navAgent.speed = speed;
+            }
+        }
+
+        /// <summary>
+        /// Get the current move speed
+        /// </summary>
+        public float GetMoveSpeed()
+        {
+            return moveSpeed;
         }
 
         private void OnDrawGizmosSelected()

@@ -143,7 +143,7 @@ MonoBehaviour:
   mobData: {fileID: 11400000, guid: f71b904bfd1e4ea41803de932a9628cc, type: 2}
   player: {fileID: 0}
   stoppingDistance: 2
-  moveSpeed: 1
+  moveSpeed: 0.1
   rotationSpeed: 5
   detectionRange: 100
   pathUpdateInterval: 0.5

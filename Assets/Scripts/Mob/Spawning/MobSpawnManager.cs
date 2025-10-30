@@ -6,221 +6,481 @@ using AudioSystem;
 namespace MobSystem
 {
     /// <summary>
-    /// Manages multiple mob spawners and coordinates waves/events
-    /// Use this for controlling spawn sequences and difficulty scaling
+    /// Manages mob spawning with phase-based difficulty scaling
+    /// Based on ListSpawner pattern with phase system integration
     /// </summary>
     public class MobSpawnManager : MonoBehaviour
     {
-        [Header("Spawner Management")]
-        [Tooltip("All spawners in the level")]
-        [SerializeField] private List<MobSpawner> allSpawners = new List<MobSpawner>();
-        
-        [Tooltip("Auto-find all spawners in scene on start")]
-        [SerializeField] private bool autoFindSpawners = true;
+        public static MobSpawnManager Instance { get; private set; }
 
-        [Header("Wave Settings")]
-        [Tooltip("Enable wave-based spawning")]
-        [SerializeField] private bool useWaveSystem = false;
+        [Header("Phase Configuration")]
+        [Tooltip("Phase configuration with mob stats and spawn rates")]
+        [SerializeField] private MobPhaseConfig phaseConfig;
         
-        [Tooltip("Number of spawners to activate per wave")]
-        [SerializeField] private int spawnersPerWave = 3;
+        [Header("List Spawners")]
+        [Tooltip("List of ListSpawner components that define spawn locations")]
+        [SerializeField] private List<ListSpawner> listSpawners = new List<ListSpawner>();
         
-        [Tooltip("Delay between waves")]
-        [SerializeField] private float timeBetweenWaves = 15f;
-        
-        [Tooltip("Delay between individual spawns in a wave")]
-        [SerializeField] private float delayBetweenSpawns = 2f;
+        [Tooltip("Auto-find all ListSpawners in scene on start")]
+        [SerializeField] private bool autoFindListSpawners = true;
 
-        [Header("Difficulty Scaling")]
-        [Tooltip("Increase mob count over time")]
-        [SerializeField] private bool scaleDifficulty = true;
-        
-        [Tooltip("Additional spawners per wave")]
-        [SerializeField] private int spawnerIncreasePerWave = 1;
-        
-        [Tooltip("Maximum spawners per wave")]
-        [SerializeField] private int maxSpawnersPerWave = 10;
-
-        [Header("Audio")]
-        [Tooltip("Sound to play when wave starts")]
-        [SerializeField] private string waveStartSoundName = "WaveStart";
+        [Header("Gameplay Manager")]
+        [Tooltip("The GameplayManager to check if the game is started")]
+        [SerializeField] private GameplayManager gameplayManager;
 
         [Header("Debug")]
         [SerializeField] private bool showDebugInfo = true;
 
         // Private variables
-        private int currentWave = 0;
-        private int activeSpawnerCount = 0;
         private List<GameObject> activeMobs = new List<GameObject>();
-        private bool waveInProgress = false;
+        private Dictionary<string, int> activeMobCountByType = new Dictionary<string, int>();
+        private float lastSpawnTime = 0f;
+        private int currentPhase = 1;
+        private bool isGameStarted = false;
+
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
 
         private void Start()
         {
-            if (autoFindSpawners)
+            // Initialize list spawners
+            InitializeListSpawners();
+            
+            // Get GameplayManager if not assigned
+            if (gameplayManager == null && GameplayManager.Instance != null)
             {
-                FindAllSpawners();
+                gameplayManager = GameplayManager.Instance;
             }
 
-            if (useWaveSystem)
+            // Subscribe to phase changes
+            if (PhaseManager.Instance != null)
             {
-                StartCoroutine(WaveSystem());
+                PhaseManager.Instance.OnPhaseChanged += OnPhaseChanged;
+            }
+
+            // Wait for game to start
+            StartCoroutine(WaitForGameStart());
+        }
+
+        private void InitializeListSpawners()
+        {
+            // Auto-find ListSpawners in scene if enabled
+            if (autoFindListSpawners)
+            {
+                ListSpawner[] foundSpawners = FindObjectsByType<ListSpawner>(FindObjectsSortMode.None);
+                listSpawners = new List<ListSpawner>(foundSpawners);
+            }
+            
+            // Initialize all spawners
+            foreach (var spawner in listSpawners)
+            {
+                if (spawner != null)
+                {
+                    spawner.Initialize();
+                }
+            }
+            
+            if (showDebugInfo)
+            {
+                Debug.Log($"MobSpawnManager: Initialized {listSpawners.Count} ListSpawners");
+                foreach (var spawner in listSpawners)
+                {
+                    if (spawner != null)
+                    {
+                        Debug.Log($"  - {spawner.GetSpawnerID()}: {spawner.GetSpawnPointCount()} spawn points, {spawner.GetAvailableMobPrefabs().Count} mob types");
+                    }
+                }
+            }
+            
+            if (listSpawners.Count == 0)
+            {
+                Debug.LogWarning("MobSpawnManager: No ListSpawners found! Mobs will not spawn.");
+            }
+        }
+
+        private IEnumerator WaitForGameStart()
+        {
+            while (gameplayManager == null || !gameplayManager.isGameStart)
+            {
+                yield return null;
+            }
+            
+            isGameStarted = true;
+            
+            if (showDebugInfo)
+            {
+                Debug.Log("MobSpawnManager: Game started, phase spawning active");
             }
         }
 
         private void Update()
         {
+            if (!isGameStarted) return;
+
             // Clean up destroyed mobs from list
             activeMobs.RemoveAll(mob => mob == null);
 
+            // Phase-based spawning
+            if (Time.time - lastSpawnTime >= phaseConfig.spawnFrequency)
+            {
+                TrySpawnMob();
+                lastSpawnTime = Time.time;
+            }
+
+            // Debug info
             if (showDebugInfo)
             {
-                // You can display this in UI later
-                Debug.Log($"Wave: {currentWave} | Active Mobs: {activeMobs.Count}");
+                int hybridCount = GetHybridMobCount();
+                int nonHybridCount = GetNonHybridMobCount();
+                Debug.Log($"Phase: {currentPhase} | Total: {activeMobs.Count}/{phaseConfig.maxTotalGhostsInScene} | Non-Hybrid: {nonHybridCount} | Hybrid: {hybridCount}");
             }
         }
 
-        /// <summary>
-        /// Find all MobSpawners in the scene
-        /// </summary>
-        private void FindAllSpawners()
+        private void OnDestroy()
         {
-            MobSpawner[] foundSpawners = FindObjectsOfType<MobSpawner>();
-            allSpawners = new List<MobSpawner>(foundSpawners);
+            if (PhaseManager.Instance != null)
+            {
+                PhaseManager.Instance.OnPhaseChanged -= OnPhaseChanged;
+            }
+        }
+
+        #region Phase System Methods
+
+        /// <summary>
+        /// Called when phase changes
+        /// </summary>
+        private void OnPhaseChanged(int newPhase)
+        {
+            currentPhase = newPhase;
             
             if (showDebugInfo)
             {
-                Debug.Log($"MobSpawnManager: Found {allSpawners.Count} spawners in scene");
+                Debug.Log($"MobSpawnManager: Phase changed to {currentPhase}");
             }
+            
+            // Update speeds of all active mobs
+            UpdateAllMobSpeeds();
         }
 
         /// <summary>
-        /// Wave-based spawn system coroutine
+        /// Try to spawn a mob based on current phase rules
         /// </summary>
-        private IEnumerator WaveSystem()
+        private void TrySpawnMob()
         {
-            while (true)
+            // Check if we've reached max total ghosts
+            if (activeMobs.Count >= phaseConfig.maxTotalGhostsInScene)
             {
-                // Wait for previous wave to clear or timer
-                yield return new WaitForSeconds(timeBetweenWaves);
-
-                // Start next wave
-                currentWave++;
-                StartWave();
-
-                // Wait for wave to complete
-                while (waveInProgress)
-                {
-                    yield return new WaitForSeconds(1f);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Start a new wave of spawns
-        /// </summary>
-        public void StartWave()
-        {
-            if (allSpawners.Count == 0)
-            {
-                Debug.LogWarning("MobSpawnManager: No spawners available!");
                 return;
             }
 
-            waveInProgress = true;
-
-            // Calculate how many spawners to use this wave
-            int spawnersToUse = spawnersPerWave;
-            if (scaleDifficulty)
+            // Get available mob types for current phase
+            List<MobTypeConfig> availableTypes = phaseConfig.GetAvailableMobTypesForPhase(currentPhase);
+            if (availableTypes.Count == 0)
             {
-                spawnersToUse += (currentWave - 1) * spawnerIncreasePerWave;
-                spawnersToUse = Mathf.Min(spawnersToUse, maxSpawnersPerWave);
-                spawnersToUse = Mathf.Min(spawnersToUse, allSpawners.Count);
+                Debug.LogWarning("No available mob types for current phase!");
+                return;
             }
 
-            // Play wave start sound
-            if (AudioManager.instance != null && !string.IsNullOrEmpty(waveStartSoundName))
+            // Filter by type limits
+            List<MobTypeConfig> spawnableTypes = new List<MobTypeConfig>();
+            foreach (var mobType in availableTypes)
             {
-                AudioManager.instance.PlayAudio(waveStartSoundName);
-            }
-
-            if (showDebugInfo)
-            {
-                Debug.Log($"Starting Wave {currentWave} with {spawnersToUse} spawners");
-            }
-
-            // Start spawning
-            StartCoroutine(SpawnWave(spawnersToUse));
-        }
-
-        /// <summary>
-        /// Spawn a wave of mobs
-        /// </summary>
-        private IEnumerator SpawnWave(int count)
-        {
-            // Get random spawners that haven't spawned yet (or can respawn)
-            List<MobSpawner> availableSpawners = new List<MobSpawner>();
-            foreach (var spawner in allSpawners)
-            {
-                if (!spawner.HasSpawned() || spawner.GetComponent<MobSpawner>() != null)
+                if (CanSpawnMobType(mobType))
                 {
-                    availableSpawners.Add(spawner);
+                    spawnableTypes.Add(mobType);
                 }
             }
 
-            // If not enough available, use all spawners
-            if (availableSpawners.Count < count)
+            if (spawnableTypes.Count == 0)
             {
-                availableSpawners = new List<MobSpawner>(allSpawners);
+                if (showDebugInfo)
+                {
+                    Debug.Log("All mob types at max capacity");
+                }
+                return;
             }
 
-            // Shuffle and take count
-            ShuffleList(availableSpawners);
-            for (int i = 0; i < count && i < availableSpawners.Count; i++)
+            // Select a mob type based on spawn weights
+            MobTypeConfig selectedType = SelectMobTypeByWeight(spawnableTypes);
+            if (selectedType == null)
             {
-                availableSpawners[i].TriggerSpawn();
+                return;
+            }
+
+            // Spawn the mob
+            SpawnMob(selectedType);
+        }
+
+        /// <summary>
+        /// Check if we can spawn a specific mob type
+        /// </summary>
+        private bool CanSpawnMobType(MobTypeConfig mobType)
+        {
+            // Check per-type limit
+            int currentCount = GetMobCountByType(mobType.typeName);
+            if (currentCount >= mobType.maxInScene)
+            {
+                return false;
+            }
+
+            // Check hybrid/non-hybrid limits
+            if (currentPhase >= phaseConfig.hybridStartPhase)
+            {
+                if (mobType.isHybrid)
+                {
+                    int hybridCount = GetHybridMobCount();
+                    if (hybridCount >= phaseConfig.maxHybridGhosts)
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    int nonHybridCount = GetNonHybridMobCount();
+                    if (nonHybridCount >= phaseConfig.maxNonHybridAfterHybrid)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Select a mob type based on spawn weights
+        /// </summary>
+        private MobTypeConfig SelectMobTypeByWeight(List<MobTypeConfig> types)
+        {
+            // Calculate total weight
+            float totalWeight = 0f;
+            foreach (var type in types)
+            {
+                totalWeight += type.GetSpawnRateForPhase(currentPhase);
+            }
+
+            if (totalWeight <= 0)
+            {
+                return types[Random.Range(0, types.Count)];
+            }
+
+            // Random selection based on weight
+            float randomValue = Random.Range(0f, totalWeight);
+            float currentWeight = 0f;
+
+            foreach (var type in types)
+            {
+                currentWeight += type.GetSpawnRateForPhase(currentPhase);
+                if (randomValue <= currentWeight)
+                {
+                    return type;
+                }
+            }
+
+            return types[types.Count - 1];
+        }
+
+        /// <summary>
+        /// Spawn a mob of the specified type
+        /// </summary>
+        private void SpawnMob(MobTypeConfig mobType)
+        {
+            if (mobType.mobPrefab == null)
+            {
+                Debug.LogWarning($"Mob prefab is null for type: {mobType.typeName}");
+                return;
+            }
+
+            if (listSpawners.Count == 0)
+            {
+                Debug.LogWarning("No ListSpawners available!");
+                return;
+            }
+
+            // Find a suitable ListSpawner for this mob type
+            ListSpawner selectedSpawner = SelectSpawnerForMob(mobType.mobPrefab);
+            if (selectedSpawner == null)
+            {
+                Debug.LogWarning($"No suitable spawner found for mob type: {mobType.typeName}");
+                return;
+            }
+
+            // Use the ListSpawner to spawn the mob
+            GameObject mob = selectedSpawner.SpawnMob(mobType.mobPrefab);
+            
+            if (mob == null)
+            {
+                Debug.LogWarning($"Failed to spawn {mobType.typeName}");
+                return;
+            }
+
+            // Get MobAI component and set speed
+            MobAI mobAI = mob.GetComponent<MobAI>();
+            if (mobAI != null)
+            {
+                float speed = mobType.CalculateSpeedForPhase(currentPhase);
+                mobAI.SetMoveSpeed(speed);
                 
-                // Track spawned mob
-                GameObject spawnedMob = availableSpawners[i].GetCurrentMob();
-                if (spawnedMob != null)
+                if (showDebugInfo)
                 {
-                    activeMobs.Add(spawnedMob);
+                    Debug.Log($"Spawned {mobType.typeName} at '{selectedSpawner.GetSpawnerID()}' (Phase {currentPhase}, Speed {speed:F2})");
                 }
-
-                yield return new WaitForSeconds(delayBetweenSpawns);
             }
 
-            waveInProgress = false;
-        }
-
-        /// <summary>
-        /// Manually trigger a specific number of spawns
-        /// </summary>
-        public void TriggerSpawns(int count)
-        {
-            StartCoroutine(SpawnWave(count));
-        }
-
-        /// <summary>
-        /// Trigger all spawners at once
-        /// </summary>
-        public void TriggerAllSpawners()
-        {
-            foreach (var spawner in allSpawners)
+            // Track the mob
+            activeMobs.Add(mob);
+            
+            // Update type count
+            if (!activeMobCountByType.ContainsKey(mobType.typeName))
             {
-                spawner.TriggerSpawn();
+                activeMobCountByType[mobType.typeName] = 0;
+            }
+            activeMobCountByType[mobType.typeName]++;
+
+            // Add component to track mob type
+            MobTypeTracker tracker = mob.AddComponent<MobTypeTracker>();
+            tracker.typeName = mobType.typeName;
+            tracker.isHybrid = mobType.isHybrid;
+            tracker.spawnManager = this;
+        }
+
+        /// <summary>
+        /// Select a spawner for a specific mob prefab
+        /// </summary>
+        private ListSpawner SelectSpawnerForMob(GameObject mobPrefab)
+        {
+            // Get all spawners that can spawn this mob type
+            List<ListSpawner> validSpawners = new List<ListSpawner>();
+            
+            foreach (var spawner in listSpawners)
+            {
+                if (spawner != null && spawner.CanSpawnMobType(mobPrefab))
+                {
+                    validSpawners.Add(spawner);
+                }
+            }
+
+            if (validSpawners.Count == 0)
+            {
+                // If no spawner has this mob in their list, use any spawner
+                // (assuming empty list means "can spawn any")
+                foreach (var spawner in listSpawners)
+                {
+                    if (spawner != null && spawner.GetAvailableMobPrefabs().Count == 0)
+                    {
+                        validSpawners.Add(spawner);
+                    }
+                }
+            }
+
+            if (validSpawners.Count == 0)
+            {
+                return null;
+            }
+
+            // Select a random spawner from valid ones
+            return validSpawners[Random.Range(0, validSpawners.Count)];
+        }
+
+        /// <summary>
+        /// Update speeds of all active mobs for new phase
+        /// </summary>
+        private void UpdateAllMobSpeeds()
+        {
+            foreach (GameObject mob in activeMobs)
+            {
+                if (mob == null) continue;
+
+                MobTypeTracker tracker = mob.GetComponent<MobTypeTracker>();
+                if (tracker == null) continue;
+
+                MobTypeConfig config = phaseConfig.GetMobTypeConfig(tracker.typeName);
+                if (config == null) continue;
+
+                MobAI mobAI = mob.GetComponent<MobAI>();
+                if (mobAI != null)
+                {
+                    float newSpeed = config.CalculateSpeedForPhase(currentPhase);
+                    mobAI.SetMoveSpeed(newSpeed);
+                    
+                    if (showDebugInfo)
+                    {
+                        Debug.Log($"Updated {tracker.typeName} speed to {newSpeed:F2} for phase {currentPhase}");
+                    }
+                }
             }
         }
 
         /// <summary>
-        /// Trigger a random spawner
+        /// Called when a mob is destroyed
         /// </summary>
-        public void TriggerRandomSpawner()
+        public void OnMobDestroyed(string typeName)
         {
-            if (allSpawners.Count > 0)
+            if (activeMobCountByType.ContainsKey(typeName))
             {
-                int randomIndex = Random.Range(0, allSpawners.Count);
-                allSpawners[randomIndex].TriggerSpawn();
+                activeMobCountByType[typeName]--;
+                if (activeMobCountByType[typeName] < 0)
+                {
+                    activeMobCountByType[typeName] = 0;
+                }
             }
+        }
+
+        /// <summary>
+        /// Get count of mobs by type name
+        /// </summary>
+        private int GetMobCountByType(string typeName)
+        {
+            if (activeMobCountByType.ContainsKey(typeName))
+            {
+                return activeMobCountByType[typeName];
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// Get count of hybrid mobs
+        /// </summary>
+        private int GetHybridMobCount()
+        {
+            int count = 0;
+            foreach (GameObject mob in activeMobs)
+            {
+                if (mob == null) continue;
+                MobTypeTracker tracker = mob.GetComponent<MobTypeTracker>();
+                if (tracker != null && tracker.isHybrid)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        /// <summary>
+        /// Get count of non-hybrid mobs
+        /// </summary>
+        private int GetNonHybridMobCount()
+        {
+            int count = 0;
+            foreach (GameObject mob in activeMobs)
+            {
+                if (mob == null) continue;
+                MobTypeTracker tracker = mob.GetComponent<MobTypeTracker>();
+                if (tracker != null && !tracker.isHybrid)
+                {
+                    count++;
+                }
+            }
+            return count;
         }
 
         /// <summary>
@@ -232,30 +492,27 @@ namespace MobSystem
         }
 
         /// <summary>
-        /// Get current wave number
+        /// Get count of specific mob type
         /// </summary>
-        public int GetCurrentWave()
+        public int GetMobCountByTypeName(string typeName)
         {
-            return currentWave;
+            return GetMobCountByType(typeName);
         }
 
         /// <summary>
-        /// Add a spawner to the manager
+        /// Get current phase number
         /// </summary>
-        public void RegisterSpawner(MobSpawner spawner)
+        public int GetCurrentPhase()
         {
-            if (!allSpawners.Contains(spawner))
-            {
-                allSpawners.Add(spawner);
-            }
+            return currentPhase;
         }
 
         /// <summary>
-        /// Remove a spawner from the manager
+        /// Check if game has started
         /// </summary>
-        public void UnregisterSpawner(MobSpawner spawner)
+        public bool IsGameStarted()
         {
-            allSpawners.Remove(spawner);
+            return isGameStarted;
         }
 
         /// <summary>
@@ -271,29 +528,16 @@ namespace MobSystem
                 }
             }
             activeMobs.Clear();
-        }
-
-        /// <summary>
-        /// Shuffle a list (Fisher-Yates algorithm)
-        /// </summary>
-        private void ShuffleList<T>(List<T> list)
-        {
-            for (int i = list.Count - 1; i > 0; i--)
-            {
-                int randomIndex = Random.Range(0, i + 1);
-                T temp = list[i];
-                list[i] = list[randomIndex];
-                list[randomIndex] = temp;
-            }
+            activeMobCountByType.Clear();
         }
 
         private void OnDrawGizmosSelected()
         {
-            if (allSpawners == null || allSpawners.Count == 0) return;
+            if (listSpawners == null || listSpawners.Count == 0) return;
 
-            // Draw connections between manager and spawners
-            Gizmos.color = Color.cyan;
-            foreach (var spawner in allSpawners)
+            // Draw connections to list spawners
+            Gizmos.color = Color.yellow;
+            foreach (var spawner in listSpawners)
             {
                 if (spawner != null)
                 {
@@ -302,9 +546,30 @@ namespace MobSystem
             }
 
             // Draw manager position
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, 1f);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(transform.position, Vector3.one * 1.5f);
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Helper component to track mob type information
+    /// </summary>
+    public class MobTypeTracker : MonoBehaviour
+    {
+        public string typeName;
+        public bool isHybrid;
+        public MobSpawnManager spawnManager;
+
+        private void OnDestroy()
+        {
+            if (spawnManager != null)
+            {
+                spawnManager.OnMobDestroyed(typeName);
+            }
         }
     }
 }
+
 

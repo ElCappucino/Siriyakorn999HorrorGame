@@ -5,6 +5,13 @@ using MobSystem;
 
 public class ListSpawner : MonoBehaviour
 {
+    [Header("-----Spawner Identity-----")]
+    [Tooltip("Unique identifier for this spawner")]
+    [SerializeField] private string spawnerID = "ListSpawner_1";
+    
+    [Tooltip("Description of what this spawner is for")]
+    [SerializeField] private string spawnerDescription = "Main entrance spawner";
+
     [Header("-----List Spawner Settings-----")]
     [Tooltip("Spawn point main object")]
     [SerializeField] private GameObject spawnMainObject;
@@ -12,30 +19,11 @@ public class ListSpawner : MonoBehaviour
     [Tooltip("The list of places to spawn")]
     [SerializeField] private List<Transform> spawnPoints;
 
-    [Tooltip("The prefab to spawn")]
-    [SerializeField] private GameObject mobPrefab;
-
-    [Tooltip("The number of places to spawn")]
-    [SerializeField] private int numPlaces = 1;
-
-    [Tooltip("The time between spawns")]
-    [SerializeField] private float spawnInterval = 1f;
-
-    [Tooltip("The time before the first spawn")]
-    [SerializeField] private float firstSpawnDelay = 1f;
+    [Tooltip("The list of mob prefabs that can spawn here")]
+    [SerializeField] private List<GameObject> mobPrefabs = new List<GameObject>();
 
     [Tooltip("The time for playing spawn animation")]
     [SerializeField] private float spawnAnimationTime = 1f;
-
-    [Header("-----Gameplay Manager-----")]
-    [Tooltip("The GameplayManager to check if the game is started")]
-    [SerializeField] private GameplayManager GameplayManager;
-
-
-    [Header("-----Animation Parameters-----")]
-    private readonly int isSpawningHash = Animator.StringToHash("IsSpawning");
-    private readonly int isWalkingHash = Animator.StringToHash("IsWalking");
-    private readonly int isAttackingHash = Animator.StringToHash("IsAttacking");
 
     [Header("-----Audio Parameters-----")]
     [Tooltip("The MobAudioManager instance")]
@@ -44,68 +32,153 @@ public class ListSpawner : MonoBehaviour
     [Tooltip("The names of the spawn sounds")]
     [SerializeField] private List<string> spawnSoundNames = new List<string> { "MobSpawn" };
 
-    private void Initialize()
+    [Header("-----Animation Parameters-----")]
+    private readonly int isSpawningHash = Animator.StringToHash("IsSpawning");
+    private readonly int isWalkingHash = Animator.StringToHash("IsWalking");
+    private readonly int isAttackingHash = Animator.StringToHash("IsAttacking");
+
+    // Internal state
+    private bool isInitialized = false;
+
+    /// <summary>
+    /// Initialize spawn points from main object
+    /// </summary>
+    public void Initialize()
     {
+        if (isInitialized) return;
+
         spawnPoints = new List<Transform>();
-        foreach (Transform child in spawnMainObject.transform)
+        
+        if (spawnMainObject != null)
         {
-            spawnPoints.Add(child);
+            foreach (Transform child in spawnMainObject.transform)
+            {
+                spawnPoints.Add(child);
+            }
         }
         
-        if(GameplayManager == null && GameplayManager.Instance != null)
-        {
-            GameplayManager = GameplayManager.Instance;
-        }
+        isInitialized = true;
+        
+        Debug.Log($"ListSpawner '{spawnerID}': Initialized with {spawnPoints.Count} spawn points and {mobPrefabs.Count} mob types");
     }
 
-    private void Start()
+    private void Awake()
     {
         Initialize();
-        StartCoroutine(WaitForGameStart());
     }
 
-    private IEnumerator WaitForGameStart()
+    /// <summary>
+    /// Get a random spawn point from this spawner
+    /// </summary>
+    public Transform GetRandomSpawnPoint()
     {
-        while (!GameplayManager.Instance.isGameStart)
+        if (!isInitialized)
         {
-            yield return null;
+            Initialize();
         }
-        StartCoroutine(SpawnMobs());
+
+        if (spawnPoints.Count == 0)
+        {
+            Debug.LogWarning($"ListSpawner '{spawnerID}': No spawn points available!");
+            return null;
+        }
+
+        return spawnPoints[Random.Range(0, spawnPoints.Count)];
     }
 
-    private IEnumerator SpawnMobs()
+    /// <summary>
+    /// Spawn a specific mob prefab at a random spawn point with animation
+    /// Called by MobSpawnManager
+    /// </summary>
+    public GameObject SpawnMob(GameObject mobPrefab)
     {
-        yield return new WaitForSeconds(firstSpawnDelay);
-
-        // Select random spawn points
-        List<Transform> selectedSpawnPoints = new List<Transform>();
-        List<Transform> availablePoints = new List<Transform>(spawnPoints);
-
-        for (int i = 0; i < numPlaces && availablePoints.Count > 0; i++)
+        if (mobPrefab == null)
         {
-            int randomIndex = Random.Range(0, availablePoints.Count);
-            selectedSpawnPoints.Add(availablePoints[randomIndex]);
-            availablePoints.RemoveAt(randomIndex);
+            Debug.LogWarning($"ListSpawner '{spawnerID}': Mob prefab is null!");
+            return null;
         }
 
-        // Spawn mobs at selected points with interval
-        foreach (Transform spawnPoint in selectedSpawnPoints)
+        Transform spawnPoint = GetRandomSpawnPoint();
+        if (spawnPoint == null)
         {
-            if (mobPrefab != null && spawnPoint != null)
-            {
-                GameObject mob = Instantiate(mobPrefab, spawnPoint.position, spawnPoint.rotation); 
-                SetSpawnAnimationPlaying(mob, true);
-                SetMobAIPaused(mob, true);
-                SetPlayingMobAudio(mob, spawnSoundNames);
-                SetMobScale(mob, Vector3.zero);
-                yield return new WaitForSeconds(spawnAnimationTime);
-                SetSpawnAnimationPlaying(mob, false);
-                SetMobAIPaused(mob, false);
-                SetMobScale(mob, Vector3.one);
-            }
-
-            yield return new WaitForSeconds(spawnInterval);
+            return null;
         }
+
+        return SpawnMobAt(mobPrefab, spawnPoint);
+    }
+
+    /// <summary>
+    /// Spawn a mob at a specific spawn point with animation
+    /// </summary>
+    public GameObject SpawnMobAt(GameObject mobPrefab, Transform spawnPoint)
+    {
+        if (mobPrefab == null || spawnPoint == null)
+        {
+            Debug.LogWarning($"ListSpawner '{spawnerID}': Invalid spawn parameters!");
+            return null;
+        }
+
+        GameObject mob = Instantiate(mobPrefab, spawnPoint.position, spawnPoint.rotation);
+        StartCoroutine(PlaySpawnAnimation(mob));
+        
+        return mob;
+    }
+
+    /// <summary>
+    /// Spawn animation coroutine
+    /// </summary>
+    private IEnumerator PlaySpawnAnimation(GameObject mob)
+    {
+        if (mob == null) yield break;
+
+        // Start spawn animation
+        SetSpawnAnimationPlaying(mob, true);
+        SetMobAIPaused(mob, true);
+        SetPlayingMobAudio(mob, spawnSoundNames);
+        SetMobScale(mob, Vector3.zero);
+
+        // Wait for animation
+        yield return new WaitForSeconds(spawnAnimationTime);
+
+        // End spawn animation
+        SetSpawnAnimationPlaying(mob, false);
+        SetMobAIPaused(mob, false);
+        SetMobScale(mob, Vector3.one);
+    }
+
+    /// <summary>
+    /// Check if a mob prefab can spawn from this spawner
+    /// </summary>
+    public bool CanSpawnMobType(GameObject mobPrefab)
+    {
+        if (mobPrefab == null) return false;
+        if (mobPrefabs.Count == 0) return true; // If no filter, can spawn any
+        
+        return mobPrefabs.Contains(mobPrefab);
+    }
+
+    /// <summary>
+    /// Get available mob prefabs for this spawner
+    /// </summary>
+    public List<GameObject> GetAvailableMobPrefabs()
+    {
+        return new List<GameObject>(mobPrefabs);
+    }
+
+    /// <summary>
+    /// Get spawner ID
+    /// </summary>
+    public string GetSpawnerID()
+    {
+        return spawnerID;
+    }
+
+    /// <summary>
+    /// Get spawn point count
+    /// </summary>
+    public int GetSpawnPointCount()
+    {
+        return spawnPoints.Count;
     }
 
     private void SetPlayingMobAudio(GameObject mob, List<string> soundNames)
@@ -147,5 +220,41 @@ public class ListSpawner : MonoBehaviour
         {
             mob.transform.localScale = scale;   
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (!isInitialized && spawnMainObject != null)
+        {
+            // Show preview even when not initialized
+            List<Transform> previewPoints = new List<Transform>();
+            foreach (Transform child in spawnMainObject.transform)
+            {
+                previewPoints.Add(child);
+            }
+            DrawSpawnGizmos(previewPoints);
+        }
+        else if (spawnPoints != null && spawnPoints.Count > 0)
+        {
+            DrawSpawnGizmos(spawnPoints);
+        }
+    }
+
+    private void DrawSpawnGizmos(List<Transform> points)
+    {
+        // Draw spawn points
+        Gizmos.color = Color.cyan;
+        foreach (var point in points)
+        {
+            if (point != null)
+            {
+                Gizmos.DrawWireSphere(point.position, 0.5f);
+                Gizmos.DrawLine(transform.position, point.position);
+            }
+        }
+
+        // Draw spawner position
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireCube(transform.position, Vector3.one * 0.5f);
     }
 }

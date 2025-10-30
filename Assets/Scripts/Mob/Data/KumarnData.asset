@@ -20,8 +20,8 @@ MonoBehaviour:
   moveSpeed: 5
   rotationSpeed: 2
   detectionRange: 50
-  attackRange: 2
-  attackCooldown: 2
+  attackRange: 1
+  attackCooldown: 1
   health: 100
   attackDamage: 10
   audioTheme: 1
