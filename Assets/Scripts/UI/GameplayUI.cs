@@ -13,7 +13,10 @@ public class GameplayUI : MonoBehaviour
     {
         StartTimer();
     }
-
+    private void OnEnable()
+    {
+        GameplayManager.Instance.isGameStart = true;
+    }
     private void StartTimer()
     {
         remainingTime = startTime;

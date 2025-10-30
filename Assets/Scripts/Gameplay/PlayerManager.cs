@@ -57,18 +57,20 @@ public class PlayerManager : MonoBehaviour
     }
     public void UpdateCurrentTalismanType(string type)
     {
-        switch (type)
+        Debug.Log("type = " + type);
+        string result = type.ToLower();
+        switch (result)
         {
-            case "Lightning":
+            case "lightning":
                 currentTalismanType = TalismanObject.TalismanType.Lighting;
                 break;
-            case "Cross":
+            case "cross":
                 currentTalismanType = TalismanObject.TalismanType.Cross;
                 break;
-            case "Stun":
+            case "stun":
                 currentTalismanType = TalismanObject.TalismanType.Stun;
                 break;
-            case "Thai":
+            case "thai":
                 currentTalismanType = TalismanObject.TalismanType.Thai;
                 break;
             default:
@@ -103,7 +105,9 @@ public class PlayerManager : MonoBehaviour
 
     public void ShootTalisman(InputAction.CallbackContext context)
     {
-        if (GameplayManager.Instance.isGameStart && !cameraControl.isHoldTalisman)
+        if (GameplayManager.Instance.isGameStart && 
+            !cameraControl.isHoldTalisman && 
+            currentTalismanType != TalismanObject.TalismanType.Normal)
         {
             if (context.performed)
             {
@@ -113,8 +117,9 @@ public class PlayerManager : MonoBehaviour
                     aimPoint = hit.point;
                 else
                     aimPoint = ray.origin + ray.direction * maxAimDistance; // aim far away
-
-                GameObject proj = Instantiate(talismanPrefab, talismanSpawnPos.position, Quaternion.identity);
+                Debug.Log("cameraControl.handPivot.transform.rotation.y = " + cameraControl.handPivot.transform.eulerAngles.y);
+                Quaternion rotation = Quaternion.Euler(0, cameraControl.handPivot.transform.eulerAngles.y, 0);
+                GameObject proj = Instantiate(talismanPrefab, talismanSpawnPos.position, rotation);
                 Rigidbody rb = proj.GetComponentInChildren<Rigidbody>();
                 if (rb != null)
                 {
@@ -123,9 +128,18 @@ public class PlayerManager : MonoBehaviour
                 }
                 proj.GetComponentInChildren<TalismanObject>().InitEffect(currentTalismanType);
 
+                currentActiveTalisman.SetActive(false);
+                currentActiveTalisman = talismanInfo.talismanInfoDict[TalismanObject.TalismanType.Normal].vfxObject;
+                currentTalismanType = TalismanObject.TalismanType.Normal;
+                currentActiveTalisman.SetActive(true);
+
                 Destroy(proj, 3.0f);
             }
         }
+        else
+        {
+            Debug.Log("GameplayManager.Instance.isGameStart && !cameraControl.isHoldTalisman");
+        }    
         
         
     }
