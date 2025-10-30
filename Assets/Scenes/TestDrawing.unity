@@ -537,6 +537,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: drawSetup
       objectReference: {fileID: 0}
+    - target: {fileID: 7836432657830839964, guid: b66825bd3688e8a42b24acbda41b3b96, type: 3}
+      propertyPath: renderZ
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
