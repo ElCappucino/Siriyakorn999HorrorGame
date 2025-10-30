@@ -125,6 +125,11 @@ public class PlayerManager : MonoBehaviour
                 }
                 proj.GetComponentInChildren<TalismanObject>().InitEffect(currentTalismanType);
 
+                currentActiveTalisman.SetActive(false);
+                currentActiveTalisman = talismanInfo.talismanInfoDict[TalismanObject.TalismanType.Normal].vfxObject;
+                currentTalismanType = TalismanObject.TalismanType.Normal;
+                currentActiveTalisman.SetActive(true);
+
                 Destroy(proj, 3.0f);
             }
         }
