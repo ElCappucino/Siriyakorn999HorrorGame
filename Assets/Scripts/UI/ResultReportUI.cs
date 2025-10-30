@@ -17,6 +17,6 @@ public class ResultReportUI : MonoBehaviour
 
         TalismanWrittenNumText.text = talismanWritten.ToString();
         GhostExorcistedNumText.text = ghostExorcisted.ToString();
-        FinalScoreText.text = score.ToString();
+        FinalScoreText.text = (score + hpBonus).ToString();
     }
 }

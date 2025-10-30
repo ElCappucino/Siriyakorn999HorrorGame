@@ -57,22 +57,26 @@ public class GameplayManager : MonoBehaviour
     void Update()
     {
         // Gameplay handler
-        if (remainingTime >= 0)
+        if (isGameStart)
         {
-            remainingTime -= Time.deltaTime;
-            int minutes = Mathf.FloorToInt(remainingTime / 60);
-            int seconds = Mathf.FloorToInt(remainingTime % 60);
-
-            countdown_text.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-        }
-        else
-        {
-            if (!isGameFinish)
+            if (remainingTime >= 0)
             {
-                ShowWinningScene();
+                remainingTime -= Time.deltaTime;
+                int minutes = Mathf.FloorToInt(remainingTime / 60);
+                int seconds = Mathf.FloorToInt(remainingTime % 60);
+
+                countdown_text.text = string.Format("{0:00}:{1:00}", minutes, seconds);
             }
-            
+            else
+            {
+                if (!isGameFinish)
+                {
+                    ShowWinningScene();
+                }
+
+            }
         }
+        
     }
     public void GhostExorcised()
     {
@@ -84,7 +88,11 @@ public class GameplayManager : MonoBehaviour
     }
     public void StartGame()
     {
+        Debug.Log("StartGame");
         isGameStart = true;
+
+        scoreText.text = currentScore.ToString();
+        scoreMultiplierText.text = "x" + currentMultiplier.ToString("F1");
     }
     private void StartTimer()
     {
@@ -106,22 +114,25 @@ public class GameplayManager : MonoBehaviour
 
     public void ShowGameOverScene()
     {
+        isGameStart = false;
+        isGameFinish = true;
         LoseSceneUI.SetActive(true);
         LoseSceneFeedbacks.PlayFeedbacks();
         LoseSceneReport.UpdateText(currentScore, playerManager.currentHealth, talismanWritten, ghostExorcisted);
-        isGameFinish = true;
     }
 
     public void ShowWinningScene()
     {
+        isGameStart = false;
+        isGameFinish = true;
         WinSceneUI.SetActive(true);
         WinSceneFeedbacks.PlayFeedbacks();
         WinSceneReport.UpdateText(currentScore, playerManager.currentHealth, talismanWritten, ghostExorcisted);
-        isGameFinish = true;
+        
     }
 
-    private void OnEnable()
+    /*private void OnEnable()
     {
         isGameStart = true;
-    }
+    }*/
 }

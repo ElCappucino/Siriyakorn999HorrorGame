@@ -121,6 +121,8 @@ public class PlayerManager : MonoBehaviour
                 currentTalismanType = TalismanObject.TalismanType.Normal;
                 currentActiveTalisman.SetActive(true);
 
+                GameplayManager.Instance.WriteTalisman();
+
                 Destroy(proj, 3.0f);
             }
         }
