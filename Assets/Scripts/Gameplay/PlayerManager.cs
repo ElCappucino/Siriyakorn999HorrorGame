@@ -31,7 +31,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float maxAimDistance = 100f;
     [SerializeField] private Transform talismanSpawnPos;
 
-    
+    [SerializeField] private CameraControl cameraControl;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -69,26 +69,30 @@ public class PlayerManager : MonoBehaviour
 
     public void ShootTalisman(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (GameplayManager.Instance.isGameStart && !cameraControl.isHoldTalisman)
         {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            Vector3 aimPoint;
-            if (Physics.Raycast(ray, out RaycastHit hit, maxAimDistance))
-                aimPoint = hit.point;
-            else
-                aimPoint = ray.origin + ray.direction * maxAimDistance; // aim far away
-
-            GameObject proj = Instantiate(talismanPrefab, talismanSpawnPos.position, Quaternion.identity);
-            Rigidbody rb = proj.GetComponentInChildren<Rigidbody>();
-            if (rb != null)
+            if (context.performed)
             {
-                Vector3 dir = (aimPoint - talismanSpawnPos.position).normalized;
-                rb.linearVelocity = dir * projectileSpeed;
-            }
-            proj.GetComponentInChildren<TalismanObject>().InitEffect(TalismanObject.TalismanType.Lighting);
+                Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+                Vector3 aimPoint;
+                if (Physics.Raycast(ray, out RaycastHit hit, maxAimDistance))
+                    aimPoint = hit.point;
+                else
+                    aimPoint = ray.origin + ray.direction * maxAimDistance; // aim far away
 
-            Destroy(proj, 3.0f);
+                GameObject proj = Instantiate(talismanPrefab, talismanSpawnPos.position, Quaternion.identity);
+                Rigidbody rb = proj.GetComponentInChildren<Rigidbody>();
+                if (rb != null)
+                {
+                    Vector3 dir = (aimPoint - talismanSpawnPos.position).normalized;
+                    rb.linearVelocity = dir * projectileSpeed;
+                }
+                proj.GetComponentInChildren<TalismanObject>().InitEffect(TalismanObject.TalismanType.Lighting);
+
+                Destroy(proj, 3.0f);
+            }
         }
+        
         
     }
     // Update is called once per frame
