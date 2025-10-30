@@ -29,7 +29,7 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private Transform talisman_defaultPos;
     [SerializeField] private Transform talisman_introPos;
     [SerializeField] private float talismanMoveSpeed;
-    private bool isHoldTalisman;
+    public bool isHoldTalisman { get; private set; }
     public bool isRoundStart = false;
 
     private Vector2 MoveInput;
@@ -48,7 +48,7 @@ public class CameraControl : MonoBehaviour
         if (!isRoundStart)
         {
             talismanTargetPosition = talisman_introPos.position;
-            Debug.Log("talismanTargetPosition = talisman_introPos.position;");
+            //Debug.Log("talismanTargetPosition = talisman_introPos.position;");
         }
         else if (isHoldTalisman)
         {

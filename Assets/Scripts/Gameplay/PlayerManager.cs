@@ -4,6 +4,7 @@ using TMPro;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using MoreMountains.Feedbacks;
+using MobSystem;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -31,7 +32,12 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float maxAimDistance = 100f;
     [SerializeField] private Transform talismanSpawnPos;
 
-    
+    [SerializeField] private CameraControl cameraControl;
+
+    [Header("Holding Talisman")]
+    [SerializeField] TalismanInfoList talismanInfo;
+    public TalismanObject.TalismanType currentTalismanType;
+    [SerializeField] private GameObject currentActiveTalisman;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -46,8 +52,36 @@ public class PlayerManager : MonoBehaviour
 
         currentMultiplier = 1.0f;
 
-    }
+        talismanInfo.InitDict();
 
+    }
+    public void UpdateCurrentTalismanType(string type)
+    {
+        switch (type)
+        {
+            case "Lightning":
+                currentTalismanType = TalismanObject.TalismanType.Lighting;
+                break;
+            case "Cross":
+                currentTalismanType = TalismanObject.TalismanType.Cross;
+                break;
+            case "Stun":
+                currentTalismanType = TalismanObject.TalismanType.Stun;
+                break;
+            case "Thai":
+                currentTalismanType = TalismanObject.TalismanType.Thai;
+                break;
+            default:
+                Debug.Log("No match");
+                break;
+        }
+
+        if (currentActiveTalisman != null)
+            currentActiveTalisman.SetActive(false);
+
+        currentActiveTalisman = talismanInfo.talismanInfoDict[currentTalismanType].vfxObject;
+        currentActiveTalisman.SetActive(true);
+    }
     public void IncreaseScore(int score)
     {
         currentScore += Mathf.CeilToInt(score * currentMultiplier);
@@ -69,7 +103,7 @@ public class PlayerManager : MonoBehaviour
 
     public void ShootTalisman(InputAction.CallbackContext context)
     {
-        if (GameplayManager.Instance.isGameStart)
+        if (GameplayManager.Instance.isGameStart && !cameraControl.isHoldTalisman)
         {
             if (context.performed)
             {
@@ -87,7 +121,7 @@ public class PlayerManager : MonoBehaviour
                     Vector3 dir = (aimPoint - talismanSpawnPos.position).normalized;
                     rb.linearVelocity = dir * projectileSpeed;
                 }
-                proj.GetComponentInChildren<TalismanObject>().InitEffect(TalismanObject.TalismanType.Lighting);
+                proj.GetComponentInChildren<TalismanObject>().InitEffect(currentTalismanType);
 
                 Destroy(proj, 3.0f);
             }
