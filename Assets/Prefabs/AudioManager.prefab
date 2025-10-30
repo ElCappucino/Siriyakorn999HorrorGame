@@ -1,0 +1,342 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3073842383423361078
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1630154878476722552}
+  m_Layer: 0
+  m_Name: BGM Holder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1630154878476722552
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3073842383423361078}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2033938710719088241}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7782206761849987739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2033938710719088241}
+  - component: {fileID: 4586592626481665572}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2033938710719088241
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7782206761849987739}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1630154878476722552}
+  - {fileID: 7876988022086152300}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4586592626481665572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7782206761849987739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18da562d20b2edb44811bfb01d6cf5b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BGMHolder: {fileID: 3073842383423361078}
+  SFXHolder: {fileID: 8458423314034678090}
+  audioMixer: {fileID: 24100000, guid: 7e984f512e89b60468e829489e8883e3, type: 2}
+  BGMAudioMixer: {fileID: -2273146209696275378, guid: 7e984f512e89b60468e829489e8883e3, type: 2}
+  SFXAudioMixer: {fileID: -3165942800488051908, guid: 7e984f512e89b60468e829489e8883e3, type: 2}
+  bGMIndex: 
+  BGMSounds:
+  - name: Main Menu
+    audioClip: {fileID: 8300000, guid: eb2fd473b4c36a9419e9cab110de05d8, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 1
+    source: {fileID: 0}
+  - name: Gameplay
+    audioClip: {fileID: 8300000, guid: 5da132d77c30f0b438c878d30c9035d5, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 1
+    source: {fileID: 0}
+  SFXSounds:
+  - name: Talisman Drawing Loop
+    audioClip: {fileID: 8300000, guid: b5f3ecdb6a5026b4b936a87f4eff03a2, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 1
+    source: {fileID: 0}
+  - name: Talisman Draw Lighting
+    audioClip: {fileID: 8300000, guid: 21ddc80a49a751548b06caf280e0bf1e, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Talisman Draw Cross
+    audioClip: {fileID: 8300000, guid: b1b5762f7c677cc41a48b1f560b3b598, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Talisman Draw Stunt
+    audioClip: {fileID: 8300000, guid: a6a9b4f2ff3ad5445b6de0c712350dec, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Talisman Draw Thai
+    audioClip: {fileID: 8300000, guid: 54ed2a225a4523d4b95bdf8217c6866d, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Talisman Shoot A
+    audioClip: {fileID: 8300000, guid: 6b5da71291c5b1c4e9aa3db450c5651a, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Talisman Shoot B
+    audioClip: {fileID: 8300000, guid: 4bbf95dc7f324424a9ea0c60953c78c8, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Talisman Attack Hit
+    audioClip: {fileID: 8300000, guid: 17214bac9f143544e915d2f7c25df3c1, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Talisman Attack Fail
+    audioClip: {fileID: 8300000, guid: 71d0f20af51dba749b1fcc5d548d90ae, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Enemy Attack Steal Paper
+    audioClip: {fileID: 8300000, guid: a222ef6e7d4f0dc4390288855ce6b57b, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Player Hurt
+    audioClip: {fileID: 8300000, guid: 3e9b8460ad44bea41a17f072a26bde77, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Kumarn Spawn Bell
+    audioClip: {fileID: 8300000, guid: 7b1841b56ad4660429c504cfe5bc4fb8, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Kumarn Attack
+    audioClip: {fileID: 8300000, guid: 7ded21e0b3d72d741b593fe55d11ec81, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Kumarn Death
+    audioClip: {fileID: 8300000, guid: 40c713796cb8a904c863072b3845a1a9, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Sadako Spawn TV
+    audioClip: {fileID: 8300000, guid: 885164a24e942a4439aec16ed5dcad56, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Sadako Attack
+    audioClip: {fileID: 8300000, guid: bee571b97534424428ec488537d74b3b, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Sadako Death
+    audioClip: {fileID: 8300000, guid: 44bc13b82fbaa184ba3b29f3293f8fea, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Vampire Spawn Cabinet
+    audioClip: {fileID: 8300000, guid: 9efb7dab3ff747f47a968234b90bf1a8, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Vampire Spawn Vent
+    audioClip: {fileID: 8300000, guid: 22972c8447a18864a85be3853c83f99a, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Vampire Spawn Window
+    audioClip: {fileID: 8300000, guid: f47977ca03323144ab40b9f915b9e753, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Vampire Attack
+    audioClip: {fileID: 8300000, guid: 9558d92550d922040b002029cdada1fd, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Vampire Death
+    audioClip: {fileID: 8300000, guid: 0d5219507f7cfac4ab1ebf99377a5ff2, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Monologue Line
+    audioClip: {fileID: 8300000, guid: 6324d53af47468146a90d26bb003d175, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: UI Button Click
+    audioClip: {fileID: 8300000, guid: ef022f1b70392144c970b50c4777dd25, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: UI Button Hover
+    audioClip: {fileID: 8300000, guid: 40b04a0f289f4d2448b0e8f10288042c, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Score Increase
+    audioClip: {fileID: 8300000, guid: a2daac642a7bd3f4cae5a9ecd9b3da43, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Chain Level Increase
+    audioClip: {fileID: 8300000, guid: dc78c778766370d478565bf19ed0b0d2, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Time Up
+    audioClip: {fileID: 8300000, guid: 3f6ab126832d02e459b76f2d0a73eb0a, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Result Game Over
+    audioClip: {fileID: 8300000, guid: 1129c048d713c3e41a0c0f257634c359, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Result Win
+    audioClip: {fileID: 8300000, guid: 85c91128152482f41b472139a307d9b1, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+--- !u!1 &8458423314034678090
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7876988022086152300}
+  m_Layer: 0
+  m_Name: SFX Holder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7876988022086152300
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8458423314034678090}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2033938710719088241}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
