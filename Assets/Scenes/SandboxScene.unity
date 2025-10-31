@@ -3824,7 +3824,7 @@ MonoBehaviour:
   currentChain: 1
   multiplierChainTimeWindow: 3
   countdown_text: {fileID: 1141892215}
-  startTime: 90
+  startTime: 207
   WinSceneUI: {fileID: 1321954257}
   LoseSceneUI: {fileID: 1617197431}
   LoseSceneReport: {fileID: 1617197436}
@@ -5660,7 +5660,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 472143161944948129, guid: c03cd1085d9c4c04383dc91d8f07a3e4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
