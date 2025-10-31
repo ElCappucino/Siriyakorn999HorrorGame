@@ -402,8 +402,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicatorSettings: {fileID: 11400000, guid: 76c4ef4b8262da44db70386113125cd6, type: 2}
   questionMarkIndicator: {fileID: 2335696680179921077, guid: b9c9b865c92be874f8ba5fe9c6d00ebd, type: 3}
-  thaiTalismanIndicator: {fileID: 0}
-  electricTalismanIndicator: {fileID: 0}
+  thaiTalismanIndicator: {fileID: 6357705193780104938, guid: a70600ee7d188fc4f82c375b8a4fa2b7, type: 3}
+  electricTalismanIndicator: {fileID: 5219164839854181288, guid: 0eadec25843383448845aa12ec463899, type: 3}
   crossTalismanIndicator: {fileID: 5785291350212733167, guid: a1f5ab8e8e62dc44798215677523537c, type: 3}
   enableTransformation: 0
   batModel: {fileID: 2223594285035772450}
