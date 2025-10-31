@@ -91,9 +91,9 @@ MonoBehaviour:
     - 0.01
     - 0.5
     - 1
-  maxTotalGhostsInScene: 4
+  maxTotalGhostsInScene: 3
   spawnFrequency: 4
   hybridStartPhase: 3
   maxNonHybridBeforeHybrid: 3
-  maxNonHybridAfterHybrid: 3
+  maxNonHybridAfterHybrid: 2
   maxHybridGhosts: 2
