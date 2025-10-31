@@ -1,3 +1,4 @@
+using AudioSystem;
 using MobSystem;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
@@ -66,6 +67,8 @@ public class GameplayManager : MonoBehaviour
         {
             PhaseManager.Instance.StartPhaseTimer();
         }
+
+        AudioManager.instance.SwitchBGM("Gameplay");
     }
 
     // Update is called once per frame
@@ -162,6 +165,7 @@ public class GameplayManager : MonoBehaviour
         LoseSceneUI.SetActive(true);
         LoseSceneFeedbacks.PlayFeedbacks();
         LoseSceneReport.UpdateText(currentScore, playerManager.currentHealth, talismanWritten, ghostExorcisted);
+        AudioManager.instance.SwitchBGM("Main Menu");
     }
 
     public void ShowWinningScene()
@@ -171,6 +175,7 @@ public class GameplayManager : MonoBehaviour
         WinSceneUI.SetActive(true);
         WinSceneFeedbacks.PlayFeedbacks();
         WinSceneReport.UpdateText(currentScore, playerManager.currentHealth, talismanWritten, ghostExorcisted);
+        AudioManager.instance.SwitchBGM("Main Menu");
 
     }
 
