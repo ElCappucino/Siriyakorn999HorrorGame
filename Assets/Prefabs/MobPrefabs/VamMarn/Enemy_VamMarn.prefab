@@ -1336,7 +1336,7 @@ MonoBehaviour:
   detectionSoundName: MobDetect
   chaseSoundName: MobChase
   attackSoundName: MobAttack
-  attackRange: 3
+  attackRange: 6
   attackCooldown: 2
   attackDamage: 1
   showDebugGizmos: 1
