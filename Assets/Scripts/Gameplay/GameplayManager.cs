@@ -99,6 +99,10 @@ public class GameplayManager : MonoBehaviour
         }
 
     }
+    public PlayerManager GetPlayerManager()
+    {
+        return playerManager;
+    }
     public void GhostExorcised()
     {
         ghostExorcisted++;
