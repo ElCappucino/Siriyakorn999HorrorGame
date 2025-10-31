@@ -290,6 +290,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1730172254394642844
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4140287198495459754}
+  m_Layer: 0
+  m_Name: Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4140287198495459754
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730172254394642844}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 172360150539361676}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1769359956401164260
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,6 +502,37 @@ MonoBehaviour:
   - SFX_Spawn_Sadako_TV1
   - SFX_Spawn_Sadako_TV2
   - SFX_Spawn_Sadako_TV3
+--- !u!1 &2757767986381735157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3627868033237832768}
+  m_Layer: 0
+  m_Name: Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3627868033237832768
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2757767986381735157}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2701775643679338410}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3000570496308440784
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,6 +1024,37 @@ Transform:
   - {fileID: 5205785667448417388}
   - {fileID: 7974415198146714627}
   m_Father: {fileID: 9157510018589484095}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5699187460786449463
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4076837013473498671}
+  m_Layer: 0
+  m_Name: Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4076837013473498671
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5699187460786449463}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6481624018712575817}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5795939505213816398
 GameObject:
@@ -1988,9 +2081,9 @@ MonoBehaviour:
   spawnerDescription: Vampire Main entrance spawner
   spawnMainObject: {fileID: 8383841371360763467}
   spawnPoints:
-  - {fileID: 2701775643679338410}
-  - {fileID: 6481624018712575817}
-  - {fileID: 172360150539361676}
+  - {fileID: 3627868033237832768}
+  - {fileID: 4076837013473498671}
+  - {fileID: 4140287198495459754}
   mobPrefabs:
   - {fileID: 2223594285035772450, guid: f153d01a1a00de5428d878c9ac581f51, type: 3}
   - {fileID: 3303203061852251375, guid: d5e58cdec9dab0446a2177e39937a284, type: 3}
@@ -3263,7 +3356,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4888472142223130785, guid: 9824f997392e32640a26d2a254c742ed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4076837013473498671}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9824f997392e32640a26d2a254c742ed, type: 3}
 --- !u!4 &6481624018712575817 stripped
@@ -4357,7 +4453,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4888472142223130785, guid: 9824f997392e32640a26d2a254c742ed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4140287198495459754}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9824f997392e32640a26d2a254c742ed, type: 3}
 --- !u!4 &172360150539361676 stripped
@@ -5796,7 +5895,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4888472142223130785, guid: 9824f997392e32640a26d2a254c742ed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3627868033237832768}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9824f997392e32640a26d2a254c742ed, type: 3}
 --- !u!4 &2701775643679338410 stripped
