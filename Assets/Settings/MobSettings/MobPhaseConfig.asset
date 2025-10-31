@@ -21,11 +21,11 @@ MonoBehaviour:
     spawnRateBeforeHybrid: 36
     spawnRateAfterHybrid: 19
     timeToReachPlayerPerPhase:
+    - 2
+    - 2.5
     - 2.5
     - 3
-    - 3
     - 3.5
-    - 4
   - typeName: Kumarn
     mobPrefab: {fileID: 8819569276586072197, guid: 7e9b9ac7b63a522429fc5ed38b26d726, type: 3}
     isHybrid: 0
@@ -34,11 +34,11 @@ MonoBehaviour:
     spawnRateBeforeHybrid: 34
     spawnRateAfterHybrid: 18
     timeToReachPlayerPerPhase:
+    - 3
     - 3.5
     - 4
+    - 4
     - 4.5
-    - 4.5
-    - 5
   - typeName: Vampire
     mobPrefab: {fileID: 2223594285035772450, guid: f153d01a1a00de5428d878c9ac581f51, type: 3}
     isHybrid: 0
@@ -47,11 +47,11 @@ MonoBehaviour:
     spawnRateBeforeHybrid: 30
     spawnRateAfterHybrid: 18
     timeToReachPlayerPerPhase:
+    - 1.5
     - 2
     - 2.5
+    - 2.5
     - 3
-    - 3
-    - 3.5
   - typeName: LongHairVampire
     mobPrefab: {fileID: 3303203061852251375, guid: d5e58cdec9dab0446a2177e39937a284, type: 3}
     isHybrid: 1
@@ -75,9 +75,9 @@ MonoBehaviour:
     timeToReachPlayerPerPhase:
     - 0
     - 0
+    - 0.01
     - 0.5
     - 1
-    - 1.5
   - typeName: SmolSadako
     mobPrefab: {fileID: 8460020759060878215, guid: 3155f2bcdde09df488226623740594be, type: 3}
     isHybrid: 1
@@ -88,9 +88,9 @@ MonoBehaviour:
     timeToReachPlayerPerPhase:
     - 0
     - 0
+    - 0.01
     - 0.5
     - 1
-    - 1.5
   maxTotalGhostsInScene: 3
   spawnFrequency: 2
   hybridStartPhase: 3
