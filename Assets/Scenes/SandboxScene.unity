@@ -1135,6 +1135,7 @@ Transform:
   - {fileID: 962744569}
   - {fileID: 1353082204}
   - {fileID: 5067693212062382379}
+  - {fileID: 605390111}
   - {fileID: 1202044602}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1963,6 +1964,37 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6861687475836163922, guid: 3424efe3e1f6a6c48a9ae3c046d9d8e7, type: 3}
   m_PrefabInstance: {fileID: 1635050696}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &605390110
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 605390111}
+  m_Layer: 0
+  m_Name: Player Target Point
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &605390111
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605390110}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.3300002, z: -23.98}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 350287233}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &627198252
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5690,29 +5722,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350287233}
     m_Modifications:
-    - target: {fileID: 402690656738950830, guid: c03cd1085d9c4c04383dc91d8f07a3e4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 402690656738950830, guid: c03cd1085d9c4c04383dc91d8f07a3e4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6380894409575601070, guid: c03cd1085d9c4c04383dc91d8f07a3e4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6449984685415781187, guid: c03cd1085d9c4c04383dc91d8f07a3e4, type: 3}
       propertyPath: m_Name
       value: Blocking Level ActualMESH
-      objectReference: {fileID: 0}
-    - target: {fileID: 6997947925483564610, guid: c03cd1085d9c4c04383dc91d8f07a3e4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6997947925483564610, guid: c03cd1085d9c4c04383dc91d8f07a3e4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.8000003
       objectReference: {fileID: 0}
     - target: {fileID: 9157510018589484095, guid: c03cd1085d9c4c04383dc91d8f07a3e4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7451,7 +7463,7 @@ GameObject:
   - component: {fileID: 5067693212062382379}
   m_Layer: 0
   m_Name: Player_Arm
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
