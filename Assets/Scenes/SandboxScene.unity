@@ -3184,7 +3184,7 @@ MonoBehaviour:
   currentHealth: 0
   cam: {fileID: 1980323510}
   talismanPrefab: {fileID: 577009588252597500, guid: a7a3b4c3cb57a2a42a549c32f3255950, type: 3}
-  projectileSpeed: 20
+  projectileSpeed: 40
   maxAimDistance: 100
   talismanSpawnPos: {fileID: 1256077610}
   cameraControl: {fileID: 2018652735}
