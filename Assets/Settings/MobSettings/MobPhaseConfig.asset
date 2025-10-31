@@ -18,7 +18,7 @@ MonoBehaviour:
     isHybrid: 0
     maxInScene: 2
     availableFromPhase: 0
-    spawnRateBeforeHybrid: 36
+    spawnRateBeforeHybrid: 19
     spawnRateAfterHybrid: 19
     timeToReachPlayerPerPhase:
     - 2
@@ -31,7 +31,7 @@ MonoBehaviour:
     isHybrid: 0
     maxInScene: 2
     availableFromPhase: 0
-    spawnRateBeforeHybrid: 34
+    spawnRateBeforeHybrid: 18
     spawnRateAfterHybrid: 18
     timeToReachPlayerPerPhase:
     - 3
@@ -44,7 +44,7 @@ MonoBehaviour:
     isHybrid: 0
     maxInScene: 2
     availableFromPhase: 0
-    spawnRateBeforeHybrid: 30
+    spawnRateBeforeHybrid: 18
     spawnRateAfterHybrid: 18
     timeToReachPlayerPerPhase:
     - 1.5
@@ -57,7 +57,7 @@ MonoBehaviour:
     isHybrid: 1
     maxInScene: 1
     availableFromPhase: 0
-    spawnRateBeforeHybrid: 0
+    spawnRateBeforeHybrid: 15
     spawnRateAfterHybrid: 15
     timeToReachPlayerPerPhase:
     - 0
@@ -70,7 +70,7 @@ MonoBehaviour:
     isHybrid: 1
     maxInScene: 1
     availableFromPhase: 0
-    spawnRateBeforeHybrid: 0
+    spawnRateBeforeHybrid: 15
     spawnRateAfterHybrid: 15
     timeToReachPlayerPerPhase:
     - 0
@@ -83,7 +83,7 @@ MonoBehaviour:
     isHybrid: 1
     maxInScene: 1
     availableFromPhase: 0
-    spawnRateBeforeHybrid: 0
+    spawnRateBeforeHybrid: 15
     spawnRateAfterHybrid: 15
     timeToReachPlayerPerPhase:
     - 0
@@ -91,9 +91,9 @@ MonoBehaviour:
     - 0.01
     - 0.5
     - 1
-  maxTotalGhostsInScene: 3
-  spawnFrequency: 2
+  maxTotalGhostsInScene: 4
+  spawnFrequency: 4
   hybridStartPhase: 3
   maxNonHybridBeforeHybrid: 3
-  maxNonHybridAfterHybrid: 2
+  maxNonHybridAfterHybrid: 3
   maxHybridGhosts: 2
