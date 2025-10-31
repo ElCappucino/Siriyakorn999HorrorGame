@@ -65,44 +65,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Kaidao Kaijeaw Kaiwan Kaikon HewAh - Game Designer
-
-    Steamed Egg Lovers
-    Association - Game Designer
-
-    Nutcharee Sumeruwai - Game Designer
-
-    PANDA
-    - Game Designer (Gameplay, UX/UI)
-
-
-    Natcha Chansamathi - Character Design,
-    Art Dinosaur, Alcohol Manager
-
-    Mach Wannawanit - Prop Design & UI
-
-    passivepong
-    - Technical Character Animator Artist
-
-    Crispy shrimp - Sea creature
-
-    jtwoenteen
-    - 3D Artist
-
-    Akio - Necromancer/Puppeteer
-
-    ---------------------------
-
-    ---------------------------
-
-
-
-    DJ
-    Yoshi499 - Unity Crasher
-
-    NongKratha - Programmer
-
-    ---------------------------'
+  m_text: "Kaidao Kaijeaw Kaiwan Kaikon HewAh - Game Designer\nSteamed Egg Lovers
+    Association - Game Designer\nNutcharee Sumeruwai - Game Designer\nPANDA - Game
+    Designer (Gameplay, UX/UI)\n\nNatcha Chansamathi - Character Design, Art Dinosaur,
+    Alcohol Manager\nMach Wannawanit - Prop Design & UI\npassivepong - Technical
+    Character Animator Artist\nCrispy shrimp - Sea creature\njtwoenteen - 3D Artist\nAkio
+    - Necromancer/Puppeteer\nAn - VFX/Technical Artist \nNoei - VFX/Technical Artist
+    \n\nDJ Yoshi499 - Unity Crasher\nNongKratha - Programmer\nPrakasitJ - Programmer/Slacker"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02db4b9227343da4d9474f12abf7cb4a, type: 2}
   m_sharedMaterial: {fileID: -4711201069623460722, guid: 02db4b9227343da4d9474f12abf7cb4a, type: 2}
