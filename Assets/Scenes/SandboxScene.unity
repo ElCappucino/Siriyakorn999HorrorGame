@@ -3827,7 +3827,7 @@ MonoBehaviour:
   scoreFeedbacks: {fileID: 967851803}
   multiplierFeedbacks: {fileID: 2122601411}
   countdown_text: {fileID: 1141892215}
-  startTime: 15
+  startTime: 207
   WinSceneUI: {fileID: 1321954257}
   LoseSceneUI: {fileID: 1617197431}
   LoseSceneReport: {fileID: 1617197436}
