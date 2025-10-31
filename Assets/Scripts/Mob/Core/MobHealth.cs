@@ -51,6 +51,11 @@ namespace MobSystem
         [Tooltip("Force of knockback")]
         [SerializeField] private float knockbackForce = 5f;
 
+        [Header("Score Variables")]
+        [Tooltip("Base score to calculate when got exorcised")]
+        [SerializeField] private int baseScore;
+        [SerializeField] private float timeSinceSpawn;
+
         // Private variables
         private bool isDead = false;
         private Renderer[] renderers;
@@ -60,6 +65,7 @@ namespace MobSystem
         private MobBehavior behavior;
         private Animator animator;
         private readonly int deathHash = Animator.StringToHash("Death");
+
 
         private void Awake()
         {
@@ -76,6 +82,14 @@ namespace MobSystem
             {
                 originalMaterials[i] = renderers[i].material;
             }
+
+            // init time since spawn
+            timeSinceSpawn = 0;
+        }
+
+        private void Update()
+        {
+            timeSinceSpawn += Time.deltaTime;
         }
 
         /// <summary>
@@ -178,6 +192,9 @@ namespace MobSystem
             {
                 animator.SetTrigger(deathHash);
             }
+
+            GameplayManager.Instance.GhostExorcised();
+            GameplayManager.Instance.IncreaseScore(baseScore, timeSinceSpawn);
 
             // Destroy after delay
             Destroy(gameObject, deathDelay);

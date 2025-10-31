@@ -19,6 +19,13 @@ public class GameplayManager : MonoBehaviour
     private int talismanWritten;
     private int ghostExorcisted;
 
+    [Header("Multiplier")]
+    [SerializeField] private List<float> multiplierChainValues = new List<float>();
+    [SerializeField] private int maxChain = 5;
+    [SerializeField] private int currentChain = 1;
+    [SerializeField] private float multiplierChainTimeWindow = 3;
+    private float currentChainTime;
+
     [Header("Countdown")]
     [SerializeField] private TMP_Text countdown_text;
     [SerializeField] private float startTime = 15.0f;
@@ -69,11 +76,25 @@ public class GameplayManager : MonoBehaviour
             }
             else
             {
+                countdown_text.text = string.Format("{0:00}:{1:00}", 0, 0);
                 if (!isGameFinish)
                 {
                     ShowWinningScene();
                 }
 
+            }
+        }
+
+        // chain multiplier
+        if (currentChain > 1)
+        {
+            currentChainTime += Time.deltaTime;
+
+            if (currentChainTime > multiplierChainTimeWindow)
+            {
+                currentChain = 1;
+                currentChainTime = 0;
+                IncreaseMultiplier(multiplierChainValues[currentChain - 1]);
             }
         }
 
@@ -99,15 +120,25 @@ public class GameplayManager : MonoBehaviour
         remainingTime = startTime;
     }
 
-    public void IncreaseScore(int score)
+    public void IncreaseScore(int score, float timeSinceSpawn)
     {
-        currentScore += Mathf.CeilToInt(score * currentMultiplier);
+        float TimeBonus = Mathf.Clamp(1 + (1 / timeSinceSpawn), 1, 2);
+        currentScore += Mathf.CeilToInt(score * currentMultiplier * TimeBonus);
         scoreText.text = currentScore.ToString();
         scoreFeedbacks.PlayFeedbacks();
+
+        // calculate chain bonus
+        if (currentChainTime < multiplierChainTimeWindow)
+        {
+            currentChain++;
+            IncreaseMultiplier(multiplierChainValues[currentChain - 1]);
+            currentChainTime = 0;
+        }
+
     }
     public void IncreaseMultiplier(float multiplier)
     {
-        currentMultiplier += multiplier;
+        currentMultiplier = multiplier;
         scoreMultiplierText.text = "x" + currentMultiplier.ToString("F1");
         multiplierFeedbacks.PlayFeedbacks();
     }
