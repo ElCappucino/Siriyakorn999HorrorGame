@@ -67,6 +67,69 @@ MonoBehaviour:
     stereoPan: 0
     loop: 0
     source: {fileID: 0}
+  - name: KumarnLaugh
+    audioClip: {fileID: 8300000, guid: dfd9019c349672f4089357f1226d4116, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: KumarnScream1
+    audioClip: {fileID: 8300000, guid: dfd9019c349672f4089357f1226d4116, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: KumarnScream2
+    audioClip: {fileID: 8300000, guid: dfd9019c349672f4089357f1226d4116, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: KumarnScream3
+    audioClip: {fileID: 8300000, guid: dfd9019c349672f4089357f1226d4116, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: KumarnFootsteps1
+    audioClip: {fileID: 8300000, guid: 3cdf2b73070b48d4e94ae4237e4177e8, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: AnkletSound
+    audioClip: {fileID: 8300000, guid: 3cdf2b73070b48d4e94ae4237e4177e8, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: SFX_Spawn_Sadako_TV1
+    audioClip: {fileID: 8300000, guid: 1a0ec01caf0bcda458e8fad87397b2a4, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: SFX_Spawn_Sadako_TV2
+    audioClip: {fileID: 8300000, guid: 4503b975f3d159d47852a20ae799435f, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: SFX_Spawn_Sadako_TV3
+    audioClip: {fileID: 8300000, guid: c0970c63be939624f9518c858f295530, type: 3}
+    volume: 1
+    pitch: 1
+    stereoPan: 0
+    loop: 0
+    source: {fileID: 0}
   default3DMinDistance: 1
-  default3DMaxDistance: 15
+  default3DMaxDistance: 50
   spatialBlend: 1

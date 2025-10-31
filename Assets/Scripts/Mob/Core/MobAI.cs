@@ -247,17 +247,39 @@ namespace MobSystem
             if (pathUpdateTimer <= 0f)
             {
                 Vector3 destination = customDestination != Vector3.zero ? customDestination : player.position;
-                navAgent.SetDestination(destination);
+
+                if (navAgent != null && navAgent.isOnNavMesh)
+                {
+                    navAgent.SetDestination(destination);
+                }
+                else
+                {
+                    // Retry next frame so agent has time to land on NavMesh
+                    StartCoroutine(WaitAndSetDestination(destination));
+                }
+
                 pathUpdateTimer = pathUpdateInterval;
-                customDestination = Vector3.zero; // Reset after use
+                customDestination = Vector3.zero;
             }
+
 
             // Apply speed multiplier from behavior
             if (behavior != null)
             {
                 navAgent.speed = moveSpeed * behavior.GetSpeedMultiplier();
             }
+
         }
+
+        private System.Collections.IEnumerator WaitAndSetDestination(Vector3 destination)
+        {
+            yield return null; // wait 1 frame
+            if (navAgent != null && navAgent.isOnNavMesh)
+            {
+                navAgent.SetDestination(destination);
+            }
+        }
+
 
         private void HandleAttackingState(float distanceToPlayer)
         {
@@ -406,11 +428,30 @@ namespace MobSystem
         public void SetPaused(bool paused)
         {
             isPaused = paused;
-            if (navAgent != null)
+
+            if (navAgent == null) return;
+
+            // If agent is not yet on NavMesh, retry next frame
+            if (!navAgent.isOnNavMesh)
+            {
+                StartCoroutine(WaitAndPause(paused));
+                return;
+            }
+
+            navAgent.isStopped = paused;
+        }
+
+        private System.Collections.IEnumerator WaitAndPause(bool paused)
+        {
+            // wait one frame for agent to get placed onto navmesh
+            yield return null;
+
+            if (navAgent != null && navAgent.isOnNavMesh)
             {
                 navAgent.isStopped = paused;
             }
         }
+
 
         /// <summary>
         /// Get the current state of the mob
