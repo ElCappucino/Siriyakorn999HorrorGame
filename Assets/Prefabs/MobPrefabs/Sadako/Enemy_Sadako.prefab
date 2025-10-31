@@ -293,7 +293,7 @@ MonoBehaviour:
   attackSoundName: MobAttack
   attackRange: 2
   attackCooldown: 2
-  attackDamage: 10
+  attackDamage: 1
   showDebugGizmos: 1
 --- !u!114 &8271039197270677352
 MonoBehaviour:
@@ -322,6 +322,7 @@ MonoBehaviour:
   useKnockback: 1
   knockbackForce: 5
   baseScore: 40
+  timeSinceSpawn: 0
 --- !u!114 &3732862449236392329
 MonoBehaviour:
   m_ObjectHideFlags: 0

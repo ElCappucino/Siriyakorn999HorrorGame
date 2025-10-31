@@ -332,7 +332,7 @@ namespace MobSystem
                 }
 
                 // Deal damage to player
-                PlayerSystem.PlayerHealth playerHealth = player.GetComponent<PlayerSystem.PlayerHealth>();
+                /*PlayerSystem.PlayerHealth playerHealth = player.GetComponent<PlayerSystem.PlayerHealth>();
                 if (playerHealth != null)
                 {
                     playerHealth.TakeDamage(attackDamage);
@@ -341,7 +341,19 @@ namespace MobSystem
                 else
                 {
                     Debug.LogWarning("Player doesn't have PlayerHealth component!");
+                }*/
+
+                PlayerManager playerManager = GameplayManager.Instance.GetPlayerManager();
+                if (playerManager == null)
+                {
+                    Debug.LogWarning("Player doesn't have PlayerHealth component!");
                 }
+                else
+                {
+                    playerManager.DecreaseHealth();
+                }
+
+
             }
 
             // Call behavior hook after attack
