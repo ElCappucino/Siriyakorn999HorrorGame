@@ -452,7 +452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mobData: {fileID: 11400000, guid: e671833020600894ba63ac893f0beada, type: 2}
   player: {fileID: 0}
-  stoppingDistance: 2
+  stoppingDistance: 1.5
   moveSpeed: 3.5
   rotationSpeed: 5
   detectionRange: 20
@@ -460,7 +460,7 @@ MonoBehaviour:
   detectionSoundName: MobDetect
   chaseSoundName: MobChase
   attackSoundName: MobAttack
-  attackRange: 2
+  attackRange: 6
   attackCooldown: 2
   attackDamage: 1
   showDebugGizmos: 1

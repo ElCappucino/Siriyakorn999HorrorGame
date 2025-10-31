@@ -570,7 +570,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 4
+  m_Intensity: 1
   m_Range: 2.6524699
   m_SpotAngle: 93.23369
   m_InnerSpotAngle: 85.03577
@@ -1036,7 +1036,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mobData: {fileID: 11400000, guid: f71b904bfd1e4ea41803de932a9628cc, type: 2}
   player: {fileID: 0}
-  stoppingDistance: 2
+  stoppingDistance: 1
   moveSpeed: 3.5
   rotationSpeed: 5
   detectionRange: 20
@@ -1044,7 +1044,7 @@ MonoBehaviour:
   detectionSoundName: MobDetect
   chaseSoundName: MobChase
   attackSoundName: MobAttack
-  attackRange: 2
+  attackRange: 7
   attackCooldown: 2
   attackDamage: 1
   showDebugGizmos: 1
