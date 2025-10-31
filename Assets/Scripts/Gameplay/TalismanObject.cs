@@ -15,6 +15,10 @@ public class TalismanObject : MonoBehaviour
     [SerializeField] private GameObject parent;
     private Rigidbody rb;
     private MeshRenderer mr;
+    private TalismanType currentType = TalismanType.Normal;
+
+    // Public property to get the current talisman type
+    public TalismanType CurrentType => currentType;
 
     private void Awake()
     {
@@ -31,6 +35,7 @@ public class TalismanObject : MonoBehaviour
 
     public void InitEffect(TalismanType type)
     {
+        currentType = type;
         mr.material = talismanList.talismanInfoDict[type].material;
         talismanList.talismanInfoDict[type].vfxObject.SetActive(true);
     }

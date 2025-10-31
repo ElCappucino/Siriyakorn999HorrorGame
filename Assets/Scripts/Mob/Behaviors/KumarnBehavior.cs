@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -36,7 +37,7 @@ namespace MobSystem
         private int currentZigzagCount;
         private float zigzagCycleTimer;
         private bool isZigzagging;
-        
+
         // Seeded random values for unique zigzag patterns
         private float zigzagTimeOffset;
         private float zigzagFrequencyX;
@@ -49,11 +50,11 @@ namespace MobSystem
             screamTimer = screamInterval;
             navAgent = GetComponent<NavMeshAgent>();
             pathUpdateTimer = pathUpdateRate;
-            
+
             // Initialize seeded random values for zigzag pattern
             InitializeZigzagSeed();
         }
-        
+
         private void InitializeZigzagSeed()
         {
             // Use provided seed, or generate random one if seed is 0
@@ -62,20 +63,20 @@ namespace MobSystem
             {
                 seed = Random.Range(1, 100000);
             }
-            
+
             // Initialize random with seed
             Random.State oldState = Random.state;
             Random.InitState(seed);
-            
+
             // Generate unique zigzag parameters based on seed
             zigzagTimeOffset = Random.Range(0f, 100f);
             zigzagFrequencyX = Random.Range(0.8f, 1.5f);
             zigzagFrequencyZ = Random.Range(0.5f, 1.0f);
             zigzagPhaseShift = Random.Range(0f, Mathf.PI * 2f);
-            
+
             // Restore previous random state
             Random.state = oldState;
-            
+
             Debug.Log($"[KumarnBehavior] Initialized zigzag with seed {seed}: " +
                      $"timeOffset={zigzagTimeOffset:F2}, freqX={zigzagFrequencyX:F2}, " +
                      $"freqZ={zigzagFrequencyZ:F2}, phase={zigzagPhaseShift:F2}");
@@ -95,7 +96,7 @@ namespace MobSystem
             // Reset zigzag count for new chase
             if (MobAudioManager.instance != null)
             {
-                MobAudioManager.instance.PlayAudio3D(footstepsSounds[Random.Range(0, footstepsSounds.Length)], transform.position);
+                MobAudioManager.instance.PlayAudio3DAttached(footstepsSounds[Random.Range(0, footstepsSounds.Length)], gameObject);
             }
             currentZigzagCount = 0;
             zigzagCycleTimer = zigzagCycleDuration;
@@ -114,11 +115,11 @@ namespace MobSystem
             if (MobAudioManager.instance != null)
             {
                 string footstepSound = footstepsSounds[Random.Range(0, footstepsSounds.Length)];
-                GameObject existingAudio = GameObject.Find($"TempAudio_{footstepSound}");
-                
+                GameObject existingAudio = GameObject.Find($"Audio_{footstepSound}");
+
                 if (existingAudio == null)
                 {
-                    MobAudioManager.instance.PlayAudio3D(footstepSound, transform.position);
+                    MobAudioManager.instance.PlayAudio3DAttached(footstepSound, gameObject);
                 }
             }
 
@@ -152,7 +153,7 @@ namespace MobSystem
                         {
                             string[] screams = { "KumarnScream1", "KumarnScream2", "KumarnScream3" };
                             string randomScream = screams[Random.Range(0, screams.Length)];
-                            MobAudioManager.instance.PlayAudio3D(randomScream, transform.position);
+                            MobAudioManager.instance.PlayAudio3DAttached(randomScream, gameObject);
                         }
                     }
                 }
@@ -175,13 +176,15 @@ namespace MobSystem
 
         private void PlayScream()
         {
-            if (MobAudioManager.instance != null)
+            PlayRandomSound(screams, attached: true);
+        }
+
+        protected override System.Collections.Generic.List<TalismanObject.TalismanType> GetRequiredTalismans()
+        {
+            return new System.Collections.Generic.List<TalismanObject.TalismanType>
             {
-                // Play random scream from Thai child voice set
-                string[] screams = { "KumarnScream1", "KumarnScream2", "KumarnScream3" };
-                string randomScream = screams[Random.Range(0, screams.Length)];
-                MobAudioManager.instance.PlayAudio3D(randomScream, transform.position);
-            }
+                TalismanObject.TalismanType.Thai
+            };
         }
 
         public override bool CustomMovement()
@@ -214,7 +217,7 @@ namespace MobSystem
             // Kumarn is fast, even faster when done zigzagging
             return isZigzagging ? 1.2f : 1.4f;
         }
-        
+
         /// <summary>
         /// Set a specific seed for zigzag behavior (call before Initialize)
         /// </summary>
@@ -222,6 +225,14 @@ namespace MobSystem
         {
             zigzagSeed = seed;
         }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            HandleTalismanCollision(collision);
+        }
+
+        // Note: OnAttack and OnAttackComplete use base class default behavior
+        // (allows default attack and destroys mob after attack)
     }
 }
 

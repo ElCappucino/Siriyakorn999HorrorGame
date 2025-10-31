@@ -17,10 +17,11 @@ namespace MobSystem
         [Header("Movement")]
         public MovementType movementType;
         public SpeedTier speedTier;
-        [Range(1f, 10f)]
+        [Range(0.1f, 10f)]
         public float moveSpeed = 3.5f;
         [Range(0.5f, 5f)]
         public float rotationSpeed = 2f;
+        public float stunDuration = 2f;
 
         [Header("Detection")]
         [Range(5f, 50f)]

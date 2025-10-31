@@ -183,7 +183,7 @@ namespace MobSystem
                 // Play 3D detection sound from enemy position
                 if (MobAudioManager.instance != null && !string.IsNullOrEmpty(detectionSoundName))
                 {
-                    MobAudioManager.instance.PlayAudio3D(detectionSoundName, transform.position);
+                    MobAudioManager.instance.PlayAudio3DAttached(detectionSoundName, gameObject);
                 }
 
                 // Call behavior hook
@@ -306,7 +306,7 @@ namespace MobSystem
                 // Play 3D attack sound from enemy position
                 if (MobAudioManager.instance != null && !string.IsNullOrEmpty(attackSoundName))
                 {
-                    MobAudioManager.instance.PlayAudio3D(attackSoundName, transform.position);
+                    MobAudioManager.instance.PlayAudio3DAttached(attackSoundName, gameObject);
                 }
 
                 // Deal damage to player
@@ -379,7 +379,7 @@ namespace MobSystem
                 // Play 3D detection sound from enemy position
                 if (MobAudioManager.instance != null && !string.IsNullOrEmpty(detectionSoundName))
                 {
-                    MobAudioManager.instance.PlayAudio3D(detectionSoundName, transform.position);
+                    MobAudioManager.instance.PlayAudio3DAttached(detectionSoundName, gameObject);
                 }
 
                 // Call behavior hook
@@ -438,6 +438,56 @@ namespace MobSystem
             {
                 ApplyMobData();
             }
+        }
+
+        /// <summary>
+        /// Set the move speed dynamically (for phase-based scaling)
+        /// </summary>
+        public void SetMoveSpeed(float speed)
+        {
+            moveSpeed = speed;
+            if (navAgent != null)
+            {
+                navAgent.speed = speed;
+            }
+        }
+
+        /// <summary>
+        /// Get the current move speed
+        /// </summary>
+        public float GetMoveSpeed()
+        {
+            return moveSpeed;
+        }
+
+        /// <summary>
+        /// Immediately destroy this mob (disables all components first for instant effect)
+        /// </summary>
+        public void DestroyMob()
+        {
+            // Disable AI to stop all updates immediately
+            this.enabled = false;
+            
+            // Disable NavMeshAgent to stop movement immediately
+            if (navAgent != null)
+            {
+                navAgent.enabled = false;
+            }
+            
+            // Disable animator to stop animations
+            if (animator != null)
+            {
+                animator.enabled = false;
+            }
+            
+            // Disable behavior script
+            if (behavior != null)
+            {
+                behavior.enabled = false;
+            }
+            
+            // Mark as destroyed and destroy the GameObject
+            Destroy(gameObject);
         }
 
         private void OnDrawGizmosSelected()
