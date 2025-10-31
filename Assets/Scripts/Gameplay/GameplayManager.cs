@@ -179,6 +179,11 @@ public class GameplayManager : MonoBehaviour
 
     }
 
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
     /*private void OnEnable()
     {
         isGameStart = true;

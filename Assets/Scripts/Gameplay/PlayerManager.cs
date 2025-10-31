@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using MoreMountains.Feedbacks;
 using MobSystem;
+using System.Security.Cryptography;
+using AudioSystem;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -57,15 +59,19 @@ public class PlayerManager : MonoBehaviour
         {
             case "lightning":
                 currentTalismanType = TalismanObject.TalismanType.Lighting;
+                AudioManager.instance.PlayAudio("Talisman Draw Lighting");
                 break;
             case "cross":
                 currentTalismanType = TalismanObject.TalismanType.Cross;
+                AudioManager.instance.PlayAudio("Talisman Draw Cross");
                 break;
             case "stun":
                 currentTalismanType = TalismanObject.TalismanType.Stun;
+                AudioManager.instance.PlayAudio("Talisman Draw Stunt");
                 break;
             case "thai":
                 currentTalismanType = TalismanObject.TalismanType.Thai;
+                AudioManager.instance.PlayAudio("Talisman Draw Thai");
                 break;
             default:
                 Debug.Log("No match");
@@ -85,6 +91,8 @@ public class PlayerManager : MonoBehaviour
         currentHealth--;
         currentHealthImages[currentHealth].sprite = emptyHealthSprite;
         cameraControl.HurtEffect.PlayFeedbacks();
+        AudioManager.instance.PlayAudio("Player Hurt");
+
         if (currentHealth <= 0 && !GameplayManager.Instance.isGameFinish)
         {
             GameplayManager.Instance.ShowGameOverScene();
@@ -123,6 +131,17 @@ public class PlayerManager : MonoBehaviour
 
                 GameplayManager.Instance.WriteTalisman();
                 cameraControl.shootEffect.PlayFeedbacks();
+
+                int randNum = Random.Range(0, 2);
+                switch (randNum)
+                {
+                    case 0:
+                        AudioManager.instance.PlayAudio("Talisman Shoot A");
+                        break;
+                    case 1:
+                        AudioManager.instance.PlayAudio("Talisman Shoot B");
+                        break;
+                }
 
                 Destroy(proj, 3.0f);
             }
