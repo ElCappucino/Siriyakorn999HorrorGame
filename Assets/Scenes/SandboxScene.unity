@@ -3826,8 +3826,17 @@ MonoBehaviour:
   scoreMultiplierText: {fileID: 2122601409}
   scoreFeedbacks: {fileID: 967851803}
   multiplierFeedbacks: {fileID: 2122601411}
+  multiplierChainValues:
+  - 1
+  - 1.2
+  - 1.4
+  - 1.7
+  - 2
+  maxChain: 5
+  currentChain: 1
+  multiplierChainTimeWindow: 3
   countdown_text: {fileID: 1141892215}
-  startTime: 15
+  startTime: 90
   WinSceneUI: {fileID: 1321954257}
   LoseSceneUI: {fileID: 1617197431}
   LoseSceneReport: {fileID: 1617197436}

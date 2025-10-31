@@ -1244,6 +1244,7 @@ MonoBehaviour:
   damageFlashDuration: 0.1
   useKnockback: 1
   knockbackForce: 5
+  baseScore: 70
 --- !u!114 &-124309687495511084
 MonoBehaviour:
   m_ObjectHideFlags: 0
