@@ -52,23 +52,10 @@ namespace MobSystem
 
         private void Start()
         {
-            // Initialize list spawners
-            InitializeListSpawners();
-            
-            // Get GameplayManager if not assigned
-            if (gameplayManager == null && GameplayManager.Instance != null)
-            {
-                gameplayManager = GameplayManager.Instance;
-            }
-
-            // Subscribe to phase changes
-            if (PhaseManager.Instance != null)
-            {
-                PhaseManager.Instance.OnPhaseChanged += OnPhaseChanged;
-            }
 
             // Wait for game to start
             StartCoroutine(WaitForGameStart());
+
         }
 
         private void InitializeListSpawners()
@@ -109,16 +96,32 @@ namespace MobSystem
 
         private IEnumerator WaitForGameStart()
         {
-            while (gameplayManager == null || !gameplayManager.isGameStart)
+            while (!gameplayManager.isGameStart)
             {
+                Debug.Log("while (!gameplayManager.isGameStart) = " +!gameplayManager.isGameStart);
                 yield return null;
             }
-            
+            Debug.Log("while (!gameplayManager.isGameStart) = " + !gameplayManager.isGameStart);
             isGameStarted = true;
             
             if (showDebugInfo)
             {
                 Debug.Log("MobSpawnManager: Game started, phase spawning active");
+            }
+
+            // Initialize list spawners
+            InitializeListSpawners();
+
+            // Get GameplayManager if not assigned
+            if (gameplayManager == null && GameplayManager.Instance != null)
+            {
+                gameplayManager = GameplayManager.Instance;
+            }
+
+            // Subscribe to phase changes
+            if (PhaseManager.Instance != null)
+            {
+                PhaseManager.Instance.OnPhaseChanged += OnPhaseChanged;
             }
         }
 

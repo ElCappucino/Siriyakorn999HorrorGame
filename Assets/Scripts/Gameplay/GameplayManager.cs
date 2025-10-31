@@ -60,7 +60,7 @@ public class GameplayManager : MonoBehaviour
 
         currentMultiplier = 1.0f;
 
-        isGameStart = true;
+        //isGameStart = true;
 
         // Start phase timer
         if (PhaseManager.Instance != null)

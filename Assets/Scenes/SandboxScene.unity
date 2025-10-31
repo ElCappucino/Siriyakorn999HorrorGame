@@ -3112,7 +3112,7 @@ MonoBehaviour:
   - 55
   - 46
   - 35
-  showDebugInfo: 1
+  showDebugInfo: 0
 --- !u!1 &1075548769
 GameObject:
   m_ObjectHideFlags: 0
