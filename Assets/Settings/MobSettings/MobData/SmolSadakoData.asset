@@ -17,9 +17,9 @@ MonoBehaviour:
   description: Smol Sadako
   movementType: 1
   speedTier: 0
-  moveSpeed: 0.2
+  moveSpeed: 2
   rotationSpeed: 1
-  stunDuration: 100
+  stunDuration: 2.5
   detectionRange: 50
   attackRange: 2
   attackCooldown: 5

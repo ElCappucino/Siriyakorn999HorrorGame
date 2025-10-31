@@ -205,10 +205,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   indicatorSettings: {fileID: 11400000, guid: f6fce7c25e6dcf94a8862f6beaf45f8c, type: 2}
-  questionMarkIndicator: {fileID: 2335696680179921077, guid: 7d8eb4aa12b03294da48683371661df0, type: 3}
-  thaiTalismanIndicator: {fileID: 6357705193780104938, guid: a70600ee7d188fc4f82c375b8a4fa2b7, type: 3}
+  questionMarkIndicator: {fileID: 2335696680179921077, guid: b9c9b865c92be874f8ba5fe9c6d00ebd, type: 3}
+  thaiTalismanIndicator: {fileID: 0}
   electricTalismanIndicator: {fileID: 5219164839854181288, guid: 0eadec25843383448845aa12ec463899, type: 3}
-  crossTalismanIndicator: {fileID: 5785291350212733167, guid: a1f5ab8e8e62dc44798215677523537c, type: 3}
+  crossTalismanIndicator: {fileID: 0}
   crawlAnimationSpeed: 0.8
   electricityEffect: {fileID: 0}
   electricityInterval: 3

@@ -17,9 +17,9 @@ MonoBehaviour:
   description: 
   movementType: 2
   speedTier: 1
-  moveSpeed: 3.5
+  moveSpeed: 1
   rotationSpeed: 2
-  stunDuration: 100
+  stunDuration: 2.5
   detectionRange: 50
   attackRange: 2
   attackCooldown: 5

@@ -1140,7 +1140,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.92658454, z: -0, w: -0.37608662}
   m_LocalPosition: {x: -3.6603625, y: 4.31, z: 11.685203}
-  m_LocalScale: {x: 0.55, y: 0.55, z: 0}
+  m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1921002386741594156}
@@ -1257,9 +1257,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   indicatorSettings: {fileID: 11400000, guid: 730e0fa1dbd667b44b9812492bb2d8f8, type: 2}
-  questionMarkIndicator: {fileID: 2335696680179921077, guid: 7d8eb4aa12b03294da48683371661df0, type: 3}
+  questionMarkIndicator: {fileID: 2335696680179921077, guid: b9c9b865c92be874f8ba5fe9c6d00ebd, type: 3}
   thaiTalismanIndicator: {fileID: 6357705193780104938, guid: a70600ee7d188fc4f82c375b8a4fa2b7, type: 3}
-  electricTalismanIndicator: {fileID: 5219164839854181288, guid: 0eadec25843383448845aa12ec463899, type: 3}
+  electricTalismanIndicator: {fileID: 0}
   crossTalismanIndicator: {fileID: 5785291350212733167, guid: a1f5ab8e8e62dc44798215677523537c, type: 3}
   hoverHeight: 1.5
   hoverBobSpeed: 2

@@ -17,9 +17,9 @@ MonoBehaviour:
   description: Kumarn
   movementType: 0
   speedTier: 2
-  moveSpeed: 5
+  moveSpeed: 3
   rotationSpeed: 1.51
-  stunDuration: 100
+  stunDuration: 2.5
   detectionRange: 50
   attackRange: 2
   attackCooldown: 5
