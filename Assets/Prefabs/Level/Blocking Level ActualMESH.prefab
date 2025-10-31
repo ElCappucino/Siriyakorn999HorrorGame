@@ -117,6 +117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7285687232082388849}
+  - component: {fileID: 1720296456436241552}
   m_Layer: 0
   m_Name: KumarnSpawn (pls hide the mesh when spawn logic is set)
   m_TagString: Untagged
@@ -148,6 +149,30 @@ Transform:
   - {fileID: 2498908918730524841}
   m_Father: {fileID: 9157510018589484095}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1720296456436241552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756670745720962145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d19ac6df44e408439d745bfb46c485d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnerID: Kumarn_ListSpawner_1
+  spawnerDescription: Kumarn Main entrance spawner
+  spawnMainObject: {fileID: 756670745720962145}
+  spawnPoints: []
+  mobPrefabs:
+  - {fileID: 8819569276586072197, guid: 7e9b9ac7b63a522429fc5ed38b26d726, type: 3}
+  - {fileID: 8321079884244443583, guid: 8e54063d152ef8c4dbc7986d9a001e91, type: 3}
+  - {fileID: 8460020759060878215, guid: 3155f2bcdde09df488226623740594be, type: 3}
+  spawnAnimationTime: 10
+  mobAudioManager: {fileID: 0}
+  spawnSoundNames:
+  - AnkletSound
 --- !u!1 &776561187440407625
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +222,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 776561187440407625}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -252,7 +277,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -305,7 +330,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1769359956401164260}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -360,7 +385,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -373,6 +398,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7087180488361650340}
+  - component: {fileID: 7274759957921889968}
   m_Layer: 0
   m_Name: Computer (Sadako Spawn)
   m_TagString: Untagged
@@ -403,6 +429,31 @@ Transform:
   - {fileID: 5894840796382174109}
   m_Father: {fileID: 9157510018589484095}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7274759957921889968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2261860251828440976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d19ac6df44e408439d745bfb46c485d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnerID: SadakoListSpawner_1
+  spawnerDescription: Sadako Main entrance spawner
+  spawnMainObject: {fileID: 2261860251828440976}
+  spawnPoints: []
+  mobPrefabs:
+  - {fileID: 5190872647505964520, guid: 19158f94bc449dc4f9237ca535b8110d, type: 3}
+  - {fileID: 8460020759060878215, guid: 3155f2bcdde09df488226623740594be, type: 3}
+  spawnAnimationTime: 10
+  mobAudioManager: {fileID: 0}
+  spawnSoundNames:
+  - SFX_Spawn_Sadako_TV1
+  - SFX_Spawn_Sadako_TV2
+  - SFX_Spawn_Sadako_TV3
 --- !u!1 &3000570496308440784
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,7 +701,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3997070494257060183}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -705,7 +756,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -758,7 +809,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4554737496443936173}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -813,7 +864,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -944,7 +995,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5795939505213816398}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -999,7 +1050,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1129,7 +1180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5211407500058651933
 Transform:
   m_ObjectHideFlags: 0
@@ -1270,6 +1321,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1552986272362981540}
+  - component: {fileID: 6430832193856914696}
   m_Layer: 0
   m_Name: Carbinet (Vampire Spawn)
   m_TagString: Untagged
@@ -1300,6 +1352,30 @@ Transform:
   - {fileID: 8174924423963362498}
   m_Father: {fileID: 9157510018589484095}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6430832193856914696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7100934381015432059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d19ac6df44e408439d745bfb46c485d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnerID: Carbinet_ListSpawner_1
+  spawnerDescription: Vampire Main entrance spawner
+  spawnMainObject: {fileID: 7100934381015432059}
+  spawnPoints: []
+  mobPrefabs:
+  - {fileID: 2223594285035772450, guid: f153d01a1a00de5428d878c9ac581f51, type: 3}
+  - {fileID: 3303203061852251375, guid: d5e58cdec9dab0446a2177e39937a284, type: 3}
+  - {fileID: 8321079884244443583, guid: 8e54063d152ef8c4dbc7986d9a001e91, type: 3}
+  spawnAnimationTime: 10
+  mobAudioManager: {fileID: 0}
+  spawnSoundNames:
+  - SFX_Spawn_Sadako_TV1
 --- !u!1 &7367849316413950927
 GameObject:
   m_ObjectHideFlags: 0
@@ -1349,7 +1425,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7367849316413950927}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1404,7 +1480,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1457,7 +1533,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7617099644037541702}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1512,7 +1588,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1565,7 +1641,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7769050111336301893}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1620,7 +1696,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1673,7 +1749,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7770790575400672837}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1728,7 +1804,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1849,6 +1925,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7009282062826173591}
+  - component: {fileID: 472143161944948129}
   m_Layer: 0
   m_Name: Vent (Vampire Spawn)
   m_TagString: Untagged
@@ -1874,6 +1951,30 @@ Transform:
   - {fileID: 172360150539361676}
   m_Father: {fileID: 9157510018589484095}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &472143161944948129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8383841371360763467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d19ac6df44e408439d745bfb46c485d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnerID: Vent_ListSpawner_1
+  spawnerDescription: Vampire Main entrance spawner
+  spawnMainObject: {fileID: 8383841371360763467}
+  spawnPoints: []
+  mobPrefabs:
+  - {fileID: 2223594285035772450, guid: f153d01a1a00de5428d878c9ac581f51, type: 3}
+  - {fileID: 3303203061852251375, guid: d5e58cdec9dab0446a2177e39937a284, type: 3}
+  - {fileID: 8321079884244443583, guid: 8e54063d152ef8c4dbc7986d9a001e91, type: 3}
+  spawnAnimationTime: 10
+  mobAudioManager: {fileID: 0}
+  spawnSoundNames:
+  - SFX_Spawn_Sadako_TV1
 --- !u!1 &8808087964207319894
 GameObject:
   m_ObjectHideFlags: 0
@@ -1886,6 +1987,7 @@ GameObject:
   - component: {fileID: 3378038443032946849}
   - component: {fileID: 8811516791014858696}
   - component: {fileID: 2572235943656758401}
+  - component: {fileID: 5623624450501698266}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -1982,6 +2084,38 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5623624450501698266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8808087964207319894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 7a1a210b6adefad4080d0c06a23507ee, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &9090429711234241598
 GameObject:
   m_ObjectHideFlags: 0
@@ -5675,6 +5809,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1319638099126188923, guid: dfecff4ccd2304b47acd963cdda8f549, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1319638099126188923, guid: dfecff4ccd2304b47acd963cdda8f549, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -5777,13 +5915,60 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1319638099126188923, guid: dfecff4ccd2304b47acd963cdda8f549, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1071196789593781807}
   m_SourcePrefab: {fileID: 100100000, guid: dfecff4ccd2304b47acd963cdda8f549, type: 3}
 --- !u!4 &8210460573191522348 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1809210583221576129, guid: dfecff4ccd2304b47acd963cdda8f549, type: 3}
   m_PrefabInstance: {fileID: 7560119990207310317}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8843586218292548246 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1319638099126188923, guid: dfecff4ccd2304b47acd963cdda8f549, type: 3}
+  m_PrefabInstance: {fileID: 7560119990207310317}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1071196789593781807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8843586218292548246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+  isInvulnerable: 0
+  enableRegen: 1
+  regenRate: 2
+  regenDelay: 5
+  deathBehavior: 0
+  respawnDelay: 3
+  respawnPoint: {fileID: 0}
+  hurtSoundName: PlayerHurt
+  deathSoundName: PlayerDeath
+  lowHealthSoundName: PlayerLowHealth
+  lowHealthThreshold: 0.25
+  useDamageFlash: 1
+  playerCamera: {fileID: 0}
+  OnDamageTaken:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRespawn:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &7573529122325637379
 PrefabInstance:
   m_ObjectHideFlags: 0
