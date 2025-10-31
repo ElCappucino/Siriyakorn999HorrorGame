@@ -131,6 +131,9 @@ public class ListSpawner : MonoBehaviour
     {
         if (mob == null) yield break;
 
+        // Store original scale
+        Vector3 originalScale = mob.transform.localScale;
+
         // Start spawn animation
         SetSpawnAnimationPlaying(mob, true);
         SetMobAIPaused(mob, true);
@@ -143,8 +146,11 @@ public class ListSpawner : MonoBehaviour
         // End spawn animation
         SetSpawnAnimationPlaying(mob, false);
         SetMobAIPaused(mob, false);
-        SetMobScale(mob, Vector3.one);
+
+        // Restore original prefab scale
+        SetMobScale(mob, originalScale);
     }
+
 
     /// <summary>
     /// Check if a mob prefab can spawn from this spawner
