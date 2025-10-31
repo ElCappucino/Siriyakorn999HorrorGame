@@ -13,6 +13,7 @@ public class IntroDialogueManager : MonoBehaviour
     [SerializeField] private MMF_Player dialogueFeedback;
     [SerializeField] private CameraControl cameraControl;
     [SerializeField] private GameObject GotoTutorialButton;
+    [SerializeField] private GameObject TutorialUI;
     private int currentMonologueIndex = 0;
     private bool isAbleToClick = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -45,7 +46,8 @@ public class IntroDialogueManager : MonoBehaviour
             dialogueFeedback.PlayFeedbacks();
 
             cameraControl.isRoundStart = true;
-            GotoTutorialButton.SetActive(true);
+            //GotoTutorialButton.SetActive(true);
+            TutorialUI.SetActive(true); 
             currentMonologueIndex = 0;
             isAbleToClick = false ;
         }
