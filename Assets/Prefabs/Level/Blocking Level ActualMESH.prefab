@@ -6578,6 +6578,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Document_01_Mesh
       objectReference: {fileID: 0}
+    - target: {fileID: 1662354107368227515, guid: 4a696965be51a6946b3c330d64f4a285, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1868641625944873621, guid: 4a696965be51a6946b3c330d64f4a285, type: 3}
       propertyPath: m_Name
       value: Document_05_Mesh
