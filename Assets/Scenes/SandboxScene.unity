@@ -1186,25 +1186,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1805491483341276675, guid: ba5bcd8dfe775314fbb7a9f5e13541db, type: 3}
-      propertyPath: m_Intensity
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1921097345298670592, guid: ba5bcd8dfe775314fbb7a9f5e13541db, type: 3}
-      propertyPath: m_Intensity
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4550850889019534609, guid: ba5bcd8dfe775314fbb7a9f5e13541db, type: 3}
-      propertyPath: m_Intensity
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5666042000526493195, guid: ba5bcd8dfe775314fbb7a9f5e13541db, type: 3}
       propertyPath: m_Name
       value: Lighting_Night
-      objectReference: {fileID: 0}
-    - target: {fileID: 6090968278298793894, guid: ba5bcd8dfe775314fbb7a9f5e13541db, type: 3}
-      propertyPath: m_Intensity
-      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7467,7 +7451,7 @@ GameObject:
   - component: {fileID: 5067693212062382379}
   m_Layer: 0
   m_Name: Player_Arm
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
