@@ -1,11 +1,12 @@
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using System.Collections.Generic;
-using UnityEngine.InputSystem;
+using MobSystem;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class GameplayManager : MonoBehaviour
 {
@@ -57,8 +58,15 @@ public class GameplayManager : MonoBehaviour
         StartTimer();
 
         currentMultiplier = 1.0f;
-    }
 
+        isGameStart = true;
+
+        // Start phase timer
+        if (PhaseManager.Instance != null)
+        {
+            PhaseManager.Instance.StartPhaseTimer();
+        }
+    }
 
     // Update is called once per frame
     void Update()
