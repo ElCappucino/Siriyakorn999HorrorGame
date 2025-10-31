@@ -1871,7 +1871,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7009282062826173591}
-  - component: {fileID: 472143161944948129}
   m_Layer: 0
   m_Name: Vent (Vampire Spawn)
   m_TagString: Untagged
@@ -1894,33 +1893,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 9157510018589484095}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &472143161944948129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8383841371360763467}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d19ac6df44e408439d745bfb46c485d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnerID: Vent_ListSpawner_1
-  spawnerDescription: Vampire Main entrance spawner
-  spawnMainObject: {fileID: 8383841371360763467}
-  spawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  mobPrefabs:
-  - {fileID: 2223594285035772450, guid: f153d01a1a00de5428d878c9ac581f51, type: 3}
-  - {fileID: 3303203061852251375, guid: d5e58cdec9dab0446a2177e39937a284, type: 3}
-  - {fileID: 8321079884244443583, guid: 8e54063d152ef8c4dbc7986d9a001e91, type: 3}
-  spawnAnimationTime: 3
-  mobAudioManager: {fileID: 0}
-  spawnSoundNames:
-  - SFX_Spawn_Sadako_TV1
 --- !u!1 &8808087964207319894
 GameObject:
   m_ObjectHideFlags: 0
@@ -6470,6 +6442,34 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 3194180217705423858, guid: 4a696965be51a6946b3c330d64f4a285, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.1573046
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194180217705423858, guid: 4a696965be51a6946b3c330d64f4a285, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6086566
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194180217705423858, guid: 4a696965be51a6946b3c330d64f4a285, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.24003403
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194180217705423858, guid: 4a696965be51a6946b3c330d64f4a285, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.04363355
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194180217705423858, guid: 4a696965be51a6946b3c330d64f4a285, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194180217705423858, guid: 4a696965be51a6946b3c330d64f4a285, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.99904764
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194180217705423858, guid: 4a696965be51a6946b3c330d64f4a285, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 174.998
+      objectReference: {fileID: 0}
     - target: {fileID: 3725268688576145506, guid: 4a696965be51a6946b3c330d64f4a285, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -6544,7 +6544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6048592026076402765, guid: 4a696965be51a6946b3c330d64f4a285, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.452
+      value: -10.059999
       objectReference: {fileID: 0}
     - target: {fileID: 6048592026076402765, guid: 4a696965be51a6946b3c330d64f4a285, type: 3}
       propertyPath: m_LocalRotation.w
