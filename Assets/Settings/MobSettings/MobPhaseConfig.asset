@@ -16,84 +16,84 @@ MonoBehaviour:
   - typeName: Sadako
     mobPrefab: {fileID: 5190872647505964520, guid: 19158f94bc449dc4f9237ca535b8110d, type: 3}
     isHybrid: 0
-    maxInScene: 3
+    maxInScene: 2
     availableFromPhase: 0
     spawnRateBeforeHybrid: 36
     spawnRateAfterHybrid: 19
     timeToReachPlayerPerPhase:
-    - 2
-    - 2.5
     - 2.5
     - 3
+    - 3
     - 3.5
+    - 4
   - typeName: Kumarn
     mobPrefab: {fileID: 8819569276586072197, guid: 7e9b9ac7b63a522429fc5ed38b26d726, type: 3}
     isHybrid: 0
-    maxInScene: 3
+    maxInScene: 2
     availableFromPhase: 0
     spawnRateBeforeHybrid: 34
     spawnRateAfterHybrid: 18
     timeToReachPlayerPerPhase:
-    - 3
-    - 3.5
     - 3.5
     - 4
-    - 4
+    - 4.5
+    - 4.5
+    - 5
   - typeName: Vampire
     mobPrefab: {fileID: 2223594285035772450, guid: f153d01a1a00de5428d878c9ac581f51, type: 3}
     isHybrid: 0
-    maxInScene: 3
+    maxInScene: 2
     availableFromPhase: 0
     spawnRateBeforeHybrid: 30
     spawnRateAfterHybrid: 18
     timeToReachPlayerPerPhase:
+    - 2
+    - 2.5
+    - 3
     - 3
     - 3.5
-    - 3.5
-    - 4
-    - 4
   - typeName: LongHairVampire
     mobPrefab: {fileID: 3303203061852251375, guid: d5e58cdec9dab0446a2177e39937a284, type: 3}
-    isHybrid: 0
-    maxInScene: 3
+    isHybrid: 1
+    maxInScene: 1
     availableFromPhase: 0
-    spawnRateBeforeHybrid: 30
-    spawnRateAfterHybrid: 18
+    spawnRateBeforeHybrid: 0
+    spawnRateAfterHybrid: 15
     timeToReachPlayerPerPhase:
-    - 3
-    - 3.5
-    - 3.5
-    - 4
-    - 4
+    - 0
+    - 0
+    - 1
+    - 1.5
+    - 2
   - typeName: VamMarn
     mobPrefab: {fileID: 8321079884244443583, guid: 8e54063d152ef8c4dbc7986d9a001e91, type: 3}
-    isHybrid: 0
-    maxInScene: 3
+    isHybrid: 1
+    maxInScene: 1
     availableFromPhase: 0
-    spawnRateBeforeHybrid: 30
-    spawnRateAfterHybrid: 18
+    spawnRateBeforeHybrid: 0
+    spawnRateAfterHybrid: 15
     timeToReachPlayerPerPhase:
-    - 3
-    - 3.5
-    - 3.5
-    - 4
-    - 4
+    - 0
+    - 0
+    - 0.5
+    - 1
+    - 1.5
   - typeName: SmolSadako
     mobPrefab: {fileID: 8460020759060878215, guid: 3155f2bcdde09df488226623740594be, type: 3}
-    isHybrid: 0
-    maxInScene: 3
+    isHybrid: 1
+    maxInScene: 1
     availableFromPhase: 0
-    spawnRateBeforeHybrid: 30
-    spawnRateAfterHybrid: 18
+    spawnRateBeforeHybrid: 0
+    spawnRateAfterHybrid: 15
     timeToReachPlayerPerPhase:
-    - 3
-    - 3.5
-    - 3.5
-    - 4
-    - 4
+    - 0
+    - 0
+    - 0.5
+    - 1
+    - 1.5
   maxTotalGhostsInScene: 3
-  spawnFrequency: 3
+  spawnFrequency: 2
   hybridStartPhase: 3
   maxNonHybridBeforeHybrid: 3
   maxNonHybridAfterHybrid: 2
-  maxHybridGhosts: 1
+  maxHybridGhosts: 2

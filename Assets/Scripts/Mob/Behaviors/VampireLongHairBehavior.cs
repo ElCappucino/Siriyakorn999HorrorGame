@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
 
@@ -124,12 +124,17 @@ namespace MobSystem
                 pathUpdateTimer -= Time.deltaTime;
                 if (pathUpdateTimer <= 0f)
                 {
-                    navAgent.SetDestination(player.position);
+                    if (navAgent.isOnNavMesh)  // Only if on NavMesh
+                    {
+                        navAgent.SetDestination(player.position);
+                    }
+
                     pathUpdateTimer = pathUpdateRate;
                 }
 
                 // Update speed multiplier
-                navAgent.speed = mobData.moveSpeed * GetSpeedMultiplier();
+                if (navAgent.isOnNavMesh)
+                    navAgent.speed = mobData.moveSpeed * GetSpeedMultiplier();
 
                 // Manually adjust Y position for flying height
                 Vector3 pos = transform.position;
@@ -138,6 +143,7 @@ namespace MobSystem
 
                 return true;
             }
+
 
             // Use default movement when not in bat form
             return false;

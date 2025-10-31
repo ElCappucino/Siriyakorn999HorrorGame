@@ -1559,7 +1559,6 @@ MonoBehaviour:
   listSpawners:
   - {fileID: 2055408156}
   - {fileID: 856528599}
-  - {fileID: 508321488}
   - {fileID: 1095246173}
   autoFindListSpawners: 1
   gameplayManager: {fileID: 1363761962}
@@ -1861,17 +1860,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 66658623080237240, guid: 3424efe3e1f6a6c48a9ae3c046d9d8e7, type: 3}
   m_PrefabInstance: {fileID: 1635050696}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &508321488 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 472143161944948129, guid: c03cd1085d9c4c04383dc91d8f07a3e4, type: 3}
-  m_PrefabInstance: {fileID: 2055408146}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d19ac6df44e408439d745bfb46c485d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &517469167
 PrefabInstance:
   m_ObjectHideFlags: 0
