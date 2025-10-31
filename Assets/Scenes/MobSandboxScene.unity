@@ -6065,7 +6065,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phaseConfig: {fileID: 11400000, guid: 1c0d95934559ff14e9122d656551a6c5, type: 2}
-  listSpawners: []
+  listSpawners:
+  - {fileID: 1099212161}
+  - {fileID: 351519653}
+  - {fileID: 1723813632}
+  - {fileID: 1190345220}
   autoFindListSpawners: 1
   gameplayManager: {fileID: 1363761962}
   showDebugInfo: 0
