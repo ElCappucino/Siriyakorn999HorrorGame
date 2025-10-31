@@ -2,6 +2,9 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Net;
 using TMPro;
+using System.Collections;
+using MoreMountains.Feedbacks;
+using Unity.Cinemachine;
 
 public class CameraControl : MonoBehaviour
 {
@@ -30,6 +33,11 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private Transform talisman_introPos;
     [SerializeField] private GameObject talisman_LineRenderer;
     [SerializeField] private float talismanMoveSpeed;
+
+    [Header("Camera Shake")]
+    [SerializeField] private CinemachineCamera cinemachine;
+    [SerializeField] public MMF_Player shootEffect;
+    [SerializeField] public MMF_Player HurtEffect;
     public bool isHoldTalisman { get; private set; }
     public bool isRoundStart = false;
 
@@ -98,4 +106,18 @@ public class CameraControl : MonoBehaviour
         talismanHoldUI.SetActive(!isHold);
     }
 
+    /*public void ShakeCamera()
+    {
+        StartCoroutine(ShakeCameraAndBack2Default());
+    }
+
+    IEnumerator ShakeCameraAndBack2Default()
+    {
+        Transform lookat = cameraLookat.transform;
+        cinemachine.Target.TrackingTarget = null;
+        shootEffect.PlayFeedbacks();
+
+        yield return new WaitForSeconds(0.3f);
+        cinemachine.Target.TrackingTarget = lookat;
+    }*/
 }

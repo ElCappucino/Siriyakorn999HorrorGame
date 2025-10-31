@@ -84,7 +84,7 @@ public class PlayerManager : MonoBehaviour
     {
         currentHealth--;
         currentHealthImages[currentHealth].sprite = emptyHealthSprite;
-
+        cameraControl.HurtEffect.PlayFeedbacks();
         if (currentHealth <= 0 && !GameplayManager.Instance.isGameFinish)
         {
             GameplayManager.Instance.ShowGameOverScene();
@@ -122,13 +122,14 @@ public class PlayerManager : MonoBehaviour
                 currentActiveTalisman.SetActive(true);
 
                 GameplayManager.Instance.WriteTalisman();
+                cameraControl.shootEffect.PlayFeedbacks();
 
                 Destroy(proj, 3.0f);
             }
         }
         else
         {
-            Debug.Log("GameplayManager.Instance.isGameStart && !cameraControl.isHoldTalisman");
+            //Debug.Log("GameplayManager.Instance.isGameStart && !cameraControl.isHoldTalisman");
         }    
         
         

@@ -31,7 +31,7 @@ public class IntroDialogueManager : MonoBehaviour
     {
         if (context.performed && isAbleToClick)
         {
-            Debug.Log("OnClick");
+            //Debug.Log("OnClick");
             RevealNextText();
         }
     }

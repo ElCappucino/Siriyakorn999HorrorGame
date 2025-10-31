@@ -1,5 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &455113598283050575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7819173033393708509}
+  m_Layer: 0
+  m_Name: ShootingFeedback
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7819173033393708509
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455113598283050575}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 926254768553580804}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &832413279853677232
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6224465835653621650}
+  m_Layer: 0
+  m_Name: HurtFeedback
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6224465835653621650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832413279853677232}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 926254768553580804}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1135687063362416779
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,6 +126,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8557919975296190074}
+  - {fileID: 7819173033393708509}
+  - {fileID: 6224465835653621650}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6399166446467825557
@@ -167,6 +231,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: bdf676d0-0155-4e70-b952-25819fe4543a
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6ea928be-5b54-4f65-895d-d16e47dfccc4
+    m_ActionName: 'Player/HoldTalisman[/Keyboard/space]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -184,6 +252,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e160dd821904a52449611df4605bded9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drawControl: {fileID: 0}
+  playerManager: {fileID: 0}
 --- !u!114 &4253613683063583609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,3 +272,15 @@ MonoBehaviour:
   currentLookatPos: {x: 0, y: 0}
   moveSpeedX: 30
   moveSpeedY: 10
+  handPivot: {fileID: 0}
+  handRotationAmountX: 0
+  handRotationAmountY: 0
+  rotationSpeed: 0
+  talismanHoldUI: {fileID: 0}
+  talismanObject: {fileID: 0}
+  talisman_holdPos: {fileID: 0}
+  talisman_defaultPos: {fileID: 0}
+  talisman_introPos: {fileID: 0}
+  talisman_LineRenderer: {fileID: 0}
+  talismanMoveSpeed: 0
+  isRoundStart: 0

@@ -283,6 +283,7 @@ namespace MobSystem
 
         private void HandleAttackingState(float distanceToPlayer)
         {
+            Debug.Log("HandleAttackingState. name = " + gameObject.name);
             // Call behavior hook
             if (behavior != null)
             {

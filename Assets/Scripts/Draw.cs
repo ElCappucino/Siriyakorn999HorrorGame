@@ -136,7 +136,7 @@ namespace PDollarGestureRecognizer {
             return gestureResult.GestureClass;
         }
 
-        void OnGUI()
+        /*void OnGUI()
         {
             GUI.Label(new Rect(10, Screen.height - 40, 500, 50), message);
 
@@ -164,6 +164,6 @@ namespace PDollarGestureRecognizer {
 
                 newGestureName = "";
             }
-        }
+        }*/
     }
 }
