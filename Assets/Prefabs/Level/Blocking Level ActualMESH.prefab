@@ -164,12 +164,21 @@ MonoBehaviour:
   spawnerID: Kumarn_ListSpawner_1
   spawnerDescription: Kumarn Main entrance spawner
   spawnMainObject: {fileID: 756670745720962145}
-  spawnPoints: []
+  spawnPoints:
+  - {fileID: 4773670304182151616}
+  - {fileID: 225434602022917140}
+  - {fileID: 7327699223515654474}
+  - {fileID: 5292822723846739385}
+  - {fileID: 6166609903225424437}
+  - {fileID: 60207904120562468}
+  - {fileID: 3835179615238893465}
+  - {fileID: 4090067203687639678}
+  - {fileID: 2498908918730524841}
   mobPrefabs:
   - {fileID: 8819569276586072197, guid: 7e9b9ac7b63a522429fc5ed38b26d726, type: 3}
   - {fileID: 8321079884244443583, guid: 8e54063d152ef8c4dbc7986d9a001e91, type: 3}
   - {fileID: 8460020759060878215, guid: 3155f2bcdde09df488226623740594be, type: 3}
-  spawnAnimationTime: 10
+  spawnAnimationTime: 3
   mobAudioManager: {fileID: 0}
   spawnSoundNames:
   - AnkletSound
@@ -444,11 +453,19 @@ MonoBehaviour:
   spawnerID: SadakoListSpawner_1
   spawnerDescription: Sadako Main entrance spawner
   spawnMainObject: {fileID: 2261860251828440976}
-  spawnPoints: []
+  spawnPoints:
+  - {fileID: 4324659423380627750}
+  - {fileID: 4269081474899082348}
+  - {fileID: 652492512013682389}
+  - {fileID: 9163440825916154034}
+  - {fileID: 5449185215010682194}
+  - {fileID: 6997947925483564610}
+  - {fileID: 3341533163545878936}
+  - {fileID: 5894840796382174109}
   mobPrefabs:
   - {fileID: 5190872647505964520, guid: 19158f94bc449dc4f9237ca535b8110d, type: 3}
   - {fileID: 8460020759060878215, guid: 3155f2bcdde09df488226623740594be, type: 3}
-  spawnAnimationTime: 10
+  spawnAnimationTime: 5
   mobAudioManager: {fileID: 0}
   spawnSoundNames:
   - SFX_Spawn_Sadako_TV1
@@ -1367,12 +1384,16 @@ MonoBehaviour:
   spawnerID: Carbinet_ListSpawner_1
   spawnerDescription: Vampire Main entrance spawner
   spawnMainObject: {fileID: 7100934381015432059}
-  spawnPoints: []
+  spawnPoints:
+  - {fileID: 1767671922713950386}
+  - {fileID: 7686556027222373453}
+  - {fileID: 523115267739265236}
+  - {fileID: 8174924423963362498}
   mobPrefabs:
   - {fileID: 2223594285035772450, guid: f153d01a1a00de5428d878c9ac581f51, type: 3}
   - {fileID: 3303203061852251375, guid: d5e58cdec9dab0446a2177e39937a284, type: 3}
   - {fileID: 8321079884244443583, guid: 8e54063d152ef8c4dbc7986d9a001e91, type: 3}
-  spawnAnimationTime: 10
+  spawnAnimationTime: 3
   mobAudioManager: {fileID: 0}
   spawnSoundNames:
   - SFX_Spawn_Sadako_TV1
@@ -1966,12 +1987,15 @@ MonoBehaviour:
   spawnerID: Vent_ListSpawner_1
   spawnerDescription: Vampire Main entrance spawner
   spawnMainObject: {fileID: 8383841371360763467}
-  spawnPoints: []
+  spawnPoints:
+  - {fileID: 2701775643679338410}
+  - {fileID: 6481624018712575817}
+  - {fileID: 172360150539361676}
   mobPrefabs:
   - {fileID: 2223594285035772450, guid: f153d01a1a00de5428d878c9ac581f51, type: 3}
   - {fileID: 3303203061852251375, guid: d5e58cdec9dab0446a2177e39937a284, type: 3}
   - {fileID: 8321079884244443583, guid: 8e54063d152ef8c4dbc7986d9a001e91, type: 3}
-  spawnAnimationTime: 10
+  spawnAnimationTime: 3
   mobAudioManager: {fileID: 0}
   spawnSoundNames:
   - SFX_Spawn_Sadako_TV1
